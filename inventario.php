@@ -24,9 +24,8 @@ $resultado = $mysqli->query($sql);
     <title>inventario</title>
     <style>
         table {
-             table-layout: fixed;
+            table-layout: fixed;
         }
-
     </style>
 </head>
 
