@@ -7,3 +7,20 @@
 #### Este repositorio cuenta con la informacion general del proyecto, y la idea del proyecto es poner en practica cada uno de los conocimientos aprendidos durante el programa.
 
 
+
+SELECT 
+	libro.titulo,
+   ubicacion.ubicacion AS ubicacion, SUM(linea_movimiento_inventario.cantidad) as 	cantidad
+FROM
+	linea_movimiento_inventario
+INNER JOIN libro
+	ON 
+linea_movimiento_inventario.id_libro=libro.id_libro
+INNER JOIN movimiento_inventario
+	ON
+linea_movimiento_inventario.id_movimiento=movimiento_inventario.ubicacion_destino
+INNER JOIN ubicacion
+	ON
+movimiento_inventario.ubicacion_destino=ubicacion.id_ubicacion
+GROUP BY
+libro.titulo, ubicacion.ubicacion;
