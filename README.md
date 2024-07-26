@@ -6,7 +6,7 @@
 
 #### Este repositorio cuenta con la informacion general del proyecto, y la idea del proyecto es poner en practica cada uno de los conocimientos aprendidos durante el programa.
 
-
+usuario bret agregado 
 
 SELECT 
 	libro.titulo,
