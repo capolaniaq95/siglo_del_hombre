@@ -1,13 +1,16 @@
 <?php
 require "conexion.php";
 
+/*
 $sql = "SELECT inventario.id_inventario, movimiento.id_movimiento, ubicacion.ubicacion, libro.titulo, movimiento.tipo 
 FROM inventario
 INNER JOIN movimiento ON inventario.id_movimiento = movimiento.id_movimiento
 INNER JOIN ubicacion ON inventario.id_ubicacion = ubicacion.id_ubicacion
 INNER JOIN libro ON movimiento.id_libro = libro.id_libro
 GROUP BY libro.titulo";
+*/
 
+$sql = "SELECT * FROM movimiento_inventario";
 $resultado = $mysqli->query($sql);
 
 ?>
