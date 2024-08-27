@@ -42,48 +42,53 @@
         <div class="left-half image-container"></div>
         <div class="right-half d-flex align-items-center justify-content-center">
             <div class="form-container">
-<form action="ingreso.php" method="POST">
-    <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">Correo</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="email">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Contraseña</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name="password">
-        </div>
-    </div>
-    <fieldset class="form-group">
-        <div class="row">
-            <legend class="col-form-label col-sm-2 pt-0">Tipo de Usuario</legend>
-            <div class="col-sm-10">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="rol" id="gridRadios1" value="Administrador" checked>
-                    <label class="form-check-label" for="gridRadios1">
-                        Administrador
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="rol" id="gridRadios2" value="Cliente">
-                    <label class="form-check-label" for="gridRadios2">
-                        Cliente
-                    </label>
-                </div>
-            </div>
-        </div>
-    </fieldset>
-    <div class="form-group row">
-        <div class="col-sm-10">
-            <button type="submit" class="btn btn-info" value="Ingresar">Ingresar</button>
-        </div>
-    </div>
-</form>
+                <form action="ingreso.php" method="POST">
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Correo</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Contraseña</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" name="password">
+                        </div>
+                    </div>
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">Tipo de Usuario</legend>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="rol" id="gridRadios1" value="Administrador" checked>
+                                    <label class="form-check-label" for="gridRadios1">
+                                        Administrador
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="rol" id="gridRadios2" value="Cliente">
+                                    <label class="form-check-label" for="gridRadios2">
+                                        Cliente
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-info" value="Ingresar">Ingresar</button>
+                        </div>
+                    </div>
+                </form>
 
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <button type="button" class="btn btn-info" onclick="window.location.href='registro.php'">Registrar</button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="button" class="btn btn-info" onclick="window.location.href='logout.php'">logout</button>
                     </div>
                 </div>
 

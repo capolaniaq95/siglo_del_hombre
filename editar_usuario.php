@@ -9,6 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST["nombre"];
     $tipo = $_POST["tipo"];
 
+    
+
     $sql = "UPDATE usuario SET correo='$correo', direccion='$direccion', celular='$celular', nombre='$nombre', id_tipo='$tipo' WHERE id_usuario='$id_usuario'";
     if ($mysqli->query($sql) === TRUE) {
         echo '<script>alert("Usuario actualizado exitosamente.");</script>';

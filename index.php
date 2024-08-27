@@ -33,6 +33,18 @@
                 <i class="fas fa-shopping-cart"></i>
               </a>
             </li>
+            <?php
+            session_start();
+            if (isset($_SESSION["id_usuario"])):
+            ?>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="Mis pedidos">
+                  <i class="fas fa-shopping-cart">Mis pedidos</i>
+                </a>
+              </li>
+            <?php
+            endif
+            ?>
           </ul>
           <form class="form-inline my-2 my-lg-0 ml-auto">
             <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">

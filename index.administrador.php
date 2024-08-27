@@ -15,7 +15,8 @@
         }
 
         .img-container img {
-            width: 100px; /* Ajusta el tamaño de la imagen a un tamaño pequeño */
+            width: 100px;
+            /* Ajusta el tamaño de la imagen a un tamaño pequeño */
             height: auto;
             object-fit: cover;
             display: block;
@@ -27,13 +28,16 @@
         }
 
         .portfolio-item-caption i {
-            font-size: 2.5rem; /* Tamaño más pequeño para los íconos */
+            font-size: 2.5rem;
+            /* Tamaño más pequeño para los íconos */
         }
 
-        .portfolio h2, .portfolio h2 {
-            font-size: 2.0rem; /* Tamaño más pequeño para los encabezados */
+        .portfolio h2,
+        .portfolio h2 {
+            font-size: 2.0rem;
+            /* Tamaño más pequeño para los encabezados */
         }
-        
+
         .portfolio .card {
             padding: 5px;
             border: none;
@@ -59,94 +63,94 @@
             <section id="portfolio" class="portfolio">
                 <div class="container">
                     <h2 class="text-uppercase text-center text-secondary">Administrador</h4>
-                    <hr class="star-dark mb-5">
-                    <div class="row">
+                        <hr class="star-dark mb-5">
+                        <div class="row">
 
-                        <div class="col-md-6 col-lg-4">
-                            <a class="d-block portfolio-item card" data-toggle="modal" href="pedidos.php">
-                                <h4 class="text-center text-secondary">Pedidos</h4>
-                                <div class="portfolio-item-caption text-center">
-                                    <i class="fa fa-search-plus"></i>
-                                </div>
-                                <div class="img-container">
-                                    <img class="img-fluid" src="/images/icono_pedidos.png" alt="Pedidos">
-                                </div>
-                            </a>
+                            <div class="col-md-6 col-lg-4">
+                                <a class="d-block portfolio-item card" data-toggle="modal" href="/pedidos/pedido.php">
+                                    <h4 class="text-center text-secondary">Pedidos</h4>
+                                    <div class="portfolio-item-caption text-center">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid" src="/images/icono_pedidos.png" alt="Pedidos">
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <a class="d-block portfolio-item card" data-toggle="modal" href="productos.php">
+                                    <h4 class="text-center text-secondary">Libros</h4>
+                                    <div class="portfolio-item-caption text-center">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid" src="/images/iconos_libros.jpeg" alt="Productos">
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <a class="d-block portfolio-item card" data-toggle="modal" href="inventario.php">
+                                    <h4 class="text-center text-secondary">Inventario</h4>
+                                    <div class="portfolio-item-caption text-center">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid" src="/images/icono_inventario.jpeg" alt="Pedidos">
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <a class="d-block portfolio-item card" data-toggle="modal" href="usuarios.php">
+                                    <h4 class="text-center text-secondary">Usuarios</h4>
+                                    <div class="portfolio-item-caption text-center">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid" src="/images/icono_usuario.png" alt="Usuarios">
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <a class="d-block portfolio-item card" data-toggle="modal" href="ubicacion.php">
+                                    <h4 class="text-center text-secondary">Ubicaciones</h4>
+                                    <div class="portfolio-item-caption text-center">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid" src="/images/icono_ubicacion.webp" alt="ubicaciones">
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <a class="d-block portfolio-item card" data-toggle="modal" href="ubicacion.php">
+                                    <h4 class="text-center text-secondary">Metodos de pago</h4>
+                                    <div class="portfolio-item-caption text-center">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid" src="/images/iconos_metodo_pago.png" alt="ubicaciones">
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <a class="d-block portfolio-item card" data-toggle="modal" href="devolucion.php">
+                                    <h4 class="text-center text-secondary">Devoluciones</h4>
+                                    <div class="portfolio-item-caption text-center">
+                                        <i class="fa fa-search-plus"></i>
+                                    </div>
+                                    <div class="img-container">
+                                        <img class="img-fluid" src="/images/icono_devoluciones.png" alt="ubicaciones">
+                                    </div>
+                                </a>
+                            </div>
+
                         </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <a class="d-block portfolio-item card" data-toggle="modal" href="productos.php">
-                                <h4 class="text-center text-secondary">Libros</h4>
-                                <div class="portfolio-item-caption text-center">
-                                    <i class="fa fa-search-plus"></i>
-                                </div>
-                                <div class="img-container">
-                                    <img class="img-fluid" src="/images/iconos_libros.jpeg" alt="Productos">
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <a class="d-block portfolio-item card" data-toggle="modal" href="inventario.php">
-                                <h4 class="text-center text-secondary">Inventario</h4>
-                                <div class="portfolio-item-caption text-center">
-                                    <i class="fa fa-search-plus"></i>
-                                </div>
-                                <div class="img-container">
-                                    <img class="img-fluid" src="/images/icono_inventario.jpeg" alt="Pedidos">
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <a class="d-block portfolio-item card" data-toggle="modal" href="usuarios.php">
-                                <h4 class="text-center text-secondary">Usuarios</h4>
-                                <div class="portfolio-item-caption text-center">
-                                    <i class="fa fa-search-plus"></i>
-                                </div>
-                                <div class="img-container">
-                                    <img class="img-fluid" src="/images/icono_usuario.png" alt="Usuarios">
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <a class="d-block portfolio-item card" data-toggle="modal" href="ubicacion.php">
-                                <h4 class="text-center text-secondary">Ubicaciones</h4>
-                                <div class="portfolio-item-caption text-center">
-                                    <i class="fa fa-search-plus"></i>
-                                </div>
-                                <div class="img-container">
-                                    <img class="img-fluid" src="/images/icono_ubicacion.webp" alt="ubicaciones">
-                                </div>
-                            </a>
-                        </div>
-
-						<div class="col-md-6 col-lg-4">
-                            <a class="d-block portfolio-item card" data-toggle="modal" href="ubicacion.php">
-                                <h4 class="text-center text-secondary">Metodos de pago</h4>
-                                <div class="portfolio-item-caption text-center">
-                                    <i class="fa fa-search-plus"></i>
-                                </div>
-                                <div class="img-container">
-                                    <img class="img-fluid" src="/images/iconos_metodo_pago.png" alt="ubicaciones">
-                                </div>
-                            </a>
-                        </div>
-
-						<div class="col-md-6 col-lg-4">
-                            <a class="d-block portfolio-item card" data-toggle="modal" href="devolucion.php">
-                                <h4 class="text-center text-secondary">Devoluciones</h4>
-                                <div class="portfolio-item-caption text-center">
-                                    <i class="fa fa-search-plus"></i>
-                                </div>
-                                <div class="img-container">
-                                    <img class="img-fluid" src="/images/icono_devoluciones.png" alt="ubicaciones">
-                                </div>
-                            </a>
-                        </div>
-
-                    </div>
                 </div>
             </section>
         </main>
