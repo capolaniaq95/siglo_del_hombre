@@ -69,6 +69,16 @@ if ($resultado_libro->num_rows > 0) {
         $options_libro .= "<option value='" . htmlspecialchars($fila['id_libro']) . "' data-precio='" . htmlspecialchars($fila['precio']) . "'>" . htmlspecialchars($fila['titulo']) . "</option>";
     }
 }
+
+$sql = "SELECT `id_metodo_de_pago`, `metodo` FROM `metodo_de_pago`";
+$payment_method = $mysqli->query($sql);
+$options_payment = "<option value=''>Selecciona un metodo de pago</option>";
+if ($payment_method->num_rows > 0) {
+    while ($fila = $payment_method->fetch_assoc()) {
+        $options_payment .= "<option value='" . htmlspecialchars($fila['id_metodo_de_pago']) . "'>" . htmlspecialchars($fila['metodo']) . "</option>";
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -97,7 +107,7 @@ if ($resultado_libro->num_rows > 0) {
             <?php if (isset($mensaje)) : ?>
                 <div class="alert alert-info"><?php echo htmlspecialchars($mensaje); ?></div>
             <?php endif; ?>
-            <form action="guardar_pedido.php" method="POST">
+            <form action="guardar.pedido.php" method="POST">
                 <div class="form-group">
                     <label for="orderDate">Fecha</label>
                     <input type="datetime-local" class="form-control" id="orderDate" name="orderDate" required>
@@ -106,6 +116,12 @@ if ($resultado_libro->num_rows > 0) {
                     <label for="customerName">Nombre del Cliente</label>
                     <select name="customer" id="customer" class="form-control" required>
                         <?php echo $options_costumer; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="paymentmethod">Nombre del Cliente</label>
+                    <select name="payment" id="payment" class="form-control" required>
+                        <?php echo $options_payment; ?>
                     </select>
                 </div>
 

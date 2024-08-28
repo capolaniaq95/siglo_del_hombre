@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de pedidos</title>
+    <title>Lista de productos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-        <header>
+    <header>
             <nav class="navbar navbar-expand-lg navbar-primary bg-info">
                 <div class="container-fluid">
                     <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
@@ -19,22 +19,19 @@
                 </div>
             </nav>
         </header>
-
         <main class="flex-fill">
             <div class="container mt-4">
-                <h2>Pedidos</h2>
-                <a href="/pedidos/agregar.pedido.php" class="btn btn-info mb-3">Agregar Nuevo Pedido</a>
+                <h2>Libros</h2>
+                <a href="agregar.libro.php" class="btn btn-info mb-3">Agregar Nuevo libro</a>
                 <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
                 <div>
                     <?php
+                    require '../conexion.php';
 
-                    require "../conexion.php";
-
-                    $sql = "SELECT pedido.id_pedido, usuario.nombre, pedido.fecha, pedido.total, metodo_de_pago.metodo
-                            FROM pedido
-                            INNER JOIN usuario ON pedido.id_usuario=usuario.id_usuario
-                            INNER JOIN metodo_de_pago ON pedido.id_metodo_de_pago=metodo_de_pago.id_metodo_de_pago
-                            ORDER BY pedido.fecha";
+                    $sql = "SELECT libro.id_libro, categoria.categoria, autor.nombre, libro.titulo, libro.descripcion, libro.editorial, libro.precio, libro.imagen
+                    FROM libro
+                    INNER JOIN categoria ON libro.id_categoria=categoria.id_categoria
+                    INNER JOIN autor ON libro.id_autor=autor.id_autor";
 
                     $result = $mysqli->query($sql);
 
@@ -45,32 +42,40 @@
                             echo '<table class="table table-striped">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>ID Pedido</th>
-                                            <th>Usuario</th>
-                                            <th>Fecha</th>
-                                            <th>Pago</th>
-                                            <th>Total</th>
-                                            <th>Acciones</th>
+                                          <th scope="col">ID libro</th>
+                                          <th scope="col">Categoria</th>
+                                          <th scope="col">Autor</th>
+                                          <th scope="col">Libro</th>
+                                          <th scope="col">Descripcion</th>
+                                          <th scope="col">Editorial</th>
+                                          <th scope="col">Precio</th>
+                                          <th scope="col">Imagen</th>
+                                          <th scope="col" style="width: 200px">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>';
 
                             while ($row = $result->fetch_assoc()) {
                                 echo '<tr>
-                                        <td>' . htmlspecialchars($row["id_pedido"]) . '</td>
+                                        <td>' . htmlspecialchars($row["id_libro"]) . '</td>
+                                        <td>' . htmlspecialchars($row["categoria"]) . '</td>
                                         <td>' . htmlspecialchars($row["nombre"]) . '</td>
-                                        <td>' . htmlspecialchars($row["fecha"]) . '</td>
-                                        <td>' . htmlspecialchars($row["metodo"]) . '</td>
-                                        <td>' . htmlspecialchars($row["total"]) . '</td>
+                                        <td>' . htmlspecialchars($row["titulo"]) . '</td>
+                                        <td>' . htmlspecialchars($row["descripcion"]) . '</td>
+                                        <td>' . htmlspecialchars($row["editorial"]) . '</td>
+                                        <td>' . htmlspecialchars($row["precio"]) . '</td>
+                                        <td>' . htmlspecialchars($row["imagen"]) . '</td>
                                         <td>
-                                            <a href="editar.pedido.php?id=' . urlencode($row["id_pedido"]) . '" class="btn btn-success btn-sm">Editar</a>
-                                            <a href="eliminar.pedido.php?id=' . urlencode($row["id_pedido"]) . '" class="btn btn-danger btn-sm">Eliminar</a>
+                                            <div class="d-flex justify-content-start">
+                                                <a href="editar.producto.php?id=' . urlencode($row["id_libro"]) . '" class="btn btn-success btn-sm mr-2">Editar</a>
+                                                <a href="eliminar.producto.php?id=' . urlencode($row["id_libro"]) . '" class="btn btn-danger btn-sm">Eliminar</a>
+                                            </div>
                                         </td>
                                     </tr>';
                             }
                             echo '</tbody></table>';
                         } else {
-                            echo "<div class='alert alert-info'>No hay registros de pedidos.</div>";
+                            echo "<div class='alert alert-info'>No hay registros de libros.</div>";
                         }
 
                         $result->free();
