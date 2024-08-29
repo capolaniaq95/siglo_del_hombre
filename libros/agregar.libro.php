@@ -60,14 +60,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <header>
-            <nav class="navbar navbar-expand-lg navbar-primary bg-info">
-                <div class="container-fluid">
-                    <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    </div>
-                </div>
-            </nav>
-        </header>
+    <nav class="navbar navbar-expand-lg navbar-primary bg-info">
+        <div class="container-fluid">
+            <!-- Alinea el título a la izquierda -->
+            <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                        <a class="nav-link text-white" href="libro.php">Libros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="autor.php">Autores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="categoria.php">Categorias Libro</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
 
   <div class="container mt-4">
     <div class="row justify-content-center">
@@ -105,11 +118,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="form-group">
               <label for="precio">Precio</label>
-              <input type="number" step="0.01" class="form-control" id="precio" name="precio" required>
+              <input type="number" step="50" class="form-control" id="precio" name="precio" required>
             </div>
             <div class="form-group">
               <label for="imagen">Imagen</label>
-              <input type="text" class="form-control-file" id="imagen" name="imagen" required>
+                <input type="text" class="form-control" id="imagen" name="imagen" required>
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
           </form>

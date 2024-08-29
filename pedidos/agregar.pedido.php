@@ -95,7 +95,7 @@ if ($payment_method->num_rows > 0) {
         <header>
             <nav class="navbar navbar-expand-lg navbar-primary bg-info">
                 <div class="container-fluid">
-                    <a class="navbar-brand px-2 text-white" href="index.php">Siglo del Hombre</a>
+                    <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     </div>
                 </div>

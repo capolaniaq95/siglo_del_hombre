@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de productos</title>
+    <title>Lista de categoria</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 
@@ -35,17 +35,14 @@
 
         <main class="flex-fill">
             <div class="container mt-4">
-                <h2>Libros</h2>
-                <a href="agregar.libro.php" class="btn btn-info mb-3">Agregar Nuevo libro</a>
+                <h2>Categoria</h2>
+                <a href="agregar.categoria.php" class="btn btn-info mb-3">Agregar Nueva Categoria</a>
                 <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
                 <div>
                     <?php
                     require '../conexion.php';
 
-                    $sql = "SELECT libro.id_libro, categoria.categoria, autor.nombre, libro.titulo, libro.descripcion, libro.editorial, libro.precio, libro.imagen
-                    FROM libro
-                    INNER JOIN categoria ON libro.id_categoria=categoria.id_categoria
-                    INNER JOIN autor ON libro.id_autor=autor.id_autor";
+                    $sql = "SELECT `id_categoria`, `categoria` FROM `categoria`";
 
                     $result = $mysqli->query($sql);
 
@@ -56,14 +53,8 @@
                             echo '<table class="table table-striped">
                                     <thead class="thead-dark">
                                         <tr>
-                                          <th scope="col">ID libro</th>
+                                          <th scope="col">ID Categoria</th>
                                           <th scope="col">Categoria</th>
-                                          <th scope="col">Autor</th>
-                                          <th scope="col">Libro</th>
-                                          <th scope="col">Descripcion</th>
-                                          <th scope="col">Editorial</th>
-                                          <th scope="col">Precio</th>
-                                          <th scope="col">Imagen</th>
                                           <th scope="col" style="width: 200px">Acciones</th>
                                         </tr>
                                     </thead>
@@ -71,25 +62,19 @@
 
                             while ($row = $result->fetch_assoc()) {
                                 echo '<tr>
-                                        <td>' . htmlspecialchars($row["id_libro"]) . '</td>
+                                        <td>' . htmlspecialchars($row["id_categoria"]) . '</td>
                                         <td>' . htmlspecialchars($row["categoria"]) . '</td>
-                                        <td>' . htmlspecialchars($row["nombre"]) . '</td>
-                                        <td>' . htmlspecialchars($row["titulo"]) . '</td>
-                                        <td>' . htmlspecialchars($row["descripcion"]) . '</td>
-                                        <td>' . htmlspecialchars($row["editorial"]) . '</td>
-                                        <td>' . htmlspecialchars($row["precio"]) . '</td>
-                                        <td>' . htmlspecialchars($row["imagen"]) . '</td>
                                         <td>
                                             <div class="d-flex justify-content-start">
-                                                <a href="editar.libro.php?id=' . urlencode($row["id_libro"]) . '" class="btn btn-success btn-sm mr-2">Editar</a>
-                                                <a href="eliminar.libro.php?id=' . urlencode($row["id_libro"]) . '" class="btn btn-danger btn-sm">Eliminar</a>
+                                                <a href="editar.categoria.php?id=' . urlencode($row["id_categoria"]) . '" class="btn btn-success btn-sm mr-2">Editar</a>
+                                                <a href="eliminar.categoria.php?id=' . urlencode($row["id_categoria"]) . '" class="btn btn-danger btn-sm">Eliminar</a>
                                             </div>
                                         </td>
                                     </tr>';
                             }
                             echo '</tbody></table>';
                         } else {
-                            echo "<div class='alert alert-info'>No hay registros de libros.</div>";
+                            echo "<div class='alert alert-info'>No hay registros de categoria.</div>";
                         }
 
                         $result->free();
