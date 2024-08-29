@@ -38,9 +38,7 @@
             if (isset($_SESSION["id_usuario"])):
             ?>
               <li class="nav-item">
-                <a class="nav-link text-white" href="Mis pedidos">
-                  <i class="fas fa-shopping-cart">Mis pedidos</i>
-                </a>
+                <a class="nav-link text-white" href="logout.php">Logout</a>
               </li>
             <?php
             endif

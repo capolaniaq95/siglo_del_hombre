@@ -18,20 +18,15 @@ $queryuser = $mysqli->query($query);
 
 $user = $queryuser->fetch_assoc();
 
-//var_dump($user);
-
 session_start();
 
 $_SESSION["id_usuario"] = $user['id_usuario'];
 
-
-//var_dump($_SESSION["id_usuario"]);
-
 $nr = 1;
 
-if ($nr == 1) {
+if ($mysqli->query($query) == True) {
 	if ($rol_id == 1) {
-		header("Location: index.php");
+		header("Location: index.administrador.php");
 	} else {
 		header("Location: index.php");
 	}

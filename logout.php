@@ -1,7 +1,9 @@
 <?php
+session_start();
 
-session_abort();
+session_unset();
 
-session_reset();
+
+session_destroy();
 
 header("Location: index.php");
