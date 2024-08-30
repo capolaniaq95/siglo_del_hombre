@@ -22,7 +22,8 @@ session_start();
 
 $_SESSION["id_usuario"] = $user['id_usuario'];
 
-$nr = 1;
+$_SESSION["pedido"] = array();
+
 
 if ($mysqli->query($query) == True) {
 	if ($rol_id == 1) {

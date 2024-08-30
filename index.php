@@ -23,15 +23,7 @@
               <a class="nav-link text-white" href="#">Libros</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">Colecciones</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link text-white" href="login.php">Ingresar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">
-                <i class="fas fa-shopping-cart"></i>
-              </a>
             </li>
             <?php
             session_start();
@@ -39,6 +31,11 @@
             ?>
               <li class="nav-item">
                 <a class="nav-link text-white" href="logout.php">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
               </li>
             <?php
             endif
