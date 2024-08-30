@@ -92,11 +92,21 @@ if ($payment_method->num_rows > 0) {
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-        <header>
+    <header>
             <nav class="navbar navbar-expand-lg navbar-primary bg-info">
                 <div class="container-fluid">
+                    <!-- Alinea el título a la izquierda -->
                     <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
+                        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="pedido.php">Pedidos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="Metodo.pago.php">Metodo de Pago</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de productos</title>
+    <title>Lista de usuarios</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 
@@ -19,7 +19,7 @@
                         <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
                         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="libro.php">Usuarios</a>
+                                <a class="nav-link text-white" href="usuario.php">Usuarios</a>
                             </li>
                         </ul>
                     </div>
@@ -30,7 +30,7 @@
         <main class="flex-fill">
             <div class="container mt-4">
                 <h2>Usuarios</h2>
-                <a href="agregar.libro.php" class="btn btn-info mb-3">Agregar Nuevo Usuario</a>
+                <a href="agregar.usuario.php" class="btn btn-info mb-3">Agregar Nuevo Usuario</a>
                 <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
                 <div>
                     <?php

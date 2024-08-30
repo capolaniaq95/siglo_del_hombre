@@ -127,13 +127,13 @@
                             </div>
 
                             <div class="col-md-6 col-lg-4">
-                                <a class="d-block portfolio-item card" data-toggle="modal" href="ubicacion.php">
-                                    <h4 class="text-center text-secondary">Metodos de pago</h4>
+                                <a class="d-block portfolio-item card" data-toggle="modal" href="index.php">
+                                    <h4 class="text-center text-secondary">Sitio Web</h4>
                                     <div class="portfolio-item-caption text-center">
                                         <i class="fa fa-search-plus"></i>
                                     </div>
                                     <div class="img-container">
-                                        <img class="img-fluid" src="/images/iconos_metodo_pago.png" alt="ubicaciones">
+                                        <img class="img-fluid" src="/images/icono_sitio_web.png" alt="Sitio Web">
                                     </div>
                                 </a>
                             </div>

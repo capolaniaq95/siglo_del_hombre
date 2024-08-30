@@ -14,18 +14,17 @@ if ($rol == 'Administrador') {
 
 $query = "SELECT * FROM usuario WHERE correo='$correo' AND password='$password' AND rol=$rol_id";
 
-$queryuser = $mysqli->query($query);
-
-$user = $queryuser->fetch_assoc();
-
-session_start();
-
-$_SESSION["id_usuario"] = $user['id_usuario'];
-
-$_SESSION["pedido"] = array();
-
 
 if ($mysqli->query($query) == True) {
+
+	$queryuser = $mysqli->query($query);
+
+	$user = $queryuser->fetch_assoc();
+
+	session_start();
+
+	$_SESSION["id_usuario"] = $user['id_usuario'];
+	$_SESSION["id_tipo"] = $user["id_tipo"];
 	if ($rol_id == 1) {
 		header("Location: index.administrador.php");
 	} else {
