@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="col-md-6 col-lg-4">
-                                <a class="d-block portfolio-item card" data-toggle="modal" href="inventario.php">
+                                <a class="d-block portfolio-item card" data-toggle="modal" href="inventario_index.php">
                                     <h4 class="text-center text-secondary">Inventario</h4>
                                     <div class="portfolio-item-caption text-center">
                                         <i class="fa fa-search-plus"></i>
