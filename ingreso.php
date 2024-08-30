@@ -6,29 +6,31 @@ $correo = $_POST['email'];
 $password = $_POST['password'];
 $rol = $_POST['rol'];
 
-if ($rol == 'Administrador'){
+if ($rol == 'Administrador') {
 	$rol_id = 1;
-}
-else{
+} else {
 	$rol_id = 2;
 }
 
 $query = "SELECT * FROM usuario WHERE correo='$correo' AND password='$password' AND rol=$rol_id";
 
-$queryuser = mysqli_query($mysqli, $query);
+$queryuser = $mysqli->query($query);
 
-$nr = mysqli_num_rows($queryuser);
+$user = $queryuser->fetch_assoc();
+
+session_start();
+
+$_SESSION["id_usuario"] = $user['id_usuario'];
+
+$_SESSION["pedido"] = array();
 
 
-if ($nr == 1) {
-	if($rol_id == 1){
-		header("Location: inventario.php");
-	}
-	else{
+if ($mysqli->query($query) == True) {
+	if ($rol_id == 1) {
+		header("Location: index.administrador.php");
+	} else {
 		header("Location: index.php");
 	}
 } else {
-    echo "<script> alert('Usuario, contraseña o rol incorrecto.');window.location='login.php' </script>";
+	echo "<script> alert('Usuario, contraseña o rol incorrecto.');window.location='login.php' </script>";
 }
-
-?>

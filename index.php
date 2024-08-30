@@ -23,16 +23,23 @@
               <a class="nav-link text-white" href="#">Libros</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">Colecciones</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link text-white" href="login.php">Ingresar</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </li>
+            <?php
+            session_start();
+            if (isset($_SESSION["id_usuario"])):
+            ?>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="logout.php">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </li>
+            <?php
+            endif
+            ?>
           </ul>
           <form class="form-inline my-2 my-lg-0 ml-auto">
             <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
