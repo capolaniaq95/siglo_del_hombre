@@ -14,8 +14,11 @@ if ($rol == 'Administrador') {
 
 $query = "SELECT * FROM usuario WHERE correo='$correo' AND password='$password' AND rol=$rol_id";
 
+$result = $mysqli->query($query);
+$num = $result->num_rows;
 
-if ($mysqli->query($query) == True) {
+
+if ($num == 1) {
 
 	$queryuser = $mysqli->query($query);
 
