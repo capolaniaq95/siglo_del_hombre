@@ -19,13 +19,7 @@
                         <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
                         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="libro.php">Libros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="autor.php">Autores</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="categoria.php">Categorias Libro</a>
+                                <a class="nav-link text-white" href="libro.php">Usuarios</a>
                             </li>
                         </ul>
                     </div>
@@ -35,14 +29,16 @@
 
         <main class="flex-fill">
             <div class="container mt-4">
-                <h2>Autores</h2>
-                <a href="agregar.autor.php" class="btn btn-info mb-3">Agregar Nuevo Autor</a>
+                <h2>Usuarios</h2>
+                <a href="agregar.libro.php" class="btn btn-info mb-3">Agregar Nuevo Usuario</a>
                 <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
                 <div>
                     <?php
                     require '../conexion.php';
 
-                    $sql = "SELECT `id_autor`, `nombre` FROM `autor`";
+                    $sql = "SELECT usuario.id_usuario, usuario.correo, usuario.direccion, usuario.nombre, tipo_de_usuario.tipo
+                    FROM usuario
+                    INNER JOIN tipo_de_usuario ON usuario.id_tipo=tipo_de_usuario.id_tipo";
 
                     $result = $mysqli->query($sql);
 
@@ -53,8 +49,11 @@
                             echo '<table class="table table-striped">
                                     <thead class="thead-dark">
                                         <tr>
-                                          <th scope="col">ID Autor</th>
-                                          <th scope="col">Autor</th>
+                                          <th scope="col">ID usuario</th>
+                                          <th scope="col">Correo</th>
+                                          <th scope="col">Direccion</th>
+                                          <th scope="col">Nombre</th>
+                                          <th scope="col">Tipo</th>
                                           <th scope="col" style="width: 200px">Acciones</th>
                                         </tr>
                                     </thead>
@@ -62,19 +61,22 @@
 
                             while ($row = $result->fetch_assoc()) {
                                 echo '<tr>
-                                        <td>' . htmlspecialchars($row["id_autor"]) . '</td>
+                                        <td>' . htmlspecialchars($row["id_usuario"]) . '</td>
+                                        <td>' . htmlspecialchars($row["correo"]) . '</td>
+                                        <td>' . htmlspecialchars($row["direccion"]) . '</td>
                                         <td>' . htmlspecialchars($row["nombre"]) . '</td>
+                                        <td>' . htmlspecialchars($row["tipo"]) . '</td>
                                         <td>
                                             <div class="d-flex justify-content-start">
-                                                <a href="editar.autor.php?id=' . urlencode($row["id_autor"]) . '" class="btn btn-success btn-sm mr-2">Editar</a>
-                                                <a href="eliminar.autor.php?id=' . urlencode($row["id_autor"]) . '" class="btn btn-danger btn-sm">Eliminar</a>
+                                                <a href="editar.usuario.php?id=' . urlencode($row["id_usuario"]) . '" class="btn btn-success btn-sm mr-2">Editar</a>
+                                                <a href="eliminar.usuario.php?id=' . urlencode($row["id_usuario"]) . '" class="btn btn-danger btn-sm">Eliminar</a>
                                             </div>
                                         </td>
                                     </tr>';
                             }
                             echo '</tbody></table>';
                         } else {
-                            echo "<div class='alert alert-info'>No hay registros de autores.</div>";
+                            echo "<div class='alert alert-info'>No hay registros de Usuarios.</div>";
                         }
 
                         $result->free();

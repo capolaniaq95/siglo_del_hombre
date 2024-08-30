@@ -103,7 +103,7 @@
                             </div>
 
                             <div class="col-md-6 col-lg-4">
-                                <a class="d-block portfolio-item card" data-toggle="modal" href="usuarios.php">
+                                <a class="d-block portfolio-item card" data-toggle="modal" href="/usuarios/usuario.php">
                                     <h4 class="text-center text-secondary">Usuarios</h4>
                                     <div class="portfolio-item-caption text-center">
                                         <i class="fa fa-search-plus"></i>

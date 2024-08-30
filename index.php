@@ -12,15 +12,17 @@
 </head>
 
 <body>
+
   <header>
     <nav class="navbar navbar-expand-lg navbar-primary bg-info">
       <div class="container-fluid">
-        <a class="navbar-brand px-2 text-white" href="#">Siglo del Hombre</a>
-
+        <!-- Alinea el título a la izquierda -->
+        <a class="navbar-brand px-2 text-white" href="index.php">Siglo del Hombre</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">Libros</a>
+              <a class="nav-link text-white" href="libro.php">Libros</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="login.php">Ingresar</a>
@@ -41,14 +43,11 @@
             endif
             ?>
           </ul>
-          <form class="form-inline my-2 my-lg-0 ml-auto">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="color: white; border-color: white;">Buscar</button>
-          </form>
         </div>
       </div>
     </nav>
   </header>
+
 
 
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">

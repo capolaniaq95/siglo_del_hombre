@@ -10,28 +10,28 @@
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-primary bg-info">
-        <div class="container-fluid">
-            <!-- Alinea el título a la izquierda -->
-            <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
-                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                        <a class="nav-link text-white" href="libro.php">Libros</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="autor.php">Autores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="categoria.php">Categorias Libro</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-primary bg-info">
+                <div class="container-fluid">
+                    <!-- Alinea el título a la izquierda -->
+                    <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
+                        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="libro.php">Libros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="autor.php">Autores</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="categoria.php">Categorias Libro</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
         <main class="flex-fill">
             <div class="container mt-4">
@@ -45,7 +45,8 @@
                     $sql = "SELECT libro.id_libro, categoria.categoria, autor.nombre, libro.titulo, libro.descripcion, libro.editorial, libro.precio, libro.imagen
                     FROM libro
                     INNER JOIN categoria ON libro.id_categoria=categoria.id_categoria
-                    INNER JOIN autor ON libro.id_autor=autor.id_autor";
+                    INNER JOIN autor ON libro.id_autor=autor.id_autor
+                    ORDER by id_libro desc";
 
                     $result = $mysqli->query($sql);
 
