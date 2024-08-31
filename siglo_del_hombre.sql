@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 26, 2024 at 04:26 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 31-08-2024 a las 02:53:26
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `siglo_del_hombre`
+-- Base de datos: `siglo_del_hombre`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `autor`
+-- Estructura de tabla para la tabla `autor`
 --
 
 CREATE TABLE `autor` (
@@ -33,7 +33,7 @@ CREATE TABLE `autor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `autor`
+-- Volcado de datos para la tabla `autor`
 --
 
 INSERT INTO `autor` (`id_autor`, `nombre`) VALUES
@@ -52,7 +52,7 @@ INSERT INTO `autor` (`id_autor`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categoria`
+-- Estructura de tabla para la tabla `categoria`
 --
 
 CREATE TABLE `categoria` (
@@ -61,7 +61,7 @@ CREATE TABLE `categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `categoria`
+-- Volcado de datos para la tabla `categoria`
 --
 
 INSERT INTO `categoria` (`id_categoria`, `categoria`) VALUES
@@ -74,7 +74,7 @@ INSERT INTO `categoria` (`id_categoria`, `categoria`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `devolucion`
+-- Estructura de tabla para la tabla `devolucion`
 --
 
 CREATE TABLE `devolucion` (
@@ -84,7 +84,7 @@ CREATE TABLE `devolucion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `devolucion`
+-- Volcado de datos para la tabla `devolucion`
 --
 
 INSERT INTO `devolucion` (`id_devolucion`, `id_linea_de_pedido`, `motivo`) VALUES
@@ -97,7 +97,7 @@ INSERT INTO `devolucion` (`id_devolucion`, `id_linea_de_pedido`, `motivo`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `libro`
+-- Estructura de tabla para la tabla `libro`
 --
 
 CREATE TABLE `libro` (
@@ -113,14 +113,14 @@ CREATE TABLE `libro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `libro`
+-- Volcado de datos para la tabla `libro`
 --
 
 INSERT INTO `libro` (`id_libro`, `titulo`, `descripcion`, `editorial`, `imagen`, `stock_minimo`, `precio`, `id_categoria`, `id_autor`) VALUES
 (1, 'El Aleph', 'Cuentos mágicos y surrealistas', 'Sur', 'aleph.jpg', 10, 25.99, 2, 4),
 (2, 'Rayuela', 'Novela experimental', 'Sudamericana', 'rayuela.jpg', 8, 22.50, 1, 3),
 (3, 'Pedro Páramo', 'Realismo mágico en la narrativa mexicana', 'Fondo de Cultura Económica', 'pedro-paramo.jpg', 5, 18.75, 2, 7),
-(4, 'Crimen y Castigo', 'Novela psicológica de Dostoievski', 'Alba Editorial', 'crimen-castigo.jpg', 12, 30.00, 1, 8),
+(4, 'Crimen y Castigo', 'Novela psicológica de Dostoievski', 'Alba Editorial', 'crimen y castigo.jpg', 12, 30.00, 1, 8),
 (5, 'Don Quijote de la Mancha', 'Obra cumbre de la literatura española', 'Espasa Calpe', 'don-quijote.jpg', 15, 28.50, 2, 9),
 (6, 'Orgullo y Prejuicio', 'Romance clásico de Jane Austen', 'Penguin Classics', 'orgullo-prejuicio.jpg', 18, 15.99, 1, 6),
 (7, '1984', 'Distopía futurista de George Orwell', 'Debolsillo', '1984.jpg', 20, 12.99, 2, 7),
@@ -131,7 +131,7 @@ INSERT INTO `libro` (`id_libro`, `titulo`, `descripcion`, `editorial`, `imagen`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `linea_de_pedido`
+-- Estructura de tabla para la tabla `linea_de_pedido`
 --
 
 CREATE TABLE `linea_de_pedido` (
@@ -143,7 +143,7 @@ CREATE TABLE `linea_de_pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `linea_de_pedido`
+-- Volcado de datos para la tabla `linea_de_pedido`
 --
 
 INSERT INTO `linea_de_pedido` (`id_linea_de_pedido`, `id_pedido`, `id_libro`, `cantidad`, `total_linea`) VALUES
@@ -171,7 +171,7 @@ INSERT INTO `linea_de_pedido` (`id_linea_de_pedido`, `id_pedido`, `id_libro`, `c
 -- --------------------------------------------------------
 
 --
--- Table structure for table `linea_movimiento_inventario`
+-- Estructura de tabla para la tabla `linea_movimiento_inventario`
 --
 
 CREATE TABLE `linea_movimiento_inventario` (
@@ -182,7 +182,7 @@ CREATE TABLE `linea_movimiento_inventario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `linea_movimiento_inventario`
+-- Volcado de datos para la tabla `linea_movimiento_inventario`
 --
 
 INSERT INTO `linea_movimiento_inventario` (`id_linea_movimiento`, `id_movimiento`, `id_libro`, `cantidad`) VALUES
@@ -211,7 +211,7 @@ INSERT INTO `linea_movimiento_inventario` (`id_linea_movimiento`, `id_movimiento
 -- --------------------------------------------------------
 
 --
--- Table structure for table `metodo_de_pago`
+-- Estructura de tabla para la tabla `metodo_de_pago`
 --
 
 CREATE TABLE `metodo_de_pago` (
@@ -220,7 +220,7 @@ CREATE TABLE `metodo_de_pago` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `metodo_de_pago`
+-- Volcado de datos para la tabla `metodo_de_pago`
 --
 
 INSERT INTO `metodo_de_pago` (`id_metodo_de_pago`, `metodo`) VALUES
@@ -232,7 +232,7 @@ INSERT INTO `metodo_de_pago` (`id_metodo_de_pago`, `metodo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `movimiento_inventario`
+-- Estructura de tabla para la tabla `movimiento_inventario`
 --
 
 CREATE TABLE `movimiento_inventario` (
@@ -244,7 +244,7 @@ CREATE TABLE `movimiento_inventario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `movimiento_inventario`
+-- Volcado de datos para la tabla `movimiento_inventario`
 --
 
 INSERT INTO `movimiento_inventario` (`id_movimiento`, `fecha`, `ubicacion_origen`, `ubicacion_destino`, `tipo_movimiento`) VALUES
@@ -262,7 +262,7 @@ INSERT INTO `movimiento_inventario` (`id_movimiento`, `fecha`, `ubicacion_origen
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pedido`
+-- Estructura de tabla para la tabla `pedido`
 --
 
 CREATE TABLE `pedido` (
@@ -275,7 +275,7 @@ CREATE TABLE `pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `pedido`
+-- Volcado de datos para la tabla `pedido`
 --
 
 INSERT INTO `pedido` (`id_pedido`, `id_usuario`, `id_metodo_de_pago`, `fecha`, `total`, `estado`) VALUES
@@ -293,7 +293,7 @@ INSERT INTO `pedido` (`id_pedido`, `id_usuario`, `id_metodo_de_pago`, `fecha`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipo_de_usuario`
+-- Estructura de tabla para la tabla `tipo_de_usuario`
 --
 
 CREATE TABLE `tipo_de_usuario` (
@@ -302,7 +302,7 @@ CREATE TABLE `tipo_de_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `tipo_de_usuario`
+-- Volcado de datos para la tabla `tipo_de_usuario`
 --
 
 INSERT INTO `tipo_de_usuario` (`id_tipo`, `tipo`) VALUES
@@ -312,7 +312,7 @@ INSERT INTO `tipo_de_usuario` (`id_tipo`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ubicacion`
+-- Estructura de tabla para la tabla `ubicacion`
 --
 
 CREATE TABLE `ubicacion` (
@@ -321,7 +321,7 @@ CREATE TABLE `ubicacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `ubicacion`
+-- Volcado de datos para la tabla `ubicacion`
 --
 
 INSERT INTO `ubicacion` (`id_ubicacion`, `ubicacion`) VALUES
@@ -334,7 +334,7 @@ INSERT INTO `ubicacion` (`id_ubicacion`, `ubicacion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -344,42 +344,43 @@ CREATE TABLE `usuario` (
   `direccion` varchar(255) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `rol` int(11) NOT NULL,
-  `id_tipo` int(11) NOT NULL
+  `id_tipo` int(11) NOT NULL,
+  `celular` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre`, `correo`, `direccion`, `password`, `rol`, `id_tipo`) VALUES
-(1, 'Juan Perez', 'juan.perez@example.com', 'Calle Falsa 123', 'password123', 1, 1),
-(2, 'Maria Garcia', 'maria.garcia@example.com', 'Avenida Siempre Viva 742', 'password456', 2, 2);
+INSERT INTO `usuario` (`id_usuario`, `nombre`, `correo`, `direccion`, `password`, `rol`, `id_tipo`, `celular`) VALUES
+(1, 'Juan Perez', 'carlos@gmail.com', 'Calle Falsa 123', '123456', 1, 1, '+57 3132323026'),
+(2, 'Maria Garcia', 'maria.garcia@example.com', 'Avenida Siempre Viva 742', 'password456', 2, 2, '+57 3132323026');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `autor`
+-- Indices de la tabla `autor`
 --
 ALTER TABLE `autor`
   ADD PRIMARY KEY (`id_autor`);
 
 --
--- Indexes for table `categoria`
+-- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Indexes for table `devolucion`
+-- Indices de la tabla `devolucion`
 --
 ALTER TABLE `devolucion`
   ADD PRIMARY KEY (`id_devolucion`),
   ADD KEY `id_linea_de_pedido` (`id_linea_de_pedido`);
 
 --
--- Indexes for table `libro`
+-- Indices de la tabla `libro`
 --
 ALTER TABLE `libro`
   ADD PRIMARY KEY (`id_libro`),
@@ -387,7 +388,7 @@ ALTER TABLE `libro`
   ADD KEY `id_autor` (`id_autor`);
 
 --
--- Indexes for table `linea_de_pedido`
+-- Indices de la tabla `linea_de_pedido`
 --
 ALTER TABLE `linea_de_pedido`
   ADD PRIMARY KEY (`id_linea_de_pedido`),
@@ -395,7 +396,7 @@ ALTER TABLE `linea_de_pedido`
   ADD KEY `id_libro` (`id_libro`);
 
 --
--- Indexes for table `linea_movimiento_inventario`
+-- Indices de la tabla `linea_movimiento_inventario`
 --
 ALTER TABLE `linea_movimiento_inventario`
   ADD PRIMARY KEY (`id_linea_movimiento`),
@@ -403,13 +404,13 @@ ALTER TABLE `linea_movimiento_inventario`
   ADD KEY `id_libro` (`id_libro`);
 
 --
--- Indexes for table `metodo_de_pago`
+-- Indices de la tabla `metodo_de_pago`
 --
 ALTER TABLE `metodo_de_pago`
   ADD PRIMARY KEY (`id_metodo_de_pago`);
 
 --
--- Indexes for table `movimiento_inventario`
+-- Indices de la tabla `movimiento_inventario`
 --
 ALTER TABLE `movimiento_inventario`
   ADD PRIMARY KEY (`id_movimiento`),
@@ -417,7 +418,7 @@ ALTER TABLE `movimiento_inventario`
   ADD KEY `ubicacion_destino` (`ubicacion_destino`);
 
 --
--- Indexes for table `pedido`
+-- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`id_pedido`),
@@ -425,147 +426,147 @@ ALTER TABLE `pedido`
   ADD KEY `id_metodo_de_pago` (`id_metodo_de_pago`);
 
 --
--- Indexes for table `tipo_de_usuario`
+-- Indices de la tabla `tipo_de_usuario`
 --
 ALTER TABLE `tipo_de_usuario`
   ADD PRIMARY KEY (`id_tipo`);
 
 --
--- Indexes for table `ubicacion`
+-- Indices de la tabla `ubicacion`
 --
 ALTER TABLE `ubicacion`
   ADD PRIMARY KEY (`id_ubicacion`);
 
 --
--- Indexes for table `usuario`
+-- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
   ADD KEY `id_tipo` (`id_tipo`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `autor`
+-- AUTO_INCREMENT de la tabla `autor`
 --
 ALTER TABLE `autor`
   MODIFY `id_autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `categoria`
+-- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `devolucion`
+-- AUTO_INCREMENT de la tabla `devolucion`
 --
 ALTER TABLE `devolucion`
   MODIFY `id_devolucion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `libro`
+-- AUTO_INCREMENT de la tabla `libro`
 --
 ALTER TABLE `libro`
   MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `linea_de_pedido`
+-- AUTO_INCREMENT de la tabla `linea_de_pedido`
 --
 ALTER TABLE `linea_de_pedido`
   MODIFY `id_linea_de_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `linea_movimiento_inventario`
+-- AUTO_INCREMENT de la tabla `linea_movimiento_inventario`
 --
 ALTER TABLE `linea_movimiento_inventario`
   MODIFY `id_linea_movimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `metodo_de_pago`
+-- AUTO_INCREMENT de la tabla `metodo_de_pago`
 --
 ALTER TABLE `metodo_de_pago`
   MODIFY `id_metodo_de_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `movimiento_inventario`
+-- AUTO_INCREMENT de la tabla `movimiento_inventario`
 --
 ALTER TABLE `movimiento_inventario`
   MODIFY `id_movimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `pedido`
+-- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `tipo_de_usuario`
+-- AUTO_INCREMENT de la tabla `tipo_de_usuario`
 --
 ALTER TABLE `tipo_de_usuario`
   MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `ubicacion`
+-- AUTO_INCREMENT de la tabla `ubicacion`
 --
 ALTER TABLE `ubicacion`
   MODIFY `id_ubicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `usuario`
+-- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `devolucion`
+-- Filtros para la tabla `devolucion`
 --
 ALTER TABLE `devolucion`
   ADD CONSTRAINT `devolucion_ibfk_1` FOREIGN KEY (`id_linea_de_pedido`) REFERENCES `linea_de_pedido` (`id_linea_de_pedido`);
 
 --
--- Constraints for table `libro`
+-- Filtros para la tabla `libro`
 --
 ALTER TABLE `libro`
   ADD CONSTRAINT `libro_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`),
   ADD CONSTRAINT `libro_ibfk_2` FOREIGN KEY (`id_autor`) REFERENCES `autor` (`id_autor`);
 
 --
--- Constraints for table `linea_de_pedido`
+-- Filtros para la tabla `linea_de_pedido`
 --
 ALTER TABLE `linea_de_pedido`
   ADD CONSTRAINT `linea_de_pedido_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`),
   ADD CONSTRAINT `linea_de_pedido_ibfk_2` FOREIGN KEY (`id_libro`) REFERENCES `libro` (`id_libro`);
 
 --
--- Constraints for table `linea_movimiento_inventario`
+-- Filtros para la tabla `linea_movimiento_inventario`
 --
 ALTER TABLE `linea_movimiento_inventario`
   ADD CONSTRAINT `linea_movimiento_inventario_ibfk_1` FOREIGN KEY (`id_movimiento`) REFERENCES `movimiento_inventario` (`id_movimiento`),
   ADD CONSTRAINT `linea_movimiento_inventario_ibfk_2` FOREIGN KEY (`id_libro`) REFERENCES `libro` (`id_libro`);
 
 --
--- Constraints for table `movimiento_inventario`
+-- Filtros para la tabla `movimiento_inventario`
 --
 ALTER TABLE `movimiento_inventario`
   ADD CONSTRAINT `movimiento_inventario_ibfk_1` FOREIGN KEY (`ubicacion_origen`) REFERENCES `ubicacion` (`id_ubicacion`),
   ADD CONSTRAINT `movimiento_inventario_ibfk_2` FOREIGN KEY (`ubicacion_destino`) REFERENCES `ubicacion` (`id_ubicacion`);
 
 --
--- Constraints for table `pedido`
+-- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`id_metodo_de_pago`) REFERENCES `metodo_de_pago` (`id_metodo_de_pago`);
 
 --
--- Constraints for table `usuario`
+-- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_tipo`) REFERENCES `tipo_de_usuario` (`id_tipo`);
