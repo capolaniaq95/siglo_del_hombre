@@ -22,7 +22,7 @@
           <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
           <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link text-white" href="libro.php">Libros</a>
+              <a class="nav-link text-white" href="libros.php">Libros</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="login.php">Ingresar</a>
@@ -35,7 +35,7 @@
                 <a class="nav-link text-white" href="logout.php">Logout</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="carrito.php">
                   <i class="fas fa-shopping-cart"></i>
                 </a>
               </li>

@@ -40,22 +40,33 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-primary bg-info">
       <div class="container-fluid">
-        <a class="navbar-brand px-2 text-white" href="#">Siglo del Hombre</a>
+        <!-- Alinea el título a la izquierda -->
+        <a class="navbar-brand px-2 text-white" href="index.php">Siglo del Hombre</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">Libros</a>
+              <a class="nav-link text-white" href="libros.php">Libros</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="login.php">Ingresar</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="carrito.php">
-                <i class="fas fa-shopping-cart"></i>
-              </a>
-            </li>
+            <?php
+            session_start();
+            if (isset($_SESSION["id_usuario"])):
+            ?>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="logout.php">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="carrito.php">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </li>
+            <?php
+            endif
+            ?>
           </ul>
-
         </div>
       </div>
     </nav>
