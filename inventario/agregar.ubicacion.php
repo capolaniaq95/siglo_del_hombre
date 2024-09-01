@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventario</title>
+    <title>Agregar ubicacion</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <style>
+	<style>
         .dropdown-menu-custom {
             display: none;
             position: absolute;
@@ -67,78 +67,39 @@
         </header>
         <main class="flex-fill">
             <div class="container mt-4">
-                <h2>Inventario</h2>
-                <a href="agregar.movimiento.inventario.php" class="btn btn-info mb-3">Agregar Nuevo Inventario</a>
-                <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
-                <div>
-                    <?php
+                <h2>Agregar ubicacion</h2>
+                <?php
+                require '../conexion.php';
 
-                    require('../conexion.php');
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+					$ubicacion = $_REQUEST['ubicacion'];
 
-                    $sql = "SELECT
-                            movimiento_inventario.id_movimiento,
-                            movimiento_inventario.fecha,
-                            ubicacion_destino.ubicacion AS destino,
-                            ubicacion_origen.ubicacion AS origen,
-                            movimiento_inventario.tipo_movimiento,
-                            movimiento_inventario.estado
-                        FROM
-                            movimiento_inventario
-                        INNER JOIN
-                            ubicacion AS ubicacion_destino ON movimiento_inventario.ubicacion_destino = ubicacion_destino.id_ubicacion
-                        INNER JOIN
-                            ubicacion AS ubicacion_origen ON movimiento_inventario.ubicacion_origen = ubicacion_origen.id_ubicacion";
-
-                    $result = $mysqli->query($sql);
-
-                    if (!$result) {
-                        echo "<div class='alert alert-danger'>Error en la consulta: " . $mysqli->error . "</div>";
+                    $sql = "INSERT INTO `ubicacion`(`ubicacion`) VALUES ('$ubicacion')";
+                    if ($mysqli->query($sql) === TRUE) {
+                        echo "<div class='alert alert-success'>ubicacion agregado correctamente.</div>";
+                        echo "<a href='ubicacion.php' class='btn btn-primary'>Volver a la lista de ubicacion</a>";
+                        $mysqli->close();
+                        exit;
                     } else {
-                        if ($result->num_rows > 0) {
-                            echo '<table class="table table-striped">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th>ID Movimiento Inv.</th>
-                                            <th>Fecha</th>
-                                            <th>Ubicacion_origen</th>
-                                            <th>Ubicacion_destino</th>
-                                            <th>Tipo</th>
-                                            <th>Estado</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>';
-
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<tr>
-                                        <td>' . htmlspecialchars($row["id_movimiento"]) . '</td>
-                                        <td>' . htmlspecialchars($row["fecha"]) . '</td>
-                                        <td>' . htmlspecialchars($row["origen"]) . '</td>
-                                        <td>' . htmlspecialchars($row["destino"]) . '</td>
-                                        <td>' . htmlspecialchars($row["tipo_movimiento"]) . '</td>
-                                        <td>' . htmlspecialchars($row["estado"]) . '</td>
-                                        <td>
-                                            <a href="editar.movimiento.php?id=' . urlencode($row["id_movimiento"]) . '" class="btn btn-success btn-sm">Editar</a>
-                                            <a href="eliminar.movimiento.php?id=' . urlencode($row["id_movimiento"]) . '" class="btn btn-danger btn-sm">Eliminar</a>
-                                        </td>
-                                    </tr>';
-                            }
-                            echo '</tbody></table>';
-                        } else {
-                            echo "<div class='alert alert-info'>No hay registros de usuarios.</div>";
-                        }
-
-                        $result->free();
+                        echo "<div class='alert alert-danger'>Error al agregar el ubicacion: " . $mysqli->error . "</div>";
                     }
-
-                    $mysqli->close();
-                    ?>
-                </div>
+                }
+                ?>
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label for="ubicacion">Nombre de la ubicacion</label>
+                        <input type="text" class="form-control" id="ubicacion" name="ubicacion" required>
+                    </div>
+                    <div class="form-group d-flex">
+                        <button type="submit" class="btn btn-info mr-2">Agregar ubicacion</button>
+                        <a href="ubicacion.php" class="btn btn-secondary">Cancelar</a>
+                    </div>
+                </form>
             </div>
         </main>
 
-        <footer class="bg-dark text-white py-3">
+        <footer class="bg-dark text-white py-3 mt-auto">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">

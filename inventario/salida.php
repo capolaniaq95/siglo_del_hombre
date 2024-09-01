@@ -67,7 +67,7 @@
         </header>
         <main class="flex-fill">
             <div class="container mt-4">
-                <h2>Inventario</h2>
+                <h2>Salidas de inventario</h2>
                 <a href="agregar.movimiento.inventario.php" class="btn btn-info mb-3">Agregar Nuevo Inventario</a>
                 <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
                 <div>
@@ -88,7 +88,9 @@
                         INNER JOIN
                             ubicacion AS ubicacion_destino ON movimiento_inventario.ubicacion_destino = ubicacion_destino.id_ubicacion
                         INNER JOIN
-                            ubicacion AS ubicacion_origen ON movimiento_inventario.ubicacion_origen = ubicacion_origen.id_ubicacion";
+                            ubicacion AS ubicacion_origen ON movimiento_inventario.ubicacion_origen = ubicacion_origen.id_ubicacion
+						WHERE
+							tipo_movimiento='salida'";
 
                     $result = $mysqli->query($sql);
 
@@ -126,7 +128,7 @@
                             }
                             echo '</tbody></table>';
                         } else {
-                            echo "<div class='alert alert-info'>No hay registros de usuarios.</div>";
+                            echo "<div class='alert alert-info'>No hay registros de Inventario.</div>";
                         }
 
                         $result->free();
