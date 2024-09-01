@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de productos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <style>
+        /* Estilo para la columna de imagen */
+        .image-column {
+            max-width: 150px; /* Ancho máximo para la columna de imagen */
+        }
+        .image-column a {
+            display: block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            max-width: 150px; /* Ajusta según el ancho deseado */
+        }
+    </style>
 </head>
 
 <body>
@@ -13,10 +27,8 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-primary bg-info">
                 <div class="container-fluid">
-                    <!-- Alinea el título a la izquierda -->
                     <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
                         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                             <li class="nav-item">
                                 <a class="nav-link text-white" href="libro.php">Libros</a>
@@ -66,7 +78,7 @@
                                           <th scope="col">Precio</th>
                                           <th scope="col">Stock</th>
                                           <th scope="col">Estado</th>
-                                          <th scope="col">Imagen</th>
+                                          <th scope="col" class="image-column">Imagen</th>
                                           <th scope="col" style="width: 200px">Acciones</th>
                                         </tr>
                                     </thead>
@@ -83,7 +95,11 @@
                                         <td>' . htmlspecialchars($row["precio"]) . '</td>
                                         <td>' . htmlspecialchars($row["stock"]) . '</td>
                                         <td>' . htmlspecialchars($row["estado"]) . '</td>
-                                        <td>' . htmlspecialchars($row["imagen"]) . '</td>
+                                        <td class="image-column">
+                                            <a href="' . htmlspecialchars($row["imagen"]) . '" target="_blank">
+                                                Ver Imagen
+                                            </a>
+                                        </td>
                                         <td>
                                             <div class="d-flex justify-content-start">
                                                 <a href="editar.libro.php?id=' . urlencode($row["id_libro"]) . '" class="btn btn-success btn-sm mr-2">Editar</a>

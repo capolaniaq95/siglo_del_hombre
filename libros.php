@@ -105,9 +105,8 @@
         }
 
         if ($result->num_rows > 0) {
-          // Recorrer cada fila de resultado
           while ($row = $result->fetch_assoc()) {
-            $imagenRuta = 'images/' . htmlspecialchars($row["imagen"], ENT_QUOTES, 'UTF-8');
+            $imagenRuta = $row['imagen'];
             $idLibro = htmlspecialchars($row["id_libro"], ENT_QUOTES, 'UTF-8');
 
             echo '<div class="col">';
