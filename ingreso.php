@@ -27,7 +27,7 @@ if ($num == 1) {
 	session_start();
 
 	$_SESSION["id_usuario"] = $user['id_usuario'];
-	$_SESSION["id_tipo"] = $user["id_tipo"];
+	$_SESSION["id_tipo"] = $rol_id;
 	if ($rol_id == 1) {
 		header("Location: index.administrador.php");
 	} else {

@@ -13,7 +13,7 @@
 
 <body>
 
-  <header>
+<header>
     <nav class="navbar navbar-expand-lg navbar-primary bg-info">
       <div class="container-fluid">
         <!-- Alinea el título a la izquierda -->
@@ -32,6 +32,21 @@
             if (isset($_SESSION["id_usuario"])):
             ?>
               <li class="nav-item">
+                <a class="nav-link text-white" href="mis.pedidos.php">Mis Pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="devolucion.php">Mis Devoluciones</a>
+              </li>
+              <?php
+              if ($_SESSION["id_tipo"] == 1):
+              ?>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="index.administrador.php">Administrador</a>
+                </li>
+              <?php
+              endif
+              ?>
+              <li class="nav-item">
                 <a class="nav-link text-white" href="logout.php">Logout</a>
               </li>
               <li class="nav-item">
@@ -47,6 +62,7 @@
       </div>
     </nav>
   </header>
+
 
 
 

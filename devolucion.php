@@ -13,31 +13,79 @@
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-primary bg-info">
-                <div class="container-fluid">
-                    <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    </div>
-                </div>
-            </nav>
-        </header>
+    <header>
+    <nav class="navbar navbar-expand-lg navbar-primary bg-info">
+      <div class="container-fluid">
+        <!-- Alinea el título a la izquierda -->
+        <a class="navbar-brand px-2 text-white" href="index.php">Siglo del Hombre</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
+          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="libros.php">Libros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="login.php">Ingresar</a>
+            </li>
+            <?php
+            session_start();
+            if (isset($_SESSION["id_usuario"])):
+            ?>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="mis.pedidos.php">Mis Pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="devolucion.php">Mis Devoluciones</a>
+              </li>
+              <?php
+              if ($_SESSION["id_tipo"] == 1):
+              ?>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="index.administrador.php">Administrador</a>
+                </li>
+              <?php
+              endif
+              ?>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="logout.php">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="carrito.php">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </li>
+            <?php
+            endif
+            ?>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 
         <main class="flex-fill">
             <div class="container mt-4">
-                <h2>Pedidos</h2>
-                <a href="/pedidos/agregar.pedido.php" class="btn btn-info mb-3">Agregar Nuevo Pedido</a>
-                <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
+                <h2>Mis Devoluciones</h2>
                 <div>
                     <?php
 
-                    require "../conexion.php";
+                    require "conexion.php";
 
-                    $sql = "SELECT pedido.id_pedido, usuario.nombre, pedido.fecha, pedido.total, metodo_de_pago.metodo
-                            FROM pedido
-                            INNER JOIN usuario ON pedido.id_usuario=usuario.id_usuario
-                            INNER JOIN metodo_de_pago ON pedido.id_metodo_de_pago=metodo_de_pago.id_metodo_de_pago
-                            ORDER BY pedido.fecha";
+                    $id_usuario = intval($_SESSION["id_usuario"]);
+
+                    $sql = "SELECT
+								devolucion.id_devolucion,
+								pedido.fecha,
+								pedido.total,
+								devolucion.motivo
+							FROM
+								devolucion
+							INNER JOIN
+								linea_de_pedido ON devolucion.id_linea_de_pedido = linea_de_pedido.id_linea_de_pedido
+							INNER JOIN
+								pedido ON linea_de_pedido.id_pedido = pedido.id_pedido
+							WHERE
+								pedido.id_usuario=$id_usuario";
 
                     $result = $mysqli->query($sql);
 
@@ -48,11 +96,9 @@
                             echo '<table class="table table-striped">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>ID Pedido</th>
-                                            <th>Usuario</th>
                                             <th>Fecha</th>
-                                            <th>Pago</th>
-                                            <th>Total</th>
+											<th>total</th>
+                                            <th>Motivo devolucion</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -60,20 +106,17 @@
 
                             while ($row = $result->fetch_assoc()) {
                                 echo '<tr>
-                                        <td>' . htmlspecialchars($row["id_pedido"]) . '</td>
-                                        <td>' . htmlspecialchars($row["nombre"]) . '</td>
                                         <td>' . htmlspecialchars($row["fecha"]) . '</td>
-                                        <td>' . htmlspecialchars($row["metodo"]) . '</td>
                                         <td>' . htmlspecialchars($row["total"]) . '</td>
+                                        <td>' . htmlspecialchars($row["motivo"]) . '</td>
                                         <td>
-                                            <a href="consultar.pedido.php?id=' . urlencode($row["id_pedido"]) . '" class="btn btn-success btn-sm">Consultar</a>
-                                            <a href="devolucion.pedido.php?id=' . urlencode($row["id_pedido"]) . '" class="btn btn-danger btn-sm">Devolución</a>
+                                            <a href="consultar.devolucion.php?id=' . urlencode($row["id_devolucion"]) . '" class="btn btn-success btn-sm">Consultar</a>
                                         </td>
                                     </tr>';
                             }
                             echo '</tbody></table>';
                         } else {
-                            echo "<div class='alert alert-info'>No hay registros de pedidos.</div>";
+                            echo "<div class='alert alert-info'>No hay registros de devoluciones.</div>";
                         }
 
                         $result->free();
