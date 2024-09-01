@@ -74,18 +74,16 @@
                     $id_usuario = intval($_SESSION["id_usuario"]);
 
                     $sql = "SELECT
-								devolucion.id_devolucion,
-								pedido.fecha,
-								pedido.total,
-								devolucion.motivo
-							FROM
-								devolucion
-							INNER JOIN
-								linea_de_pedido ON devolucion.id_linea_de_pedido = linea_de_pedido.id_linea_de_pedido
-							INNER JOIN
-								pedido ON linea_de_pedido.id_pedido = pedido.id_pedido
-							WHERE
-								pedido.id_usuario=$id_usuario";
+                              devolucion.id_devolucion,
+                              pedido.fecha,
+                              pedido.total,
+                              devolucion.motivo
+                            FROM
+                              devolucion
+                            INNER JOIN
+                              pedido ON devolucion.id_pedido = pedido.id_pedido
+                            WHERE
+                              pedido.id_usuario=$id_usuario";
 
                     $result = $mysqli->query($sql);
 

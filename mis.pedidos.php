@@ -108,7 +108,7 @@
                                         <td>' . htmlspecialchars($row["total"]) . '</td>
                                         <td>
                                             <a href="consultar.pedido.php?id=' . urlencode($row["id_pedido"]) . '" class="btn btn-success btn-sm">Consultar</a>
-                                            <a href="devolucion.pedido.php?id=' . urlencode($row["id_pedido"]) . '" class="btn btn-danger btn-sm">Devolución</a>
+                                            <a href="generar.devolucion.php?id_pedido=' . urlencode($row["id_pedido"]) . '" class="btn btn-danger btn-sm">Devolución</a>
                                         </td>
                                     </tr>';
                             }
