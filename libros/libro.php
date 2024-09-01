@@ -42,7 +42,7 @@
                     <?php
                     require '../conexion.php';
 
-                    $sql = "SELECT libro.id_libro, categoria.categoria, autor.nombre, libro.titulo, libro.descripcion, libro.editorial, libro.precio, libro.imagen
+                    $sql = "SELECT libro.id_libro, categoria.categoria, autor.nombre, libro.titulo, libro.descripcion, libro.editorial, libro.precio, libro.imagen, libro.stock, libro.estado
                     FROM libro
                     INNER JOIN categoria ON libro.id_categoria=categoria.id_categoria
                     INNER JOIN autor ON libro.id_autor=autor.id_autor
@@ -64,6 +64,8 @@
                                           <th scope="col">Descripcion</th>
                                           <th scope="col">Editorial</th>
                                           <th scope="col">Precio</th>
+                                          <th scope="col">Stock</th>
+                                          <th scope="col">Estado</th>
                                           <th scope="col">Imagen</th>
                                           <th scope="col" style="width: 200px">Acciones</th>
                                         </tr>
@@ -79,6 +81,8 @@
                                         <td>' . htmlspecialchars($row["descripcion"]) . '</td>
                                         <td>' . htmlspecialchars($row["editorial"]) . '</td>
                                         <td>' . htmlspecialchars($row["precio"]) . '</td>
+                                        <td>' . htmlspecialchars($row["stock"]) . '</td>
+                                        <td>' . htmlspecialchars($row["estado"]) . '</td>
                                         <td>' . htmlspecialchars($row["imagen"]) . '</td>
                                         <td>
                                             <div class="d-flex justify-content-start">

@@ -63,7 +63,7 @@ if ($resultado->num_rows > 0) {
 
 $sql = "SELECT id_libro, titulo, precio FROM libro";
 $resultado_libro = $mysqli->query($sql);
-$options_libro = "<option value=''>Selecciona un producto</option>";
+$options_libro = "<option value=''>Selecciona un libro</option>";
 if ($resultado_libro->num_rows > 0) {
     while ($fila = $resultado_libro->fetch_assoc()) {
         $options_libro .= "<option value='" . htmlspecialchars($fila['id_libro']) . "' data-precio='" . htmlspecialchars($fila['precio']) . "'>" . htmlspecialchars($fila['titulo']) . "</option>";

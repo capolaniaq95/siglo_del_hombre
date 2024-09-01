@@ -1,26 +1,24 @@
 <?php
 require "../conexion.php";
 
-$sql = "SELECT id_producto, producto, precio FROM producto";
-$resultado_productos = $mysqli->query($sql);
-$options_producto = "<option value=''>Selecciona un producto</option>";
-if ($resultado_productos->num_rows > 0) {
-    while ($fila = $resultado_productos->fetch_assoc()) {
-        $options_producto .= "<option value='" . htmlspecialchars($fila['id_producto']) . "' data-precio='" . htmlspecialchars($fila['precio']) . "'>" . htmlspecialchars($fila['producto']) . "</option>";
+$sql = "SELECT id_libro, titulo, precio FROM libro";
+$resultado_libros = $mysqli->query($sql);
+$options_libro = "<option value=''>Selecciona un libro</option>";
+if ($resultado_libros->num_rows > 0) {
+    while ($fila = $resultado_libros->fetch_assoc()) {
+        $options_libro .= "<option value='" . htmlspecialchars($fila['id_libro']) . "' data-precio='" . htmlspecialchars($fila['precio']) . "'>" . htmlspecialchars($fila['titulo']) . "</option>";
     }
 }
 
 
-$sql = "SELECT `id_ubicacion`, `nombre` FROM `ubicacion`";
+$sql = "SELECT `id_ubicacion`, `ubicacion` FROM `ubicacion`";
 $resultado_ubicacion = $mysqli->query($sql);
-$options_ubicacion = "<option value=''>Selecciona un producto</option>";
-if ($resultado_productos->num_rows > 0) {
+$options_ubicacion = "<option value=''>Selecciona un ubicacion</option>";
+if ($resultado_ubicacion->num_rows > 0) {
     while ($fila = $resultado_ubicacion->fetch_assoc()) {
-        $options_ubicacion .= "<option value='" . htmlspecialchars($fila['id_ubicacion']) . "'>" . htmlspecialchars($fila['nombre']) . "</option>";
+        $options_ubicacion .= "<option value='" . htmlspecialchars($fila['id_ubicacion']) . "'>" . htmlspecialchars($fila['ubicacion']) . "</option>";
     }
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,14 +28,61 @@ if ($resultado_productos->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de movimiento inventario</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+        .dropdown-menu-custom {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu-custom a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu-custom a:hover {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .nav-item:hover .dropdown-menu-custom {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-success">
-                <div style="text-align: center; width: 100%; font-size: 1.5em;">
-                    <a class="navbar-brand text-white" href="index.php" style="font-size: 1.5rem;">Ferretería Luis Vagales</a>
+    <header>
+            <nav class="navbar navbar-expand-lg navbar-primary bg-info">
+                <div class="container-fluid">
+                    <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button">
+                                    Inventario
+                                </a>
+                                <div class="dropdown-menu-custom" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Entradas</a>
+                                    <a class="dropdown-item" href="#">Salidas</a>
+                                    <a class="dropdown-item" href="#">En proceso</a>
+                                    <a class="dropdown-item" href="#">Completadas</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="ubicacion.php">Ubicacion</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </nav>
         </header>
@@ -69,7 +114,7 @@ if ($resultado_productos->num_rows > 0) {
                     <table class="table table-bordered" id="orderLinesTable">
                         <thead class="thead-dark">
                             <tr>
-                                <th>Producto</th>
+                                <th>libro</th>
                                 <th>Cantidad</th>
                                 <th>Acciones</th>
                             </tr>
@@ -77,8 +122,8 @@ if ($resultado_productos->num_rows > 0) {
                         <tbody>
                             <tr>
                                 <td>
-                                    <select name="productos[]" class="form-control productSelect" onchange="updatePrice(this)">
-                                        <?php echo $options_producto; ?>
+                                    <select name="libros[]" class="form-control productSelect" onchange="updatePrice(this)">
+                                        <?php echo $options_libro; ?>
                                     </select>
                                 </td>
                                 <td><input type="number" class="form-control quantity" name="cantidades[]" onchange="calculateSubtotal(this)" required></td>
@@ -107,8 +152,8 @@ if ($resultado_productos->num_rows > 0) {
                 newRow.innerHTML = `
                 <tr>
                     <td>
-                        <select name="productos[]" class="form-control productSelect" onchange="updatePrice(this)">
-                            <?php echo $options_producto; ?>
+                        <select name="libros[]" class="form-control productSelect" onchange="updatePrice(this)">
+                            <?php echo $options_libro; ?>
                         </select>
                     </td>
                     <td><input type="number" class="form-control quantity" name="cantidades[]" onchange="calculateSubtotal(this)" required></td>
