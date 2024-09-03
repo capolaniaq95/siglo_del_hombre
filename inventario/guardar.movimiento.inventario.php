@@ -78,9 +78,9 @@
 
 
             if ($origen == 2 && $destino == 1 ){
-                $tipo_movimiento = "Entrada";
+                $tipo_movimiento = "entrada";
             }else if ($origen == 1 && $destino == 3){
-                $tipo_movimiento = "Salida";
+                $tipo_movimiento = "salida";
             }else{
                 die("<script> alert('Movimiento no permitido');window.location='agregar.movimiento.inventario.php' </script>");
             }

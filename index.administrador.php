@@ -126,7 +126,7 @@
                             </div>
 
                             <div class="col-md-6 col-lg-4">
-                                <a class="d-block portfolio-item card" data-toggle="modal" href="devolucion.php">
+                                <a class="d-block portfolio-item card" data-toggle="modal" href="/devolucion/devolucion.php">
                                     <h4 class="text-center text-secondary">Devoluciones</h4>
                                     <div class="portfolio-item-caption text-center">
                                         <i class="fa fa-search-plus"></i>
