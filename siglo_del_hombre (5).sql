@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2024 at 03:51 AM
+-- Generation Time: Sep 05, 2024 at 06:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -82,7 +82,7 @@ INSERT INTO `categoria` (`id_categoria`, `categoria`) VALUES
 
 CREATE TABLE `devolucion` (
   `id_devolucion` int(11) NOT NULL,
-  `id_linea_de_pedido` int(11) NOT NULL,
+  `id_pedido` int(11) NOT NULL,
   `motivo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -100,25 +100,28 @@ CREATE TABLE `libro` (
   `imagen` varchar(255) NOT NULL,
   `precio` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
-  `id_autor` int(11) NOT NULL
+  `id_autor` int(11) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `estado` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `libro`
 --
 
-INSERT INTO `libro` (`id_libro`, `titulo`, `descripcion`, `editorial`, `imagen`, `precio`, `id_categoria`, `id_autor`) VALUES
-(1, 'El Aleph', 'Cuentos mágicos y surrealistas', 'Sur', 'aleph.jpg', 5500, 2, 4),
-(2, 'Rayuela', 'Novela experimental', 'Sudamericana', 'rayuela.jpg', 23000, 1, 3),
-(3, 'Pedro Páramo', 'Realismo mágico en la narrativa mexicana', 'Fondo de Cultura Económica', 'pedro-paramo.jpg', 12000, 2, 7),
-(4, 'Crimen y Castigo', 'Novela psicológica de Dostoievski', 'Alba Editorial', 'crimen-castigo.jpg', 30000, 1, 8),
-(5, 'Don Quijote de la Mancha', 'Obra cumbre de la literatura española', 'Espasa Calpe', 'don-quijote.jpg', 50000, 2, 9),
-(6, 'Orgullo y Prejuicio', 'Romance clásico de Jane Austen', 'Penguin Classics', 'orgullo-prejuicio.jpg', 10000, 1, 6),
-(7, '1984', 'Distopía futurista de George Orwell', 'Debolsillo', '1984.jpg', 55000, 2, 7),
-(8, 'La Sombra del Viento', 'Misterio y literatura en el Barrio Gótico de Barcelona', 'Planeta', 'sombra-viento.jpg', 27000, 1, 10),
-(9, 'Harry Potter y la Piedra Filosofal', 'Fantasía juvenil de J.K. Rowling', 'Salamandra', 'harry-potter.jpg', 20000, 2, 8),
-(10, 'Los Miserables', 'Épica novela de Victor Hugo', 'Anaya', 'miserables.jpg', 36000, 1, 10),
-(11, 'EnseÃ±ar a luis vagales', 'pruebas', 'panamericana', '/images/prueba.jpeg', 15000, 5, 2);
+INSERT INTO `libro` (`id_libro`, `titulo`, `descripcion`, `editorial`, `imagen`, `precio`, `id_categoria`, `id_autor`, `stock`, `estado`) VALUES
+(1, 'El Aleph', 'Cuentos mï¿½gicos y surrealistas', 'Sur', 'https://i.postimg.cc/mDCJfy9L/miserables.jpg', 5500, 2, 4, -23, 'No Disponible'),
+(2, 'Rayuela', 'Novela experimental', 'Sudamericana', 'https://i.postimg.cc/vH3jsB4V/Rayuela.jpg', 23000, 1, 3, -2, 'No Disponible'),
+(3, 'Pedro Pï¿½ramo', 'Realismo mï¿½gico en la narrativa mexicana', 'Fondo de Cultura Econï¿½mica', 'https://i.postimg.cc/mkSnhZVK/pedro-paramo.jpg', 12000, 2, 7, 0, ''),
+(4, 'Crimen y Castigo', 'Novela psicolï¿½gica de Dostoievski', 'Alba Editorial', 'https://i.postimg.cc/MGhNFFv3/crimen-y-castigo.jpg', 30000, 1, 8, -2, 'No Disponible'),
+(5, 'Don Quijote de la Mancha', 'Obra cumbre de la literatura espaï¿½ola', 'Espasa Calpe', 'https://i.postimg.cc/sgHtpXyr/don-quijote.jpg', 50000, 2, 9, 0, ''),
+(6, 'Orgullo y Prejuicio', 'Romance clï¿½sico de Jane Austen', 'Penguin Classics', 'https://i.postimg.cc/1th7HVjL/orgullo-prejuicio.jpg', 10000, 1, 6, -1, 'No Disponible'),
+(7, '1984', 'Distopï¿½a futurista de George Orwell', 'Debolsillo', 'https://i.postimg.cc/jSSpwfpc/1984.jpg', 55000, 2, 7, 0, ''),
+(8, 'La Sombra del Viento', 'Misterio y literatura en el Barrio Gï¿½tico de Barcelona', 'Planeta', 'https://i.postimg.cc/66VgMzwz/9221003367bb8bc334463a2556e63e24.jpg', 27000, 1, 10, 0, ''),
+(9, 'Harry Potter y la Piedra Filosofal', 'Fantasï¿½a juvenil de J.K. Rowling', 'Salamandra', 'https://i.postimg.cc/1th7HVjL/orgullo-prejuicio.jpg', 20000, 2, 8, 0, 'No Disponible'),
+(10, 'Los Miserables', 'ï¿½pica novela de Victor Hugo', 'Anaya', 'https://i.postimg.cc/jSSpwfpc/1984.jpg', 36000, 1, 10, 0, 'No Disponible'),
+(11, 'EnseÃ±ar a luis vagales', 'pruebas', 'panamericana', 'https://i.postimg.cc/Cx52Lg86/sombra-viento.jpg', 15000, 5, 2, -2, 'No Disponible'),
+(12, 'Don don quijote', 'purbeas imagen relacional', 'panamericana', 'https://i.postimg.cc/mkfQz9Cm/aleph.jpg', 12050, 1, 1, -3, 'No Disponible');
 
 -- --------------------------------------------------------
 
@@ -141,7 +144,44 @@ CREATE TABLE `linea_de_pedido` (
 INSERT INTO `linea_de_pedido` (`id_linea_de_pedido`, `id_pedido`, `id_libro`, `cantidad`, `total_linea`) VALUES
 (26, 38, 8, 2, 54000),
 (27, 38, 6, 1, 10000),
-(28, 39, 7, 12, 660000);
+(28, 39, 7, 12, 660000),
+(29, 40, 10, 3, 108000),
+(30, 41, 12, 3, 36150),
+(31, 42, 12, 3, 36150),
+(32, 42, 12, 3, 36150),
+(33, 44, 12, 3, 36150),
+(34, 44, 12, 3, 36150),
+(35, 44, 12, 3, 36150),
+(36, 44, 12, 3, 36150),
+(37, 44, 12, 3, 36150),
+(38, 44, 11, 2, 30000),
+(39, 49, 9, 1, 20000),
+(52, 62, 1, 2, 46000),
+(53, 62, 1, 1, 30000),
+(54, 64, 1, 2, 46000),
+(55, 64, 1, 1, 30000),
+(56, 65, 1, 1, 23000),
+(57, 65, 1, 1, 30000),
+(58, 65, 1, 1, 10000),
+(59, 66, 1, 1, 23000),
+(60, 66, 1, 1, 30000),
+(61, 66, 1, 1, 10000),
+(62, 66, 1, 1, 20000),
+(63, 67, 1, 1, 30000),
+(64, 67, 1, 1, 10000),
+(65, 67, 1, 1, 20000),
+(66, 68, 1, 2, 46000),
+(67, 68, 1, 2, 60000),
+(68, 68, 1, 1, 20000),
+(69, 70, 2, 2, 46000),
+(70, 70, 4, 2, 60000),
+(71, 70, 6, 1, 10000),
+(72, 70, 9, 1, 20000),
+(73, 71, 2, 2, 46000),
+(74, 71, 4, 2, 60000),
+(75, 71, 6, 1, 10000),
+(76, 71, 9, 1, 20000),
+(77, 72, 11, 3, 45000);
 
 -- --------------------------------------------------------
 
@@ -161,27 +201,42 @@ CREATE TABLE `linea_movimiento_inventario` (
 --
 
 INSERT INTO `linea_movimiento_inventario` (`id_linea_movimiento`, `id_movimiento`, `id_libro`, `cantidad`) VALUES
-(1, 1, 1, 5),
-(2, 1, 3, 3),
-(3, 1, 5, 2),
-(4, 2, 2, 1),
-(5, 2, 4, 2),
-(6, 2, 6, 1),
-(7, 3, 7, 4),
-(8, 3, 9, 1),
-(9, 3, 10, 2),
-(10, 4, 8, 3),
-(11, 4, 10, 1),
-(12, 5, 1, 2),
-(13, 5, 3, 1),
-(14, 5, 5, 3),
-(15, 6, 2, 2),
-(16, 6, 4, 1),
-(17, 7, 6, 3),
-(18, 7, 8, 1),
-(19, 8, 9, 2),
-(20, 8, 10, 1),
-(21, 9, 1, 4);
+(22, 18, 10, 1),
+(23, 19, 11, 2),
+(24, 20, 10, 3),
+(25, 21, 10, 4),
+(26, 23, 10, 1),
+(27, 24, 10, 2),
+(28, 25, 10, 1),
+(29, 26, 10, 3),
+(30, 33, 12, 3),
+(31, 34, 12, 3),
+(32, 34, 11, 2),
+(33, 35, 9, 1),
+(34, 36, 9, 1),
+(35, 37, 9, 1),
+(36, 51, 1, 2),
+(37, 51, 1, 1),
+(38, 52, 1, 2),
+(39, 52, 1, 1),
+(40, 53, 1, 1),
+(41, 53, 1, 1),
+(42, 53, 1, 1),
+(43, 54, 1, 1),
+(44, 54, 1, 1),
+(45, 54, 1, 1),
+(46, 54, 1, 1),
+(47, 55, 1, 1),
+(48, 55, 1, 1),
+(49, 55, 1, 1),
+(50, 56, 1, 2),
+(51, 56, 1, 2),
+(52, 56, 1, 1),
+(53, 58, 2, 2),
+(54, 58, 4, 2),
+(55, 58, 6, 1),
+(56, 58, 9, 1),
+(57, 60, 11, 3);
 
 -- --------------------------------------------------------
 
@@ -213,27 +268,61 @@ INSERT INTO `metodo_de_pago` (`id_metodo_de_pago`, `metodo`) VALUES
 
 CREATE TABLE `movimiento_inventario` (
   `id_movimiento` int(11) NOT NULL,
-  `fecha` date NOT NULL,
+  `fecha` varchar(50) NOT NULL,
   `ubicacion_origen` int(11) NOT NULL,
   `ubicacion_destino` int(11) NOT NULL,
-  `tipo_movimiento` enum('entrada','salida','transferencia') NOT NULL
+  `tipo_movimiento` varchar(50) NOT NULL,
+  `estado` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `movimiento_inventario`
 --
 
-INSERT INTO `movimiento_inventario` (`id_movimiento`, `fecha`, `ubicacion_origen`, `ubicacion_destino`, `tipo_movimiento`) VALUES
-(1, '2024-06-01', 1, 2, 'entrada'),
-(2, '2024-06-02', 2, 3, 'salida'),
-(3, '2024-06-03', 3, 1, 'transferencia'),
-(4, '2024-06-04', 1, 2, 'entrada'),
-(5, '2024-06-05', 2, 3, 'salida'),
-(6, '2024-06-06', 3, 1, 'transferencia'),
-(7, '2024-06-07', 1, 2, 'entrada'),
-(8, '2024-06-08', 2, 3, 'salida'),
-(9, '2024-06-09', 3, 1, 'transferencia'),
-(10, '2024-06-10', 1, 2, 'entrada');
+INSERT INTO `movimiento_inventario` (`id_movimiento`, `fecha`, `ubicacion_origen`, `ubicacion_destino`, `tipo_movimiento`, `estado`) VALUES
+(18, '2024-08-31T21:54', 2, 1, 'entrada', 'Completado'),
+(19, '2024-08-31T21:55', 1, 3, 'salida', 'Completado'),
+(20, '2024-08-31T21:57', 1, 3, 'salida', 'Completado'),
+(21, '2024-08-31T22:02', 2, 1, 'entrada', 'Completado'),
+(22, '2024-09-01T00:03', 1, 3, 'salida', 'Completado'),
+(23, '2024-09-01T00:05', 2, 1, 'entrada', 'Completado'),
+(24, '2024-09-01T00:06', 2, 1, 'entrada', 'Completado'),
+(25, '2024-09-01T01:07', 2, 1, 'entrada', 'Completado'),
+(26, '2024-09-01T00:07', 1, 3, 'salida', 'Completado'),
+(27, '2024-09-02T20:42', 1, 3, 'entrada', ''),
+(28, '2024-09-02T20:49', 1, 3, 'salida', 'pendiente'),
+(29, '2024-09-02T20:49', 1, 3, 'salida', 'pendiente'),
+(30, '2024-09-02T20:49', 1, 3, 'salida', 'Pendiente'),
+(31, '2024-09-02T20:49', 1, 3, 'salida', 'Pendiente'),
+(32, '2024-09-02T20:49', 1, 3, 'salida', 'Pendiente'),
+(33, '2024-09-02T20:49', 1, 3, 'salida', 'Pendiente'),
+(34, '2024-09-02T20:49', 1, 3, 'salida', 'Pendiente'),
+(35, '2024-09-02T21:16', 1, 3, 'salida', 'Pendiente'),
+(36, '2024-09-02T21:16', 2, 1, 'Entrada', 'Completado'),
+(37, '2024-09-02T21:17', 2, 1, 'Entrada', 'Completado'),
+(38, '2024-09-03 06:55:26', 1, 3, 'salida', 'Completado'),
+(39, '2024-09-03 06:56:46', 1, 3, 'salida', 'Completado'),
+(40, '2024-09-03 06:59:03', 1, 3, 'salida', 'Completado'),
+(41, '2024-09-03 07:01:29', 1, 3, 'salida', 'Completado'),
+(42, '2024-09-03 07:01:29', 1, 3, 'salida', 'Completado'),
+(43, '2024-09-03 07:03:47', 1, 3, 'salida', 'Completado'),
+(44, '2024-09-03 07:05:56', 1, 3, 'salida', 'Completado'),
+(45, '2024-09-03 07:05:56', 1, 3, 'salida', 'Completado'),
+(46, '2024-09-03 07:05:56', 1, 3, 'salida', 'Completado'),
+(47, '2024-09-03 07:05:56', 1, 3, 'salida', 'Completado'),
+(48, '2024-09-03 07:05:56', 1, 3, 'salida', 'Completado'),
+(49, '2024-09-03 07:15:40', 1, 3, 'salida', 'Completado'),
+(50, '2024-09-03 07:17:34', 1, 3, 'salida', 'Completado'),
+(51, '2024-09-03 07:17:34', 1, 3, 'salida', 'Completado'),
+(52, '2024-09-03 07:19:02', 1, 3, 'salida', 'Proceso'),
+(53, '2024-09-05 04:08:35', 1, 3, 'salida', 'Completado'),
+(54, '2024-09-05 04:55:54', 1, 3, 'salida', 'Completado'),
+(55, '2024-09-05 05:01:00', 1, 3, 'salida', 'Proceso'),
+(56, '2024-09-05 05:10:21', 1, 3, 'salida', 'Proceso'),
+(57, '2024-09-05 05:17:09', 1, 3, 'salida', 'Proceso'),
+(58, '2024-09-05 05:17:50', 1, 3, 'salida', 'Proceso'),
+(59, '2024-09-05 05:23:51', 1, 3, 'salida', 'Proceso'),
+(60, '2024-09-04T22:25', 1, 3, 'salida', 'Proceso');
 
 -- --------------------------------------------------------
 
@@ -256,7 +345,40 @@ CREATE TABLE `pedido` (
 
 INSERT INTO `pedido` (`id_pedido`, `id_usuario`, `id_metodo_de_pago`, `fecha`, `total`, `estado`) VALUES
 (38, 2, 1, '2024-08-21T23:01', 64000, 'publicado'),
-(39, 2, 1, '2024-08-21T23:39', 660000, 'publicado');
+(39, 2, 1, '2024-08-21T23:39', 660000, 'publicado'),
+(40, 16, 3, '2024-08-16T21:11', 108000, 'publicado'),
+(41, 16, 2, '2024-09-02T20:42', 66150, 'publicado'),
+(42, 16, 3, '2024-09-02T20:49', 66150, 'publicado'),
+(43, 16, 3, '2024-09-02T20:49', 66150, 'publicado'),
+(44, 16, 6, '2024-09-02T20:49', 66150, 'publicado'),
+(45, 16, 6, '2024-09-02T20:49', 66150, 'publicado'),
+(46, 16, 6, '2024-09-02T20:49', 66150, 'publicado'),
+(47, 16, 6, '2024-09-02T20:49', 66150, 'publicado'),
+(48, 16, 6, '2024-09-02T20:49', 66150, 'publicado'),
+(49, 15, 4, '2024-09-02T21:16', 20000, 'publicado'),
+(50, 2, 2, '2024-09-03 06:55:26', 86000, 'publicado'),
+(51, 2, 1, '2024-09-03 06:56:46', 76000, 'publicado'),
+(52, 2, 1, '2024-09-03 06:59:03', 76000, 'publicado'),
+(53, 2, 3, '2024-09-03 07:01:29', 86000, 'publicado'),
+(54, 2, 3, '2024-09-03 07:01:29', 86000, 'publicado'),
+(55, 2, 2, '2024-09-03 07:03:47', 30000, 'publicado'),
+(56, 2, 2, '2024-09-03 07:05:56', 76000, 'publicado'),
+(57, 2, 2, '2024-09-03 07:05:56', 76000, 'publicado'),
+(58, 2, 2, '2024-09-03 07:05:56', 76000, 'publicado'),
+(59, 2, 2, '2024-09-03 07:05:56', 76000, 'publicado'),
+(60, 2, 2, '2024-09-03 07:05:56', 76000, 'publicado'),
+(61, 2, 3, '2024-09-03 07:15:40', 82000, 'publicado'),
+(62, 2, 2, '2024-09-03 07:17:34', 76000, 'publicado'),
+(63, 2, 2, '2024-09-03 07:17:34', 76000, 'publicado'),
+(64, 2, 1, '2024-09-03 07:19:02', 76000, 'publicado'),
+(65, 2, 4, '2024-09-05 04:08:35', 63000, 'publicado'),
+(66, 2, 3, '2024-09-05 04:55:54', 83000, 'publicado'),
+(67, 2, 4, '2024-09-05 05:01:00', 60000, 'publicado'),
+(68, 2, 3, '2024-09-05 05:10:21', 126000, 'publicado'),
+(69, 2, 4, '2024-09-05 05:17:09', 136000, 'publicado'),
+(70, 2, 4, '2024-09-05 05:17:50', 136000, 'publicado'),
+(71, 2, 2, '2024-09-05 05:23:51', 136000, 'publicado'),
+(72, 17, 4, '2024-09-04T22:25', 45000, 'publicado');
 
 -- --------------------------------------------------------
 
@@ -293,11 +415,9 @@ CREATE TABLE `ubicacion` (
 --
 
 INSERT INTO `ubicacion` (`id_ubicacion`, `ubicacion`) VALUES
-(1, 'Almacén Central'),
-(2, 'Sucursal Norte'),
-(3, 'Sucursal Sur'),
-(4, 'Sucursal Este'),
-(5, 'Sucursal Oeste');
+(1, 'Stock'),
+(2, 'Virtual Vendors'),
+(3, 'Virtual Customer');
 
 -- --------------------------------------------------------
 
@@ -323,7 +443,14 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `correo`, `direccion`, `password`, `rol`, `id_tipo`, `celular`) VALUES
 (2, 'Maria Garcia', 'carlos@gmail.com', 'Avenida Siempre Viva 742', '123456', 1, 1, '+57 313232306'),
 (15, 'Edgar Polania', 'vagales@gmail.com', 'calle 34', '123456', 2, 2, '+57 3214990480'),
-(16, 'luis vagales', 'vagales@gmail.com', 'calle 34', '123456', 2, 2, '+57 3214990480');
+(16, 'luis vagales', 'vagales111111111@gmail.com', 'calle 34', '123456', 2, 2, '+57 3214990480'),
+(17, 'Edgar Polania', 'carlos_a95@gmail.com', 'calle 34', '123456', 2, 2, '+57 3214990480'),
+(18, 'Carmen', 'carmen@gmail.com', 'calle 23', '12345', 2, 2, '+57 3214990480'),
+(19, 'Carmen', 'carmen@gmail.com', 'calle 23', '123456', 2, 2, '+57 3214990480'),
+(20, 'cristina', 'cristina@gmail.com', 'diagonal', '123456', 2, 2, '+57 3214990480'),
+(21, 'luis vagales', 'cristina@gmail.com', 'dg 62 h bis', '321432', 2, 2, '+57 3214990480'),
+(22, 'Julia', 'julia@gmail.com', 'calle 12', '123456', 2, 1, '+57 3214990480'),
+(24, 'guillermito', 'armando@gmail.com', 'dg 62 h bis', '654321', 1, 1, '+57 3214990480');
 
 --
 -- Indexes for dumped tables
@@ -346,7 +473,7 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `devolucion`
   ADD PRIMARY KEY (`id_devolucion`),
-  ADD KEY `id_linea_de_pedido` (`id_linea_de_pedido`);
+  ADD KEY `id_pedido` (`id_pedido`);
 
 --
 -- Indexes for table `libro`
@@ -433,25 +560,25 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT for table `devolucion`
 --
 ALTER TABLE `devolucion`
-  MODIFY `id_devolucion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_devolucion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `libro`
 --
 ALTER TABLE `libro`
-  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `linea_de_pedido`
 --
 ALTER TABLE `linea_de_pedido`
-  MODIFY `id_linea_de_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_linea_de_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `linea_movimiento_inventario`
 --
 ALTER TABLE `linea_movimiento_inventario`
-  MODIFY `id_linea_movimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_linea_movimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `metodo_de_pago`
@@ -463,13 +590,13 @@ ALTER TABLE `metodo_de_pago`
 -- AUTO_INCREMENT for table `movimiento_inventario`
 --
 ALTER TABLE `movimiento_inventario`
-  MODIFY `id_movimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_movimiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `tipo_de_usuario`
@@ -481,13 +608,13 @@ ALTER TABLE `tipo_de_usuario`
 -- AUTO_INCREMENT for table `ubicacion`
 --
 ALTER TABLE `ubicacion`
-  MODIFY `id_ubicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_ubicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
@@ -497,7 +624,7 @@ ALTER TABLE `usuario`
 -- Constraints for table `devolucion`
 --
 ALTER TABLE `devolucion`
-  ADD CONSTRAINT `devolucion_ibfk_1` FOREIGN KEY (`id_linea_de_pedido`) REFERENCES `linea_de_pedido` (`id_linea_de_pedido`);
+  ADD CONSTRAINT `devolucion_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`);
 
 --
 -- Constraints for table `libro`
