@@ -6,20 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de usuarios</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+        .dropdown-menu-custom {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu-custom a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu-custom a:hover {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .nav-item:hover .dropdown-menu-custom {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-        <header>
+    <header>
             <nav class="navbar navbar-expand-lg navbar-primary bg-info">
                 <div class="container-fluid">
-                    <!-- Alinea el título a la izquierda -->
                     <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
                         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="usuario.php">Usuarios</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white dropdown-toggle" href="usuario.php" id="navbarDropdown" role="button">
+                                    Usuarios
+                                </a>
+                                <div class="dropdown-menu-custom" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/usuarios/cliente.php">Clientes</a>
+                                    <a class="dropdown-item" href="/usuarios/administrador.php">Administradores</a>
+                                </div>
                             </li>
                         </ul>
                     </div>

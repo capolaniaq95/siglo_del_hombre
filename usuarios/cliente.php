@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de ubicacion</title>
+    <title>Lista de usuarios</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-	<style>
+    <style>
         .dropdown-menu-custom {
             display: none;
             position: absolute;
@@ -46,19 +46,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button">
-                                    Inventario
+                                <a class="nav-link text-white dropdown-toggle" href="usuario.php" id="navbarDropdown" role="button">
+                                    Usuarios
                                 </a>
                                 <div class="dropdown-menu-custom" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/inventario/entrada.php">Entradas</a>
-                                    <a class="dropdown-item" href="/inventario/salida.php">Salidas</a>
-                                    <a class="dropdown-item" href="/inventario/proceso.php">En proceso</a>
-                                    <a class="dropdown-item" href="/inventario/completado.php">Completadas</a>
-                                    <a class="dropdown-item" href="/inventario/existencias.php">Existencias</a>
+                                    <a class="dropdown-item" href="/usuarios/cliente.php">Clientes</a>
+                                    <a class="dropdown-item" href="/usuarios/administrador.php">Administradores</a>
                                 </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="ubicacion.php">Ubicacion</a>
                             </li>
                         </ul>
                     </div>
@@ -68,14 +62,16 @@
 
         <main class="flex-fill">
             <div class="container mt-4">
-                <h2>Ubicacion</h2>
-                <!-- <a href="agregar.ubicacion.php" class="btn btn-info mb-3">Agregar Nueva ubicacion</a> -->
+                <h2>Usuarios</h2>
+                <a href="agregar.usuario.php" class="btn btn-info mb-3">Agregar Nuevo Usuario</a>
                 <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
                 <div>
                     <?php
                     require '../conexion.php';
 
-                    $sql = "SELECT `id_ubicacion`, `ubicacion` FROM `ubicacion`";
+                    $sql = "SELECT usuario.id_usuario, usuario.correo, usuario.direccion, usuario.nombre, tipo_de_usuario.tipo
+                    FROM usuario
+                    INNER JOIN tipo_de_usuario ON usuario.id_tipo=tipo_de_usuario.id_tipo WHERE usuario.id_tipo=2";
 
                     $result = $mysqli->query($sql);
 
@@ -86,8 +82,11 @@
                             echo '<table class="table table-striped">
                                     <thead class="thead-dark">
                                         <tr>
-                                          <th scope="col">ID ubicacion</th>
-                                          <th scope="col">ubicacion</th>
+                                          <th scope="col">ID usuario</th>
+                                          <th scope="col">Correo</th>
+                                          <th scope="col">Direccion</th>
+                                          <th scope="col">Nombre</th>
+                                          <th scope="col">Tipo</th>
                                           <th scope="col" style="width: 200px">Acciones</th>
                                         </tr>
                                     </thead>
@@ -95,19 +94,22 @@
 
                             while ($row = $result->fetch_assoc()) {
                                 echo '<tr>
-                                        <td>' . htmlspecialchars($row["id_ubicacion"]) . '</td>
-                                        <td>' . htmlspecialchars($row["ubicacion"]) . '</td>
+                                        <td>' . htmlspecialchars($row["id_usuario"]) . '</td>
+                                        <td>' . htmlspecialchars($row["correo"]) . '</td>
+                                        <td>' . htmlspecialchars($row["direccion"]) . '</td>
+                                        <td>' . htmlspecialchars($row["nombre"]) . '</td>
+                                        <td>' . htmlspecialchars($row["tipo"]) . '</td>
                                         <td>
                                             <div class="d-flex justify-content-start">
-                                                <a href="editar.ubicacion.php?id=' . urlencode($row["id_ubicacion"]) . '" class="btn btn-success btn-sm mr-2">Editar</a>
-                                                <!-- <a href="eliminar.ubicacion.php?id=' . urlencode($row["id_ubicacion"]) . '" class="btn btn-danger btn-sm">Eliminar</a> -->
+                                                <a href="editar.usuario.php?id=' . urlencode($row["id_usuario"]) . '" class="btn btn-success btn-sm mr-2">Editar</a>
+                                                <a href="eliminar.usuario.php?id=' . urlencode($row["id_usuario"]) . '" class="btn btn-danger btn-sm">Eliminar</a>
                                             </div>
                                         </td>
                                     </tr>';
                             }
                             echo '</tbody></table>';
                         } else {
-                            echo "<div class='alert alert-info'>No hay registros de ubicacion.</div>";
+                            echo "<div class='alert alert-info'>No hay registros de Usuarios.</div>";
                         }
 
                         $result->free();

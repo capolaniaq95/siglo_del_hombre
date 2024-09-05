@@ -56,6 +56,7 @@
                 <?php
                 require "conexion.php";
                 if (isset($_SESSION["carrito"])) {
+
                     $id_usuario = intval($_SESSION['id_usuario']);
                     $sql = "SELECT nombre FROM usuario WHERE `id_usuario`=$id_usuario";
                     $resultado = $mysqli->query($sql);
@@ -114,7 +115,10 @@
                                         $libro_query = $resultado_libros->fetch_assoc();
                                     ?>
                                         <tr>
-                                            <td><input type="text" class="form-control" name="libros[]" value="<?php echo $libro_query['titulo']; ?>" readonly required></td>
+                                            <td>
+                                                <input type="hidden" class="form-control" name="libros_ids[]" value="<?php echo $libro; ?>" readonly required>
+                                                <input type="text" class="form-control" name="libros[]" value="<?php echo $libro_query['titulo']; ?>" readonly required>
+                                            </td>
                                             <td><input type="number" class="form-control cantidad-input" name="cantidades[]" value="<?php echo intval($cantidad); ?>" required></td>
                                             <td><input type="number" class="form-control precio-input" name="precios[]" value="<?php echo $libro_query['precio']; ?>" readonly required></td>
                                             <td><input type="number" class="form-control subtotal" name="subtotales[]" readonly required></td>

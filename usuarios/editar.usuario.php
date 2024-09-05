@@ -102,7 +102,7 @@ if (isset($_GET["id"])) {
                             <label for="tipo">Tipo de Usuario</label>
                             <select class="form-control" id="tipo" name="tipo" required>
                                 <option value="1" <?php if ($usuario['id_tipo'] == 1) echo 'selected'; ?>>Administrador</option>
-                                <option value="2" <?php if ($usuario['id_tipo'] == 2) echo 'selected'; ?>>Usuario</option>
+                                <option value="2" <?php if ($usuario['id_tipo'] == 2) echo 'selected'; ?>>Cliente</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>

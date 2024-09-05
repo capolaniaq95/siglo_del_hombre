@@ -59,7 +59,7 @@
             $orderDate = $_REQUEST['orderDate'];
             $customer = intval($_REQUEST['customer']);
 			$payment = intval($_REQUEST['payment']);
-            $libros = array($_REQUEST['libros']);
+            $libros = array($_REQUEST['libros_ids']);
             $cantidades = array($_REQUEST['cantidades']);
             $precios = array($_REQUEST['precios']);
             $subtotales = array($_REQUEST['subtotales']);
@@ -70,7 +70,7 @@
                     VALUES ($customer, $payment, '$orderDate', $totalAmount)";
 
             $query_insert_movimiento_salida = "INSERT INTO `movimiento_inventario`(`fecha`, `ubicacion_origen`, `ubicacion_destino`, `tipo_movimiento`, `estado`)
-                                               VALUES ('$orderDate', 1, 3,'salida','Completado')";
+                                               VALUES ('$orderDate', 1, 3,'salida','Proceso')";
 
 			$insert_movimiento = $mysqli->query($query_insert_movimiento_salida);
 
@@ -93,7 +93,7 @@
                                         AND movimiento_inventario.ubicacion_origen=1
                                         AND movimiento_inventario.ubicacion_destino=3
                                         AND movimiento_inventario.tipo_movimiento='salida'
-                                        AND movimiento_inventario.estado='Completado'";
+                                        AND movimiento_inventario.estado='Proceso'";
 
                 $result = $mysqli->query($query_id_inventario);
 
@@ -104,14 +104,7 @@
                 if ($result->num_rows > 0) {
                     for ($i = 0; $i < count($libros[0]); $i++) {
 
-						$titulo = (string) $libros[0][$i];
-						$sql = "SELECT id_libro
-								FROM libro
-								WHERE libro.titulo='$titulo'";
-
-						$result = $mysqli->query($sql);
-
-						$id_libro = intval($result->fetch_assoc());
+						$id_libro = intval($libros[0][$i]);
 
                         $cantidad = intval($cantidades[0][$i]);
                         $sub_total = intval($subtotales[0][$i]);
@@ -124,7 +117,7 @@
                         $insertar_linea_movimiento_inventario = "INSERT INTO `linea_movimiento_inventario`(`id_movimiento`, `id_libro`, `cantidad`)
                                                                  VALUES ($id_inventario, $id_libro, $cantidad)";
 
-                       $mysqli->query($insertar_linea_movimiento_inventario);
+                       /*$mysqli->query($insertar_linea_movimiento_inventario);
 
                         $query_cantidad_libro = "SELECT libro.stock, libro.estado, libro.titulo
                                                  FROM libro
@@ -142,7 +135,7 @@
                         }
 
                         $update_stock = "UPDATE `libro` SET `stock`=$stock,`estado`='$estado' WHERE `id_libro`=$id_libro";
-                        $result_update = $mysqli->query($update_stock);
+                        $result_update = $mysqli->query($update_stock);*/
 
                     }
                     echo "<div class='alert alert-success'>Carrito de compras agregado correctamente.</div>";

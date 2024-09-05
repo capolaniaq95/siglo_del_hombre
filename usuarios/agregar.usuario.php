@@ -79,7 +79,7 @@
 				$nombre = $_POST['nombre'];
 				$celular = $_POST['celular'];
 				$password = $_POST['password'];
-				$id_tipo = intval($_POST['id_tipo']);
+				$id_tipo = $_POST['id_tipo'];
 
 				if ($id_tipo == 'Administrador'){
 					$id_tipo = 1;

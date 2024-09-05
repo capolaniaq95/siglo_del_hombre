@@ -62,7 +62,7 @@
                                         AND movimiento_inventario.ubicacion_origen=1
                                         AND movimiento_inventario.ubicacion_destino=3
                                         AND movimiento_inventario.tipo_movimiento='salida'
-                                        AND movimiento_inventario.estado='Completado'";
+                                        AND movimiento_inventario.estado='Proceso'";
 
                 $result = $mysqli->query($query_id_inventario);
 
@@ -87,6 +87,7 @@
 
                        $mysqli->query($insertar_linea_movimiento_inventario);
 
+                       /*
                         $query_cantidad_libro = "SELECT libro.stock, libro.estado, libro.titulo
                                                  FROM libro
                                                  WHERE libro.id_libro=$id_libro";
@@ -104,7 +105,7 @@
                         }
 
                         $update_stock = "UPDATE `libro` SET `stock`=$stock,`estado`='$estado' WHERE `id_libro`=$id_libro";
-                        $result_update = $mysqli->query($update_stock);
+                        $result_update = $mysqli->query($update_stock);*/
 
                     }
                     echo "<div class='alert alert-success'>Pedido agregado correctamente.</div>";

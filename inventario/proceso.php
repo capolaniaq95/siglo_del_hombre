@@ -121,8 +121,8 @@
                                         <td>' . htmlspecialchars($row["tipo_movimiento"]) . '</td>
                                         <td>' . htmlspecialchars($row["estado"]) . '</td>
                                         <td>
-                                            <a href="editar.movimiento.php?id=' . urlencode($row["id_movimiento"]) . '" class="btn btn-success btn-sm">Editar</a>
-                                            <a href="eliminar.movimiento.php?id=' . urlencode($row["id_movimiento"]) . '" class="btn btn-danger btn-sm">Eliminar</a>
+                                            <a href="completar.movimiento.php?id=' . urlencode($row["id_movimiento"]) . '" class="btn btn-success btn-sm">Completar</a>
+                                            <a href="cancelar.movimiento.php?id=' . urlencode($row["id_movimiento"]) . '" class="btn btn-danger btn-sm">Cancelar</a>
                                         </td>
                                     </tr>';
                             }
