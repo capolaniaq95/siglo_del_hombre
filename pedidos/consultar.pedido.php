@@ -121,7 +121,6 @@
                                 </thead>
                                 <tbody>
                                     <?php while($linea_pedido = $result_linea->fetch_assoc()):
-                                        var_dump($linea_pedido);
                                         $libro = $linea_pedido['titulo'];
                                         $cantidad = intval($linea_pedido['cantidad']);
                                         $precio = floatval($linea_pedido['precio']);
@@ -129,7 +128,7 @@
                                     ?>
                                         <tr>
                                             <td><input type="text" class="form-control" name="libros[]" value="<?php echo $libro; ?>" readonly required></td>
-                                            <td><input type="number" class="form-control cantidad-input" name="cantidades[]" value="<?php echo $cantidad; ?>" required></td>
+                                            <td><input type="number" class="form-control cantidad-input" name="cantidades[]" value="<?php echo $cantidad; ?>" readonly required></td>
                                             <td><input type="number" class="form-control precio-input" name="precios[]" value="<?php echo $precio; ?>" readonly required></td>
                                             <td><input type="number" class="form-control subtotal" name="subtotales[]" value="<?php echo $subtotal; ?>" readonly required></td>
                                         </tr>

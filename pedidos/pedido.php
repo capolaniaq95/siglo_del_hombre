@@ -45,7 +45,7 @@
                             FROM pedido
                             INNER JOIN usuario ON pedido.id_usuario=usuario.id_usuario
                             INNER JOIN metodo_de_pago ON pedido.id_metodo_de_pago=metodo_de_pago.id_metodo_de_pago
-                            ORDER BY pedido.fecha";
+                            ORDER BY pedido.id_pedido";
 
                     $result = $mysqli->query($sql);
 

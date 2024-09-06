@@ -39,11 +39,13 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-white" href="logout.php">Logout</a>
                                 </li>
+                                <?php if (isset($_SESSION['carrito'])): ?>
                                 <li class="nav-item">
                                     <a class="nav-link text-white" href="carrito.php">
                                         <i class="fas fa-shopping-cart"></i>
                                     </a>
                                 </li>
+                                <?php endif ?>
                             <?php endif ?>
                         </ul>
                     </div>
@@ -117,25 +119,11 @@
                         $insertar_linea_movimiento_inventario = "INSERT INTO `linea_movimiento_inventario`(`id_movimiento`, `id_libro`, `cantidad`)
                                                                  VALUES ($id_inventario, $id_libro, $cantidad)";
 
-                       /*$mysqli->query($insertar_linea_movimiento_inventario);
+                        $mysqli->query($insertar_linea_movimiento_inventario);
 
-                        $query_cantidad_libro = "SELECT libro.stock, libro.estado, libro.titulo
-                                                 FROM libro
-                                                 WHERE libro.id_libro=$id_libro";
-
-                        $result = $mysqli->query($query_cantidad_libro);
-                        $result = $result->fetch_assoc();
-                        $stock = intval($result['stock']) - $cantidad;
-
-                        $titulo = $result['titulo'];
-                        if ($stock > 0){
-                            $estado = 'Disponible';
-                        }else {
-                            $estado = 'No Disponible';
+                        if (isset($_SESSION['carrito'])) {
+                            unset($_SESSION['carrito']);
                         }
-
-                        $update_stock = "UPDATE `libro` SET `stock`=$stock,`estado`='$estado' WHERE `id_libro`=$id_libro";
-                        $result_update = $mysqli->query($update_stock);*/
 
                     }
                     echo "<div class='alert alert-success'>Carrito de compras agregado correctamente.</div>";

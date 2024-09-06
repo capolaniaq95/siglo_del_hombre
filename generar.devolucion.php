@@ -143,7 +143,7 @@ if ($payment_method->num_rows > 0) {
   </header>
 
         <div class="container mt-5">
-            <h2>Formulario de Pedido</h2>
+            <h2>Formulario de Devolucion</h2>
             <?php if (isset($mensaje)) : ?>
                 <div class="alert alert-info"><?php echo htmlspecialchars($mensaje); ?></div>
             <?php endif; ?>
