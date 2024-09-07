@@ -65,27 +65,23 @@
 
             require "conexion.php";
 
-            if (isset($_GET['id_pedido'])) {
-                $id_pedido = intval($_GET['id_pedido']);
+            if (isset($_GET['id_devolucion'])) {
+                $id_devolucion = intval($_GET['id_devolucion']);
 
-                $sql = "SELECT pedido.id_usuario, pedido.fecha 
-                            FROM pedido 
-                            WHERE id_pedido=$id_pedido";
+                $sql = "SELECT devolucion.motivo, devolucion.fecha, devolucion.descripcion 
+                        WHERE devolucion.id_devolucion=$id_devolucion";
 
                 $result = $mysqli->query($sql);
 
-                $pedido = $result->fetch_assoc();
+                $devolucion = $result->fetch_assoc();
 
-                $sql = "SELECT linea_de_pedido.id_libro, linea_de_pedido.cantidad, libro.titulo 
-                            FROM linea_de_pedido
-                            INNER JOIN libro
-                            ON linea_de_pedido.id_libro=libro.id_libro
-                            WHERE linea_de_pedido.id_pedido=$id_pedido";
+                $sql = "SELECT lineas_devolucion.cantidad, libro.titulo,, libro.titulo, lineas_devolucion.id_libro 
+                        INNER JOIN libro
+                        ON lineas_devolucion.id_libro = libro.id_libro
+                        WHERE lineas_devolucion.id_devolucion=$id_devolucion";
 
                 $result_linea = $mysqli->query($sql);
             }
-            $fecha_y_hora = date("Y-m-d H:i:s");
-
             ?>
             <?php if (isset($mensaje)) : ?>
                 <div class="alert alert-info"><?php echo htmlspecialchars($mensaje); ?></div>
@@ -131,7 +127,7 @@
                 </div>
                 <!-- Comentado el botón de agregar línea -->
                 <!-- <button type="button" class="btn btn-secondary" id="addLineBtn">Agregar Línea</button> -->
-                <button type="submit" class="btn btn-success">Generar Devolucion</button>
+                <!-- <button type="submit" class="btn btn-success">Generar Devolucion</button> -->
                 <a href="index.php" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>

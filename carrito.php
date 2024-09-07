@@ -67,7 +67,7 @@
                     }
                     $fecha_y_hora = date("Y-m-d H:i:s");
 
-                    $linea_pedido = $_SESSION['carrito'];  // Ajuste aquí para simplificar
+                    $linea_pedido = $_SESSION['carrito'];
 
                     $sql = "SELECT `id_metodo_de_pago`, `metodo` FROM `metodo_de_pago`";
                     $payment_method = $mysqli->query($sql);

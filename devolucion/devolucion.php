@@ -2,37 +2,36 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>index</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-    <header>
-    <nav class="navbar navbar-expand-lg navbar-primary bg-info">
-        <div class="container-fluid">
-            <!-- Alinea el título a la izquierda -->
-            <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
-                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                        <a class="nav-link text-white" href="/devolucion/devolucion.php">Devoluciones</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-primary bg-info">
+                <div class="container-fluid">
+                    <!-- Alinea el título a la izquierda -->
+                    <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
+                        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/devolucion/devolucion.php">Devoluciones</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
         <main class="flex-fill">
             <div class="container mt-4">
                 <h2>Devoluciones</h2>
-				<a href="agregar.devolucion.php" class="btn btn-info mb-3">Agregar Nueva devolucion</a>
                 <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
                 <div>
                     <?php
@@ -44,7 +43,8 @@
                               devolucion.id_devolucion,
                               pedido.fecha,
                               pedido.total,
-                              devolucion.motivo
+                              devolucion.motivo,
+                              devolucion.estado
                             FROM
                               devolucion
                             INNER JOIN
@@ -61,6 +61,7 @@
                                             <th>Fecha</th>
 											<th>total</th>
                                             <th>Motivo devolucion</th>
+                                            <th>Estado</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -71,8 +72,11 @@
                                         <td>' . htmlspecialchars($row["fecha"]) . '</td>
                                         <td>' . htmlspecialchars($row["total"]) . '</td>
                                         <td>' . htmlspecialchars($row["motivo"]) . '</td>
+                                        <td>' . htmlspecialchars($row["estado"]) . '</td>
                                         <td>
-                                            <a href="consultar.devolucion.php?id=' . urlencode($row["id_devolucion"]) . '" class="btn btn-success btn-sm">Consultar</a>
+                                            <a href="consultar.devolucion.php?id_devolucion=' . urlencode($row["id_devolucion"]) . '" class="btn btn-info btn-sm">Consultar</a>
+                                            <a href="aceptar.devolucion.php?id_devolucion=' . urlencode($row["id_devolucion"]) . '" class="btn btn-success btn-sm">Aceptar</a>
+                                            <a href="rechazar.devolucion.php?id_devolucion=' . urlencode($row["id_devolucion"]) . '" class="btn btn-danger btn-sm">Rechazar</a>
                                         </td>
                                     </tr>';
                             }

@@ -12,74 +12,75 @@
 </head>
 
 <body>
-    <div class="d-flex flex-column min-vh-100">
+  <div class="d-flex flex-column min-vh-100">
     <header>
-    <nav class="navbar navbar-expand-lg navbar-primary bg-info">
-      <div class="container-fluid">
-        <!-- Alinea el título a la izquierda -->
-        <a class="navbar-brand px-2 text-white" href="index.php">Siglo del Hombre</a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
-          <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link text-white" href="libros.php">Libros</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="login.php">Ingresar</a>
-            </li>
-            <?php
-            session_start();
-            if (isset($_SESSION["id_usuario"])):
-            ?>
+      <nav class="navbar navbar-expand-lg navbar-primary bg-info">
+        <div class="container-fluid">
+          <!-- Alinea el título a la izquierda -->
+          <a class="navbar-brand px-2 text-white" href="index.php">Siglo del Hombre</a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
+            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link text-white" href="mis.pedidos.php">Mis Pedidos</a>
+                <a class="nav-link text-white" href="libros.php">Libros</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="devolucion.php">Mis Devoluciones</a>
+                <a class="nav-link text-white" href="login.php">Ingresar</a>
               </li>
               <?php
-              if ($_SESSION["id_tipo"] == 1):
+              session_start();
+              if (isset($_SESSION["id_usuario"])):
               ?>
                 <li class="nav-item">
-                  <a class="nav-link text-white" href="index.administrador.php">Administrador</a>
+                  <a class="nav-link text-white" href="mis.pedidos.php">Mis Pedidos</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="devolucion.php">Mis Devoluciones</a>
+                </li>
+                <?php
+                if ($_SESSION["id_tipo"] == 1):
+                ?>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="index.administrador.php">Administrador</a>
+                  </li>
+                <?php
+                endif
+                ?>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="logout.php">Logout</a>
+                </li>
+                <?php if (isset($_SESSION['carrito'])): ?>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="carrito.php">
+                      <i class="fas fa-shopping-cart"></i>
+                    </a>
+                  </li>
+                <?php endif ?>
               <?php
               endif
               ?>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="logout.php">Logout</a>
-              </li>
-              <?php if (isset($_SESSION['carrito'])): ?>
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="carrito.php">
-                    <i class="fas fa-shopping-cart"></i>
-                  </a>
-                </li>
-              <?php endif ?>
-            <?php
-            endif
-            ?>
-          </ul>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-  </header>
+      </nav>
+    </header>
 
-        <main class="flex-fill">
-            <div class="container mt-4">
-                <h2>Mis Devoluciones</h2>
-                <div>
-                    <?php
+    <main class="flex-fill">
+      <div class="container mt-4">
+        <h2>Mis Devoluciones</h2>
+        <div>
+          <?php
 
-                    require "conexion.php";
+          require "conexion.php";
 
-                    $id_usuario = intval($_SESSION["id_usuario"]);
+          $id_usuario = intval($_SESSION["id_usuario"]);
 
-                    $sql = "SELECT
+          $sql = "SELECT
                               devolucion.id_devolucion,
                               pedido.fecha,
                               pedido.total,
-                              devolucion.motivo
+                              devolucion.motivo,
+                              devolucion.estado
                             FROM
                               devolucion
                             INNER JOIN
@@ -87,66 +88,68 @@
                             WHERE
                               pedido.id_usuario=$id_usuario";
 
-                    $result = $mysqli->query($sql);
+          $result = $mysqli->query($sql);
 
-                    if (!$result) {
-                        echo "<div class='alert alert-danger'>Error en la consulta: " . $mysqli->error . "</div>";
-                    } else {
-                        if ($result->num_rows > 0) {
-                            echo '<table class="table table-striped">
+          if (!$result) {
+            echo "<div class='alert alert-danger'>Error en la consulta: " . $mysqli->error . "</div>";
+          } else {
+            if ($result->num_rows > 0) {
+              echo '<table class="table table-striped">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>Fecha</th>
-											<th>total</th>
+											                      <th>total</th>
                                             <th>Motivo devolucion</th>
+                                            <th>Estado</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>';
 
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<tr>
+              while ($row = $result->fetch_assoc()) {
+                echo '<tr>
                                         <td>' . htmlspecialchars($row["fecha"]) . '</td>
                                         <td>' . htmlspecialchars($row["total"]) . '</td>
                                         <td>' . htmlspecialchars($row["motivo"]) . '</td>
+                                        <td>' . htmlspecialchars($row["estado"]) . '</td>
                                         <td>
                                             <a href="consultar.devolucion.php?id=' . urlencode($row["id_devolucion"]) . '" class="btn btn-success btn-sm">Consultar</a>
                                         </td>
                                     </tr>';
-                            }
-                            echo '</tbody></table>';
-                        } else {
-                            echo "<div class='alert alert-info'>No hay registros de devoluciones.</div>";
-                        }
+              }
+              echo '</tbody></table>';
+            } else {
+              echo "<div class='alert alert-info'>No hay registros de devoluciones.</div>";
+            }
 
-                        $result->free();
-                    }
+            $result->free();
+          }
 
-                    $mysqli->close();
-                    ?>
-                </div>
-            </div>
-        </main>
+          $mysqli->close();
+          ?>
+        </div>
+      </div>
+    </main>
 
-        <footer class="bg-dark text-white py-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>&copy; 2024 Librería Siglo del Hombre. Todos los derechos reservados.</p>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <a href="contacto.html" class="text-white">Contacto</a> |
-                        <a href="privacidad.html" class="text-white">Política de Privacidad</a> |
-                        <a href="terminos.html" class="text-white">Términos de Servicio</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
+    <footer class="bg-dark text-white py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <p>&copy; 2024 Librería Siglo del Hombre. Todos los derechos reservados.</p>
+          </div>
+          <div class="col-md-6 text-right">
+            <a href="contacto.html" class="text-white">Contacto</a> |
+            <a href="privacidad.html" class="text-white">Política de Privacidad</a> |
+            <a href="terminos.html" class="text-white">Términos de Servicio</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy5Yk4pKjmb6/8tJTxXKoO4YHh5tFO4kD2Jg2w2" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-rbsA7j6Fn5vK6e1jlg00uYFnbAM4A2E3xOSKq6xE7cqp9SZO+L/5Q/XfAkG4P1tn" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jG7s3e3SddU6zLZnCTunZ2a6D4iwHeL6vU2f9mB79mKwwm4eD" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy5Yk4pKjmb6/8tJTxXKoO4YHh5tFO4kD2Jg2w2" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-rbsA7j6Fn5vK6e1jlg00uYFnbAM4A2E3xOSKq6xE7cqp9SZO+L/5Q/XfAkG4P1tn" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jG7s3e3SddU6zLZnCTunZ2a6D4iwHeL6vU2f9mB79mKwwm4eD" crossorigin="anonymous"></script>
 </body>
 
 </html>
