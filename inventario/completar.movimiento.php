@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Completar movimiento inventario</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-	<style>
+    <style>
         .dropdown-menu-custom {
             display: none;
             position: absolute;
@@ -36,7 +36,7 @@
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-    <header>
+        <header>
             <nav class="navbar navbar-expand-lg navbar-primary bg-info">
                 <div class="container-fluid">
                     <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
@@ -66,59 +66,57 @@
         </header>
         <div class="container mt-4">
             <h2>Movimiento Completado</h2>
-			<?php
+            <?php
 
-			require '../conexion.php';
+            require '../conexion.php';
 
-			if (isset($_GET['id'])){
+            if (isset($_GET['id'])) {
 
-				$id_movimiento = $_GET['id'];
+                $id_movimiento = $_GET['id'];
 
-				$sql = "UPDATE `movimiento_inventario` SET `estado`='Completado' WHERE id_movimiento=$id_movimiento";
-				
-				$result = $mysqli->query($sql);
-				$sql = "SELECT libro.id_libro, libro.estado, linea_movimiento_inventario.cantidad
+                $sql = "UPDATE `movimiento_inventario` SET `estado`='Completado' WHERE id_movimiento=$id_movimiento";
+
+                $result = $mysqli->query($sql);
+                $sql = "SELECT libro.id_libro, libro.estado, linea_movimiento_inventario.cantidad
 						FROM linea_movimiento_inventario
 						INNER JOIN libro
 						ON linea_movimiento_inventario.id_libro = libro.id_libro
 						WHERE linea_movimiento_inventario.id_movimiento = $id_movimiento";
 
 
-				$result = $mysqli->query($sql);
+                $result = $mysqli->query($sql);
 
-				if ($result->num_rows > 0){
-					while ($linea_movimiento = $result->fetch_assoc()){
+                if ($result->num_rows > 0) {
+                    while ($linea_movimiento = $result->fetch_assoc()) {
 
-						$cantidad = intval($linea_movimiento['cantidad']);
-						$id_libro = intval($linea_movimiento['id_libro']);
-				
-						$sql = "SELECT libro.titulo, libro.stock
+                        $cantidad = intval($linea_movimiento['cantidad']);
+                        $id_libro = intval($linea_movimiento['id_libro']);
+
+                        $sql = "SELECT libro.titulo, libro.stock
 								FROM libro
 								WHERE id_libro=$id_libro";
-				
-						$result_libro = $mysqli->query($sql);
-						$libro = $result_libro->fetch_assoc();
-				
-						$stock = intval($libro['stock']) - $cantidad;
-				
-						$titulo = $libro['titulo'];
-						if ($stock > 0){
-						$estado = 'Disponible';
-						}else {
-						$estado = 'No Disponible';
-						echo "<div class='alert alert-danger'>Cantidad del libro $titulo(id=$id_libro) menor o igual a 0. (cantidad=$cantidad) (stock=$stock)</div>";
-						}
-				
-						$update_stock = "UPDATE `libro` SET `stock`=$stock,`estado`='$estado' WHERE `id_libro`=$id_libro";
-						$result_update = $mysqli->query($update_stock);
-						
-					}
-					echo "<a href='inventario.php' class='btn btn-primary'>Volver a la lista de Inventario</a>";
-				}
 
-			}
+                        $result_libro = $mysqli->query($sql);
+                        $libro = $result_libro->fetch_assoc();
 
-			?>
+                        $stock = intval($libro['stock']) - $cantidad;
+
+                        $titulo = $libro['titulo'];
+                        if ($stock > 0) {
+                            $estado = 'Disponible';
+                        } else {
+                            $estado = 'No Disponible';
+                            echo "<div class='alert alert-danger'>Cantidad del libro $titulo(id=$id_libro) menor o igual a 0. (cantidad=$cantidad) (stock=$stock)</div>";
+                        }
+
+                        $update_stock = "UPDATE `libro` SET `stock`=$stock,`estado`='$estado' WHERE `id_libro`=$id_libro";
+                        $result_update = $mysqli->query($update_stock);
+                    }
+                    echo "<a href='inventario.php' class='btn btn-primary'>Volver a la lista de Inventario</a>";
+                }
+            }
+
+            ?>
 </body>
 
 </html>

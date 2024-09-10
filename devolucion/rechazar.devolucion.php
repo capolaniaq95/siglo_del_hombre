@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Devolucion</title>
+    <title>index</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -69,60 +69,34 @@
                 <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
                 <div>
                     <?php
-
                     require "../conexion.php";
 
+                    if ($_GET['id_devolucion']) {
 
-                    $sql = "SELECT
-                              devolucion.id_devolucion,
-                              pedido.fecha,
-                              pedido.total,
-                              devolucion.motivo,
-                              devolucion.estado
-                            FROM
-                              devolucion
-                            INNER JOIN
-                              pedido ON devolucion.id_pedido = pedido.id_pedido";
-                    $result = $mysqli->query($sql);
+                        $id_devolucion = intval($_GET['id_devolucion']);
 
-                    if (!$result) {
-                        echo "<div class='alert alert-danger'>Error en la consulta: " . $mysqli->error . "</div>";
-                    } else {
-                        if ($result->num_rows > 0) {
-                            echo '<table class="table table-striped">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th>Fecha</th>
-											<th>total</th>
-                                            <th>Motivo devolucion</th>
-                                            <th>Estado</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>';
+                        $sql = "SELECT devolucion.estado FROM devolucion WHERE id_devolucion= $id_devolucion";
 
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<tr>
-                                        <td>' . htmlspecialchars($row["fecha"]) . '</td>
-                                        <td>' . htmlspecialchars($row["total"]) . '</td>
-                                        <td>' . htmlspecialchars($row["motivo"]) . '</td>
-                                        <td>' . htmlspecialchars($row["estado"]) . '</td>
-                                        <td>
-                                            <a href="consultar.devolucion.php?id_devolucion=' . urlencode($row["id_devolucion"]) . '" class="btn btn-info btn-sm">Consultar</a>
-                                            <a href="aceptar.devolucion.php?id_devolucion=' . urlencode($row["id_devolucion"]) . '" class="btn btn-success btn-sm">Aceptar</a>
-                                            <a href="rechazar.devolucion.php?id_devolucion=' . urlencode($row["id_devolucion"]) . '" class="btn btn-danger btn-sm">Rechazar</a>
-                                        </td>
-                                    </tr>';
+                        $resultado = $mysqli->query($sql);
+
+                        $estado = $resultado->fetch_assoc();
+
+                        if ($estado['estado'] == 'Proceso' || $estado['estado'] == '') {
+                            $sql = "UPDATE devolucion SET devolucion.estado = 'Rechazada' WHERE id_devolucion=$id_devolucion";
+
+                            if ($mysqli->query($sql) === TRUE) {
+                                echo "<div class='alert alert-success'>Devolucion Rechazada agregado correctamente.</div>";
+                                echo "<a href='/devolucion/devolucion.php' class='btn btn-primary'>Volver a la lista de devoluciones</a>";
+                                $mysqli->close();
+                                exit;
+                            } else {
+                                echo "<div class='alert alert-danger'>Error al Aceptar devolucion " . $mysqli->error . "</div>";
                             }
-                            echo '</tbody></table>';
                         } else {
-                            echo "<div class='alert alert-info'>No hay registros de devoluciones.</div>";
+                            echo "<div class='alert alert-danger'>Devolucion ya completada no la puede modificar " . $mysqli->error . "</div>";
+                            echo "<a href='/devolucion/devolucion.php' class='btn btn-primary'>Atras</a>";
                         }
-
-                        $result->free();
                     }
-
-                    $mysqli->close();
                     ?>
                 </div>
             </div>

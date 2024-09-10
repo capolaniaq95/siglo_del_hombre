@@ -4,8 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Devolucion</title>
+    <title>index</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .dropdown-menu-custom {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-menu-custom a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu-custom a:hover {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .nav-item:hover .dropdown-menu-custom {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,46 +42,22 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-primary bg-info">
                 <div class="container-fluid">
-                    <!-- Alinea el título a la izquierda -->
-                    <a class="navbar-brand px-2 text-white" href="index.php">Siglo del Hombre</a>
+                    <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="libros.php">Libros</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-white dropdown-toggle" href="devolucion.php" id="navbarDropdown" role="button">
+                                    Devoluciones
+                                </a>
+                                <div class="dropdown-menu-custom" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/devolucion/proceso.php">Proceso</a>
+                                    <a class="dropdown-item" href="/devolucion/aceptada.php">Aceptada</a>
+                                    <a class="dropdown-item" href="/devolucion/rechazada.php">Rechazada</a>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="login.php">Ingresar</a>
-                            </li>
-                            <?php
-                            session_start();
-                            if (isset($_SESSION["id_usuario"])):
-                            ?>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="mis.pedidos.php">Mis Pedidos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="devolucion.php">Mis Devoluciones</a>
-                                </li>
-                                <?php
-                                if ($_SESSION["id_tipo"] == 1):
-                                ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white" href="index.administrador.php">Administrador</a>
-                                    </li>
-                                <?php
-                                endif
-                                ?>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="logout.php">Logout</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="carrito.php">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </li>
-                            <?php
-                            endif
-                            ?>
                         </ul>
                     </div>
                 </div>
@@ -60,25 +65,28 @@
         </header>
 
         <div class="container mt-5">
-            <h2>Formulario de Devolucion</h2>
+            <h2>Consultar Devolucion</h2>
             <?php
 
-            require "conexion.php";
+            require "../conexion.php";
 
             if (isset($_GET['id_devolucion'])) {
+
                 $id_devolucion = intval($_GET['id_devolucion']);
 
-                $sql = "SELECT devolucion.motivo, devolucion.fecha, devolucion.descripcion 
-                        WHERE devolucion.id_devolucion=$id_devolucion";
+                $sql = "SELECT `motivo`, `descripcion`, `fecha`, `estado` 
+                        FROM `devolucion`
+                        WHERE id_devolucion = $id_devolucion";
 
                 $result = $mysqli->query($sql);
 
                 $devolucion = $result->fetch_assoc();
 
-                $sql = "SELECT lineas_devolucion.cantidad, libro.titulo,, libro.titulo, lineas_devolucion.id_libro 
+                $sql = "SELECT lineas_devolucion.cantidad, libro.titulo, lineas_devolucion.id_libro
+                        FROM lineas_devolucion
                         INNER JOIN libro
                         ON lineas_devolucion.id_libro = libro.id_libro
-                        WHERE lineas_devolucion.id_devolucion=$id_devolucion";
+                        WHERE lineas_devolucion.id_devolucion = $id_devolucion";
 
                 $result_linea = $mysqli->query($sql);
             }
@@ -89,16 +97,16 @@
             <form action="guardar.devolucion.php" method="POST">
                 <div class="form-group">
                     <label for="orderDate">Fecha</label>
-                    <input type="hidden" class="form-control" name="id_pedido" value="<?php echo $id_pedido; ?>" readonly required>
-                    <input type="datetime-local" class="form-control" id="orderDate" name="orderDate" value="<?php echo $fecha_y_hora; ?>" readonly>
+                    <input type="hidden" class="form-control" name="id_devolucion" value="<?php echo $id_devolucion; ?>" readonly required>
+                    <input type="datetime-local" class="form-control" id="fecha" name="fecha" value="<?php echo $devolucion['fecha']; ?>" readonly>
                 </div>
                 <div class="form-group">
                     <label for="customerName">Motivo</label>
-                    <input type="text" class="form-control" name="motivo">
+                    <input type="text" class="form-control" name="motivo" value="<?php echo $devolucion['motivo']; ?>" readonly required>
                 </div>
                 <div class="form-group">
                     <label for="paymentmethod">Descripcion del motivo</label>
-                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="3" readonly required><?php echo $devolucion['descripcion']; ?></textarea>
                 </div>
 
                 <h4>Líneas de Pedido</h4>
@@ -108,7 +116,6 @@
                             <tr>
                                 <th>Libro</th>
                                 <th>Cantidad</th>
-                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -118,8 +125,7 @@
                                         <input type="hidden" class="form-control" name="libros_ids[]" value="<?php echo $linea['id_libro']; ?>" readonly required>
                                         <input type="text" class="form-control" name="libros[]" value="<?php echo $linea['titulo']; ?>" readonly required>
                                     </td>
-                                    <td><input type="number" class="form-control cantidad-input" name="cantidades[]" value="<?php echo intval($linea['cantidad']); ?>" required></td>
-                                    <td><button type="button" class="btn btn-danger removeRow">Eliminar</button></td>
+                                    <td><input type="number" class="form-control cantidad-input" name="cantidades[]" value="<?php echo intval($linea['cantidad']); ?>" readonly required></td>
                                 </tr>
                             <?php endwhile ?>
                         </tbody>
@@ -128,7 +134,10 @@
                 <!-- Comentado el botón de agregar línea -->
                 <!-- <button type="button" class="btn btn-secondary" id="addLineBtn">Agregar Línea</button> -->
                 <!-- <button type="submit" class="btn btn-success">Generar Devolucion</button> -->
-                <a href="index.php" class="btn btn-secondary">Cancelar</a>
+
+                <a href="devolucion.php" class="btn btn-secondary">Cancelar</a>
+                <a href="aceptar.devolucion.php?id_devolucion=<?php echo $id_devolucion; ?>" class="btn btn-success">Aceptar</a>
+                <a href="rechazar.devolucion.php?id_devolucion=<?php echo $id_devolucion; ?>" class="btn btn-danger">Rechazar</a>
             </form>
         </div>
 

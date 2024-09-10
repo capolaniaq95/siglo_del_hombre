@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-	<style>
+    <style>
         .dropdown-menu-custom {
             display: none;
             position: absolute;
@@ -36,7 +36,7 @@
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-    <header>
+        <header>
             <nav class="navbar navbar-expand-lg navbar-primary bg-info">
                 <div class="container-fluid">
                     <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
@@ -77,11 +77,11 @@
             $cantidades = array($_REQUEST["cantidades"]);
 
 
-            if ($origen == 2 && $destino == 1 ){
+            if ($origen == 2 && $destino == 1) {
                 $tipo_movimiento = "entrada";
-            }else if ($origen == 1 && $destino == 3){
+            } else if ($origen == 1 && $destino == 3) {
                 $tipo_movimiento = "salida";
-            }else{
+            } else {
                 die("<script> alert('Movimiento no permitido');window.location='agregar.movimiento.inventario.php' </script>");
             }
 
@@ -110,15 +110,15 @@
                         $result_stock = $mysqli->query($query_stock);
                         $stock_query = $result_stock->fetch_assoc();
 
-                        if ($tipo_movimiento == "Entrada"){
+                        if ($tipo_movimiento == "entrada") {
                             $stock = intval(intval($stock_query['stock']) + $cantidad);
-                        }else{
+                        } else {
                             $stock = intval(intval($stock_query['stock']) - $cantidad);
                         }
 
-                        if ($stock > 0){
+                        if ($stock > 0) {
                             $estado = 'Disponible';
-                        }else {
+                        } else {
 
                             $estado = 'No Disponible';
                         }
@@ -127,7 +127,6 @@
                     }
                     echo "<div class='alert alert-success'>movimiento agregado correctamente</div>";
                     echo "<a href='inventario.php' class='btn btn-primary'>Volver a la lista de inventario</a>";
-
                 }
             }
 
