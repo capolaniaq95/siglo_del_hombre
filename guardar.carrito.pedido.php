@@ -71,11 +71,6 @@
             $sql = "INSERT INTO `pedido`(`id_usuario`,`id_metodo_de_pago`, `fecha`, `total`)
                     VALUES ($customer, $payment, '$orderDate', $totalAmount)";
 
-            $query_insert_movimiento_salida = "INSERT INTO `movimiento_inventario`(`fecha`, `ubicacion_origen`, `ubicacion_destino`, `tipo_movimiento`, `estado`)
-                                               VALUES ('$orderDate', 1, 3,'salida','Proceso')";
-
-			$insert_movimiento = $mysqli->query($query_insert_movimiento_salida);
-
             if ($mysqli->query($sql) === TRUE) {
 
                 $query_id_pedido = "SELECT `id_pedido` FROM `pedido`
@@ -88,6 +83,13 @@
                 $pedido = $result->fetch_assoc();
 
                 $id_pedido = $pedido['id_pedido'];
+
+                $referencia = "Pedido" . $id_pedido;
+
+                $query_insert_movimiento_salida = "INSERT INTO `movimiento_inventario`(`fecha`, `ubicacion_origen`, `ubicacion_destino`, `tipo_movimiento`, `estado`, `referencia`)
+                VALUES ('$orderDate', 1, 3,'salida','Proceso', '$referencia')";
+
+                $insert_movimiento = $mysqli->query($query_insert_movimiento_salida);
 
                 $query_id_inventario = "SELECT MAX(`id_movimiento`) AS 'id_movimiento'
                                         FROM `movimiento_inventario`

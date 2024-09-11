@@ -19,6 +19,8 @@ if ($resultado_ubicacion->num_rows > 0) {
         $options_ubicacion .= "<option value='" . htmlspecialchars($fila['id_ubicacion']) . "'>" . htmlspecialchars($fila['ubicacion']) . "</option>";
     }
 }
+
+$fecha_y_hora = date("Y-m-d H:i:s");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -94,7 +96,7 @@ if ($resultado_ubicacion->num_rows > 0) {
             <form action="guardar.movimiento.inventario.php" method="POST">
                 <div class="form-group">
                     <label for="orderDate">Fecha</label>
-                    <input type="datetime-local" class="form-control" id="orderDate" name="orderDate" required>
+                    <input type="text" class="form-control" id="orderDate" name="orderDate" value="<?php echo $fecha_y_hora; ?>" readonly required>
                 </div>
                 <div class="form-group">
                     <label for="customerName">ubicacion origen</label>

@@ -85,8 +85,12 @@
                 die("<script> alert('Movimiento no permitido');window.location='agregar.movimiento.inventario.php' </script>");
             }
 
-            $sql = "INSERT INTO `movimiento_inventario`( `fecha`, `ubicacion_destino`, `ubicacion_origen`, `tipo_movimiento`, `estado`)
-					VALUES ('$orderDate',$destino, $origen, '$tipo_movimiento', 'Completado')";
+            session_start();
+
+            $referencia = "AdministradorID" . (string)$_SESSION["id_usuario"];
+
+            $sql = "INSERT INTO `movimiento_inventario`( `fecha`, `ubicacion_destino`, `ubicacion_origen`, `tipo_movimiento`, `estado`, `referencia`)
+					VALUES ('$orderDate',$destino, $origen, '$tipo_movimiento', 'Completado', '$referencia')";
 
             if ($mysqli->query($sql) === TRUE) {
 

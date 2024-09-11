@@ -31,12 +31,22 @@
         .nav-item:hover .dropdown-menu-custom {
             display: block;
         }
+        
+
+
+        .table td, .table th {
+            white-space: nowrap; 
+        }
+
+        .table-container {
+            width: 1000px;
+        }
     </style>
 </head>
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-    <header>
+        <header>
             <nav class="navbar navbar-expand-lg navbar-primary bg-info">
                 <div class="container-fluid">
                     <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
@@ -46,7 +56,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button">
+                                <a class="nav-link text-white dropdown-toggle" href="inventario" id="navbarDropdown" role="button">
                                     Inventario
                                 </a>
                                 <div class="dropdown-menu-custom" aria-labelledby="navbarDropdown">
@@ -70,25 +80,25 @@
                 <h2>Inventario</h2>
                 <a href="agregar.movimiento.inventario.php" class="btn btn-info mb-3">Agregar Nuevo Inventario</a>
                 <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
-                <div>
+                <div class="table-container">
                     <?php
 
                     require('../conexion.php');
 
-
                     $sql = "SELECT
-                            movimiento_inventario.id_movimiento,
-                            movimiento_inventario.fecha,
-                            ubicacion_destino.ubicacion AS destino,
-                            ubicacion_origen.ubicacion AS origen,
-                            movimiento_inventario.tipo_movimiento,
-                            movimiento_inventario.estado
-                        FROM
-                            movimiento_inventario
-                        INNER JOIN
-                            ubicacion AS ubicacion_destino ON movimiento_inventario.ubicacion_destino = ubicacion_destino.id_ubicacion
-                        INNER JOIN
-                            ubicacion AS ubicacion_origen ON movimiento_inventario.ubicacion_origen = ubicacion_origen.id_ubicacion";
+                                movimiento_inventario.id_movimiento,
+                                movimiento_inventario.fecha,
+                                ubicacion_destino.ubicacion AS destino,
+                                ubicacion_origen.ubicacion AS origen,
+                                movimiento_inventario.tipo_movimiento,
+                                movimiento_inventario.estado,
+                                movimiento_inventario.referencia
+                            FROM
+                                movimiento_inventario
+                            INNER JOIN
+                                ubicacion AS ubicacion_destino ON movimiento_inventario.ubicacion_destino = ubicacion_destino.id_ubicacion
+                            INNER JOIN
+                                ubicacion AS ubicacion_origen ON movimiento_inventario.ubicacion_origen = ubicacion_origen.id_ubicacion";
 
                     $result = $mysqli->query($sql);
 
@@ -96,15 +106,16 @@
                         echo "<div class='alert alert-danger'>Error en la consulta: " . $mysqli->error . "</div>";
                     } else {
                         if ($result->num_rows > 0) {
-                            echo '<table class="table table-striped">
+                            echo '<table class="table table-bordered table-striped table-hover text-center">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>ID Movimiento Inv.</th>
                                             <th>Fecha</th>
-                                            <th>Ubicacion_origen</th>
-                                            <th>Ubicacion_destino</th>
+                                            <th>Ubicacion Origen</th>
+                                            <th>Ubicacion Destino</th>
                                             <th>Tipo</th>
                                             <th>Estado</th>
+                                            <th>Referencia</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -118,15 +129,15 @@
                                         <td>' . htmlspecialchars($row["destino"]) . '</td>
                                         <td>' . htmlspecialchars($row["tipo_movimiento"]) . '</td>
                                         <td>' . htmlspecialchars($row["estado"]) . '</td>
+                                        <td>' . htmlspecialchars($row["referencia"]) . '</td>
                                         <td>
-                                            <a href="editar.movimiento.php?id=' . urlencode($row["id_movimiento"]) . '" class="btn btn-success btn-sm">Editar</a>
-                                            <a href="eliminar.movimiento.php?id=' . urlencode($row["id_movimiento"]) . '" class="btn btn-danger btn-sm">Eliminar</a>
+                                            <a href="consultar.movimiento.php?id=' . urlencode($row["id_movimiento"]) . '" class="btn btn-success btn-sm">Consultar</a>
                                         </td>
                                     </tr>';
                             }
                             echo '</tbody></table>';
                         } else {
-                            echo "<div class='alert alert-info'>No hay registros de usuarios.</div>";
+                            echo "<div class='alert alert-info'>No hay registros de movimientos.</div>";
                         }
 
                         $result->free();

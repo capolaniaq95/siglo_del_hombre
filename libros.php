@@ -138,11 +138,12 @@
             echo '<p class="card-text"><strong>Precio: </strong>$' . htmlspecialchars($row["precio"], ENT_QUOTES, 'UTF-8') . '</p>';
             echo '</div>';
             echo '<div class="card-footer">';
-            echo '<form method="post" action="agregar.carrito.php">';
-            echo '<input type="hidden" name="id_libro" value="' . $idLibro . '">';
-            echo '<button type="submit" class="btn" style="background-color: #17a2b8; color: white;">Agregar al Carrito</button>
-';
+            if (isset($_SESSION["id_usuario"])){
+              echo '<form method="post" action="agregar.carrito.php">';
+              echo '<input type="hidden" name="id_libro" value="' . $idLibro . '">';
+              echo '<button type="submit" class="btn" style="background-color: #17a2b8; color: white;">Agregar al Carrito</button>';
 
+            }
             echo '</form>';
             echo '</div>';
             echo '</div>';
