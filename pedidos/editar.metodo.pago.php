@@ -89,8 +89,8 @@
                     </div>
 
                     <button type="submit" class="btn btn-info">Actualizar metodo</button>
+                    <a href="metodo.pago.php" class="btn btn-secondary">Cancelar</a>
                 </form>
-                <a href="metodo.pago.php" class="btn btn-secondary mt-3">Cancelar</a>
             </div>
 
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy5Yk4pKjmb6/8tJTxXKoO4YHh5tFO4kD2Jg2w2" crossorigin="anonymous"></script>

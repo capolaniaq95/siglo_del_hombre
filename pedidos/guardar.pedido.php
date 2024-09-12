@@ -47,11 +47,6 @@
             $sql = "INSERT INTO `pedido`(`id_usuario`,`id_metodo_de_pago`, `fecha`, `total`)
                     VALUES ($customer, $payment, '$orderDate', $totalAmount)";
 
-            $query_insert_movimiento_salida = "INSERT INTO `movimiento_inventario`(`fecha`, `ubicacion_origen`, `ubicacion_destino`, `tipo_movimiento`, `estado`)
-                                               VALUES ('$orderDate', 1, 3,'salida','Proceso')";
-
-			$insert_movimiento = $mysqli->query($query_insert_movimiento_salida);
-
             if ($mysqli->query($sql) === TRUE) {
 
                 $query_id_pedido = "SELECT `id_pedido` FROM `pedido`
@@ -64,6 +59,13 @@
                 $pedido = $result->fetch_assoc();
 
                 $id_pedido = $pedido['id_pedido'];
+
+                $referencia = 'Pedido' . intval($id_pedido);
+
+                $query_insert_movimiento_salida = "INSERT INTO `movimiento_inventario`(`fecha`, `ubicacion_origen`, `ubicacion_destino`, `tipo_movimiento`, `estado`, `referencia`)
+                                                   VALUES ('$orderDate', 1, 3,'salida','Proceso', '$referencia')";
+
+                $insert_movimiento = $mysqli->query($query_insert_movimiento_salida);
 
                 $query_id_inventario = "SELECT MAX(`id_movimiento`) AS 'id_movimiento'
                                         FROM `movimiento_inventario`
@@ -96,25 +98,6 @@
 
                        $mysqli->query($insertar_linea_movimiento_inventario);
 
-                       /*
-                        $query_cantidad_libro = "SELECT libro.stock, libro.estado, libro.titulo
-                                                 FROM libro
-                                                 WHERE libro.id_libro=$id_libro";
-
-                        $result = $mysqli->query($query_cantidad_libro);
-                        $result = $result->fetch_assoc();
-                        $stock = intval($result['stock']) - $cantidad;
-
-                        $titulo = $result['titulo'];
-                        if ($stock > 0){
-                            $estado = 'Disponible';
-                        }else {
-                            $estado = 'No Disponible';
-                            echo "<div class='alert alert-danger'>Cantidad del libro $titulo(id=$id_libro) menor o igual a 0.</div>";
-                        }
-
-                        $update_stock = "UPDATE `libro` SET `stock`=$stock,`estado`='$estado' WHERE `id_libro`=$id_libro";
-                        $result_update = $mysqli->query($update_stock);*/
 
                     }
                     echo "<div class='alert alert-success'>Pedido agregado correctamente.</div>";

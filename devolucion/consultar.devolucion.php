@@ -131,13 +131,14 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- Comentado el botón de agregar línea -->
-                <!-- <button type="button" class="btn btn-secondary" id="addLineBtn">Agregar Línea</button> -->
-                <!-- <button type="submit" class="btn btn-success">Generar Devolucion</button> -->
 
-                <a href="devolucion.php" class="btn btn-secondary">Cancelar</a>
-                <a href="aceptar.devolucion.php?id_devolucion=<?php echo $id_devolucion; ?>" class="btn btn-success">Aceptar</a>
-                <a href="rechazar.devolucion.php?id_devolucion=<?php echo $id_devolucion; ?>" class="btn btn-danger">Rechazar</a>
+                <a href="devolucion.php" class="btn btn-secondary">Atras</a>
+                <?php if ($devolucion['estado'] == 'Proceso') {  ?>
+                    <a href="aceptar.devolucion.php?id_devolucion=<?php echo $id_devolucion; ?>" class="btn btn-success">Aceptar</a>
+                    <a href="rechazar.devolucion.php?id_devolucion=<?php echo $id_devolucion; ?>" class="btn btn-danger">Rechazar</a>
+                <?php }else if($devolucion['estado'] == 'Aceptada') { ?>
+                    <a href="generar.movimiento.php?id_devolucion=<?php echo $id_devolucion; ?>" class="btn btn-success">Generar movimiento</a>
+                <?php  } ?>
             </form>
         </div>
 

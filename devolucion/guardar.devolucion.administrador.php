@@ -10,54 +10,26 @@
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-        <header>
+    <header>
             <nav class="navbar navbar-expand-lg navbar-primary bg-info">
                 <div class="container-fluid">
                     <!-- Alinea el título a la izquierda -->
-                    <a class="navbar-brand px-2 text-white" href="index.php">Siglo del Hombre</a>
+                    <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Alinea los elementos del menú a la izquierda utilizando "mr-auto" -->
                         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="libros.php">Libros</a>
+                                <a class="nav-link text-white" href="pedido.php">Pedidos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="login.php">Ingresar</a>
+                                <a class="nav-link text-white" href="Metodo.pago.php">Metodo de Pago</a>
                             </li>
-                            <?php
-                            session_start();
-                            if (isset($_SESSION["id_usuario"])):
-                            ?>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="mis.pedidos.php">Mis Pedidos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="devolucion.php">Mis Devoluciones</a>
-                                </li>
-                                <?php
-                                if ($_SESSION["id_tipo"] == 1):
-                                ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white" href="index.administrador.php">Administrador</a>
-                                    </li>
-                                <?php
-                                endif
-                                ?>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="logout.php">Logout</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="carrito.php">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </li>
-                            <?php
-                            endif
-                            ?>
                         </ul>
                     </div>
                 </div>
             </nav>
         </header>
+
 
         <div class="container mt-5">
             <h2>Formulario de Devolucion</h2>
@@ -72,9 +44,10 @@
             $libros_ids = array($_REQUEST['libros_ids']);
             $cantidades = array($_REQUEST['cantidades']);
 
+            $referencia = 'Pedido' . $id_pedido;
 
-            $sql = "INSERT INTO `devolucion`(`id_pedido`, `motivo`, `descripcion`, `fecha`, `estado`)
-                    VALUES ($id_pedido,'$motivo','$descripcion','$orderDate', 'Proceso')";
+            $sql = "INSERT INTO `devolucion`(`id_pedido`, `motivo`, `descripcion`, `fecha`, `estado`, `referencia`)
+                    VALUES ($id_pedido,'$motivo','$descripcion','$orderDate', 'Proceso', '$referencia')";
 
             if ($mysqli->query($sql) === TRUE) {
 
@@ -101,8 +74,8 @@
 
                         $result = $mysqli->query($insert_linea_devolucion);
                     }
-                    echo "<div class='alert alert-success'>Pedido agregado correctamente.</div>";
-                    echo "<a href='index.php' class='btn btn-primary'>Volver al menu principal</a>";
+                    echo "<div class='alert alert-success'>Devolucion agregada correctamente.</div>";
+                    echo "<a href='/pedidos/pedido.php' class='btn btn-primary'>Volver al menu principal</a>";
                     $mysqli->close();
                     exit;
                 } else {
