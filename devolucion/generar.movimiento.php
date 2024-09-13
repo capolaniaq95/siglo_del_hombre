@@ -68,7 +68,7 @@
                 <h2>Devoluciones</h2>
                 <a onclick="window.print()" class="btn btn-info mb-3">Imprimir Informe</a>
                 <div>
-                    <?php
+                <?php
                     require "../conexion.php";
 
                     if ($_GET['id_devolucion']) {

@@ -72,7 +72,7 @@
 
             if (isset($_GET['id'])) {
 
-                $id_movimiento = $_GET['id'];
+                $id_movimiento = intval($_GET['id']);
 
                 $sql = "UPDATE `movimiento_inventario` SET `estado`='Completado' WHERE id_movimiento=$id_movimiento";
 
@@ -83,9 +83,17 @@
 						ON linea_movimiento_inventario.id_libro = libro.id_libro
 						WHERE linea_movimiento_inventario.id_movimiento = $id_movimiento";
 
+<<<<<<< HEAD
                 $sql_tipo_movimiento = "SELECT movimiento_inventario.tipo_movimiento 
                                         FROM movimiento_inventario 
                                         WHERE id_movimiento=$id_movimiento";
+=======
+                $sql_tipo_movimiento = "SELECT `tipo_movimiento` FROM `movimiento_inventario` WHERE `id_movimiento`= $id_movimiento";
+
+                $result_tipo = $mysqli->query($sql_tipo_movimiento);
+
+                $tipo_movimiento = $result_tipo->fetch_assoc();
+>>>>>>> c98f5496da4cd1ce2bce1c735341fc4f8b2f7893
 
                 $result_estado = $mysqli->query($sql_tipo_movimiento);
 
@@ -104,8 +112,12 @@
                         $result_libro = $mysqli->query($sql);
                         $libro = $result_libro->fetch_assoc();
 
+<<<<<<< HEAD
 
                         if ($estado == 'salida') {
+=======
+                        if ($tipo_movimiento['tipo_movimiento'] == 'salida') {
+>>>>>>> c98f5496da4cd1ce2bce1c735341fc4f8b2f7893
                             $stock = intval($libro['stock']) - $cantidad;
                         } else {
                             $stock = intval($libro['stock']) + $cantidad;
@@ -123,6 +135,7 @@
                         $update_stock = "UPDATE `libro` SET `stock`=$stock,`estado`='$estado' WHERE `id_libro`=$id_libro";
                         $result_update = $mysqli->query($update_stock);
                     }
+                    echo "<div class='alert alert-success'>Movimiento completado correctamente.</div>";
                     echo "<a href='inventario.php' class='btn btn-primary'>Volver a la lista de Inventario</a>";
                 }
             }
