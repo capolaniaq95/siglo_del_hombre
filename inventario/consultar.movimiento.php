@@ -22,10 +22,10 @@ if ($resultado_ubicacion->num_rows > 0) {
 
 
 
-if (isset($_GET['id_movimiento'])){
-	$id_movimiento = intval($_GET['id_movimiento']);
+if (isset($_GET['id_movimiento'])) {
+    $id_movimiento = intval($_GET['id_movimiento']);
 
-	$sql = "SELECT movimiento_inventario.fecha, 
+    $sql = "SELECT movimiento_inventario.fecha, 
 					ubicacion_destino.ubicacion AS destino, 
 					ubicacion_origen.ubicacion AS origen,
 					movimiento_inventario.referencia,
@@ -39,17 +39,17 @@ if (isset($_GET['id_movimiento'])){
 					WHERE
 					movimiento_inventario.id_movimiento = $id_movimiento";
 
-	$result = $mysqli->query($sql);
+    $result = $mysqli->query($sql);
 
-	$movimiento = $result->fetch_assoc();
+    $movimiento = $result->fetch_assoc();
 
-	$fecha = $movimiento['fecha'];
-	$destino = $movimiento['destino'];
-	$origen = $movimiento['origen'];
-	$referencia = $movimiento['referencia'];
-	$movimiento_estado = $movimiento['estado'];
+    $fecha = $movimiento['fecha'];
+    $destino = $movimiento['destino'];
+    $origen = $movimiento['origen'];
+    $referencia = $movimiento['referencia'];
+    $movimiento_estado = $movimiento['estado'];
 
-	$sql = "SELECT linea_movimiento_inventario.cantidad, libro.titulo
+    $sql = "SELECT linea_movimiento_inventario.cantidad, libro.titulo
 			FROM
 			linea_movimiento_inventario
 			INNER JOIN
@@ -58,8 +58,7 @@ if (isset($_GET['id_movimiento'])){
 			WHERE
 			linea_movimiento_inventario.id_movimiento=$id_movimiento";
 
-	$result = $mysqli->query($sql);
-
+    $result = $mysqli->query($sql);
 }
 
 ?>
@@ -71,7 +70,7 @@ if (isset($_GET['id_movimiento'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de movimiento inventario</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-	<style>
+    <style>
         .dropdown-menu-custom {
             display: none;
             position: absolute;
@@ -101,7 +100,7 @@ if (isset($_GET['id_movimiento'])){
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-    <header>
+        <header>
             <nav class="navbar navbar-expand-lg navbar-primary bg-info">
                 <div class="container-fluid">
                     <a class="navbar-brand px-2 text-white" href="../index.administrador.php">Siglo del Hombre</a>
@@ -141,15 +140,15 @@ if (isset($_GET['id_movimiento'])){
                 </div>
                 <div class="form-group">
                     <label for="customerName">ubicacion origen</label>
-					<input type="text" class="form-control" id="origen" name="origen" value="<?php echo $origen ?>" readonly required>
+                    <input type="text" class="form-control" id="origen" name="origen" value="<?php echo $origen ?>" readonly required>
                 </div>
 
                 <div class="form-group">
                     <label for="customerName">Ubicacion Destino</label>
-					<input type="text" class="form-control" id="destino" name="destino" value="<?php echo $destino ?>" readonly required>
+                    <input type="text" class="form-control" id="destino" name="destino" value="<?php echo $destino ?>" readonly required>
                 </div>
-				<div class="form-group">
-                    <label for="orderDate">Fecha</label>
+                <div class="form-group">
+                    <label for="orderDate">Referencia</label>
                     <input type="text" class="form-control" id="referencia" name="referencia" value="<?php echo $referencia ?>" readonly required>
                 </div>
                 <h4>Líneas de Pedido</h4>
@@ -162,23 +161,23 @@ if (isset($_GET['id_movimiento'])){
                             </tr>
                         </thead>
                         <tbody>
-							<?php while($linea = $result->fetch_assoc()):
-								$cantidad = intval($linea['cantidad']);
-								$libro = $linea['titulo'];
-								?>
-                            <tr>
-                                <td><input type="text" class="form-control quantity" name="libro" value="<?php echo $libro; ?>" readonly required></td>
-                                <td><input type="number" class="form-control quantity" name="cantidad" value="<?php echo $cantidad; ?>" readonly required></td>
-                            </tr>
-							<?php  endwhile; ?>
+                            <?php while ($linea = $result->fetch_assoc()):
+                                $cantidad = intval($linea['cantidad']);
+                                $libro = $linea['titulo'];
+                            ?>
+                                <tr>
+                                    <td><input type="text" class="form-control quantity" name="libro" value="<?php echo $libro; ?>" readonly required></td>
+                                    <td><input type="number" class="form-control quantity" name="cantidad" value="<?php echo $cantidad; ?>" readonly required></td>
+                                </tr>
+                            <?php endwhile; ?>
                         </tbody>
                     </table>
                 </div>
                 <div class="form-group">
-					<a href="inventario.php" class="btn btn-secondary">Atras</a>
-					<?php if ($movimiento_estado == 'Proceso'):
-						echo '<a href="completar.movimiento.php?id=' . urlencode($id_movimiento) . '" class="btn btn-success">Completar</a>';
-					endif; ?>
+                    <a href="inventario.php" class="btn btn-secondary">Atras</a>
+                    <?php if ($movimiento_estado == 'Proceso'):
+                        echo '<a href="completar.movimiento.php?id=' . urlencode($id_movimiento) . '" class="btn btn-success">Completar</a>';
+                    endif; ?>
                 </div>
 
             </form>

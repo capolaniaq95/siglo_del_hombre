@@ -75,31 +75,48 @@
 
                         $id_devolucion = intval($_GET['id_devolucion']);
 
-						$fecha = date("Y-m-d H:i:s");
-						$referencia = 'Devolucion' . $id_devolucion;
+                        $fecha = date("Y-m-d H:i:s");
+                        $referencia = 'Devolucion' . $id_devolucion;
+
+                        $sql = "SELECT lineas_devolucion.cantidad, lineas_devolucion.id_libro 
+                                FROM lineas_devolucion
+                                WHERE lineas_devolucion.id_devolucion=$id_devolucion";
+
+                        $result_lineas_devolucion = $mysqli->query($sql);
 
                         $sql = "INSERT INTO `movimiento_inventario`(`fecha`, `ubicacion_origen`, `ubicacion_destino`, `tipo_movimiento`, `estado`, `referencia`)
-								VALUES ('$fecha',2,1,'entrada','Proceso','$referencia')";
+								VALUES ('$fecha', 2, 1,'entrada','Proceso','$referencia')";
 
                         $resultado = $mysqli->query($sql);
 
-						$sql = "SELECT "
+                        $sql = "SELECT `id_movimiento` 
+                                FROM `movimiento_inventario` 
+                                WHERE `fecha`='$fecha'
+                                AND `ubicacion_origen`=2
+                                AND `ubicacion_destino`=1 
+                                AND `tipo_movimiento`='entrada'
+                                AND `estado`='Proceso'";
 
-                        if ($estado['estado'] == 'Proceso' || $estado['estado'] == '') {
-                            $sql = "UPDATE devolucion SET devolucion.estado = 'Aceptada' WHERE id_devolucion=$id_devolucion";
+                        $result = $mysqli->query($sql);
 
-                            if ($mysqli->query($sql) === TRUE) {
-                                echo "<div class='alert alert-success'>Movimiento agregado correctamente.</div>";
-                                echo "<a href='/devolucion/devolucion.php' class='btn btn-primary'>Volver a la lista de devoluciones</a>";
-                                $mysqli->close();
-                                exit;
-                            } else {
-                                echo "<div class='alert alert-danger'>Error al Aceptar devolucion " . $mysqli->error . "</div>";
-                            }
-                        } else {
-                            echo "<div class='alert alert-danger'>Devolucion ya completada no la puede modificar " . $mysqli->error . "</div>";
-                            echo "<a href='/devolucion/devolucion.php' class='btn btn-primary'>Atras</a>";
+                        $id_movimiento = $result->fetch_assoc();
+
+                        $id_movimiento = $id_movimiento['id_movimiento'];
+
+                        while ($linea_devolucion = $result_lineas_devolucion->fetch_assoc()) {
+                            $cantidad = intval($linea_devolucion['cantidad']);
+                            $id_libro = intval($linea_devolucion['id_libro']);
+
+
+                            $sql = "INSERT INTO `linea_movimiento_inventario`(`id_movimiento`, `id_libro`, `cantidad`) 
+                                    VALUES ($id_movimiento, $id_libro, $cantidad)";
+
+
+                            $result = $mysqli->query($sql);
                         }
+
+                        echo "<div class='alert alert-success'>Movimiento generado correctamente agregado correctamente.</div>";
+                        echo "<a href='devolucion.php' class='btn btn-primary'>Volver a la pagina principal</a>";
                     }
                     ?>
                 </div>
