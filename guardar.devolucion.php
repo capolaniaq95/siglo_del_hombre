@@ -62,7 +62,7 @@
         <div class="container mt-5">
             <h2>Formulario de Devolucion</h2>
             <?php
-            require '../conexion.php';
+            require 'conexion.php';
 
             $id_pedido = intval($_REQUEST['id_pedido']);
             $orderDate = $_REQUEST['orderDate'];
