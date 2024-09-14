@@ -72,9 +72,10 @@
             $libros_ids = array($_REQUEST['libros_ids']);
             $cantidades = array($_REQUEST['cantidades']);
 
+            $referencia = "Pedido" . $id_pedido;
 
-            $sql = "INSERT INTO `devolucion`(`id_pedido`, `motivo`, `descripcion`, `fecha`, `estado`)
-                    VALUES ($id_pedido,'$motivo','$descripcion','$orderDate', 'Proceso')";
+            $sql = "INSERT INTO `devolucion`(`id_pedido`, `motivo`, `descripcion`, `fecha`, `estado`, `referencia`)
+                    VALUES ($id_pedido,'$motivo','$descripcion','$orderDate', 'Proceso', '$referencia')";
 
             if ($mysqli->query($sql) === TRUE) {
 
