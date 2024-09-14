@@ -116,7 +116,7 @@
                                         <td>' . htmlspecialchars($row["estado"]) . '</td>
                                         <td>' . htmlspecialchars($row["referencia"]) . '</td>
                                         <td>
-                                            <a href="consultar.devolucion.php?id=' . urlencode($row["id_devolucion"]) . '" class="btn btn-success btn-sm">Consultar</a>
+                                            <a href="consultar.devolucion.php?id_devolucion=' . urlencode($row["id_devolucion"]) . '" class="btn btn-success btn-sm">Consultar</a>
                                         </td>
                                     </tr>';
               }
