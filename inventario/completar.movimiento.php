@@ -83,21 +83,15 @@
 						ON linea_movimiento_inventario.id_libro = libro.id_libro
 						WHERE linea_movimiento_inventario.id_movimiento = $id_movimiento";
 
-<<<<<<< HEAD
-                $sql_tipo_movimiento = "SELECT movimiento_inventario.tipo_movimiento 
+                $result = $mysqli->query($sql);
+
+                $sql_tipo_movimiento = "SELECT tipo_movimiento 
                                         FROM movimiento_inventario 
                                         WHERE id_movimiento=$id_movimiento";
-=======
-                $sql_tipo_movimiento = "SELECT `tipo_movimiento` FROM `movimiento_inventario` WHERE `id_movimiento`= $id_movimiento";
 
-                $result_tipo = $mysqli->query($sql_tipo_movimiento);
+                $tipo_movimiento = $mysqli->query($sql_tipo_movimiento);
 
-                $tipo_movimiento = $result_tipo->fetch_assoc();
->>>>>>> c98f5496da4cd1ce2bce1c735341fc4f8b2f7893
-
-                $result_estado = $mysqli->query($sql_tipo_movimiento);
-
-                $estado = $result_estado['estado'];
+                $tipo_movimiento = $tipo_movimiento->fetch_assoc();
 
                 if ($result->num_rows > 0) {
                     while ($linea_movimiento = $result->fetch_assoc()) {
@@ -112,12 +106,7 @@
                         $result_libro = $mysqli->query($sql);
                         $libro = $result_libro->fetch_assoc();
 
-<<<<<<< HEAD
-
-                        if ($estado == 'salida') {
-=======
                         if ($tipo_movimiento['tipo_movimiento'] == 'salida') {
->>>>>>> c98f5496da4cd1ce2bce1c735341fc4f8b2f7893
                             $stock = intval($libro['stock']) - $cantidad;
                         } else {
                             $stock = intval($libro['stock']) + $cantidad;

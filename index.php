@@ -1,18 +1,135 @@
+<?php
+// Conectar a la base de datos
+$mysqli = new mysqli('localhost', 'root', '', 'siglo_del_hombre');
+
+// Verificar la conexión
+if ($mysqli->connect_error) {
+  die('Error en la conexión: ' . $mysqli->connect_error);
+}
+
+// Consulta para obtener los últimos libros con información de autor y categoría
+$sql = "SELECT 
+            l.id_libro, 
+            l.titulo, 
+            l.descripcion,  
+            l.precio, 
+            l.imagen, 
+            a.nombre AS autor, 
+            c.categoria AS genero
+        FROM libro l
+        JOIN autor a ON l.id_autor = a.id_autor
+        JOIN categoria c ON l.id_categoria = c.id_categoria
+        ORDER BY l.id_libro DESC 
+        LIMIT 4"; // Ajusta el LIMIT según necesites
+
+$result = $mysqli->query($sql);
+
+if ($result === false) {
+  die('Error en la consulta: ' . $mysqli->error);
+}
+
+// Obtener los libros en un array
+$libros = [];
+if ($result->num_rows > 0) {
+  while ($fila = $result->fetch_assoc()) {
+    $libros[] = $fila;
+  }
+}
+
+// Cerrar la conexión
+$mysqli->close();
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>index</title>
+  <title>Inicio - Siglo del Hombre</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #00796b;
+      border-bottom: 2px solid #004d40;
+    }
+
+    .navbar-nav .nav-link {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .carousel-inner img {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-custom {
+      border: 2px solid #0288d1;
+      /* Borde de color azul */
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .card-custom:hover {
+      transform: scale(1.03);
+      border-color: black;
+      /* Color del borde en hover */
+    }
+
+    .card-img-top {
+      border-radius: 15px 15px 0 0;
+      height: 20rem;
+      /* Ajusta la altura según sea necesario */
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .card-body {
+      background-color: white;
+      padding: 1rem;
+    }
+
+    .card-footer {
+      background-color: #f8f9fa;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin-top: 30px;
+    }
+
+    .novedades {
+      color: black;
+      /* Color azul claro */
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .btn-custom {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-custom:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 
 <body>
-
   <header>
     <nav class="navbar navbar-expand-lg navbar-primary bg-info">
       <div class="container-fluid">
@@ -26,9 +143,6 @@
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="login.php">Ingresar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="categoria.php">categorias</a>
             </li>
             <?php
             session_start();
@@ -67,6 +181,7 @@
       </div>
     </nav>
   </header>
+
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -86,56 +201,27 @@
     </a>
   </div>
 
-
   <section>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" style="padding: 30px;">
-      <div class="col">
-        <div class="card card-custom h-100">
-          <img src="./images/thumb_1200_1695.png" class="card-img-top" alt="Libro 1" style="height: 25rem;">
-          <div class="card-body">
-            <h5 class="card-title">Libro 1</h5>
-            <p class="card-text">Descripción del libro 1.</p>
+    <div class="container">
+      <div class="novedades">Novedades</div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <?php foreach ($libros as $libro): ?>
+          <div class="col">
+            <div class="card card-custom h-100">
+              <img src="<?php echo htmlspecialchars($libro['imagen']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($libro['titulo']); ?>">
+              <div class="card-body">
+                <h5 class="card-title"><?php echo htmlspecialchars($libro['titulo']); ?></h5>
+                <p class="card-text">Autor: <?php echo htmlspecialchars($libro['autor']); ?></p>
+                <p class="card-text">Género: <?php echo htmlspecialchars($libro['genero']); ?></p>
+                <p class="card-text"><?php echo htmlspecialchars($libro['descripcion']); ?></p>
+                <p class="card-text">Precio: $<?php echo htmlspecialchars($libro['precio']); ?></p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Última actualización hace <?php echo rand(1, 60); ?> minutos</small>
+              </div>
+            </div>
           </div>
-          <div class="card-footer">
-            <small class="text-muted">Última actualización hace 3 minutos</small>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card card-custom h-100">
-          <img src="./images/9221003367bb8bc334463a2556e63e24.jpg" class="card-img-top" alt="Libro 2" style="height: 25rem;">
-          <div class="card-body">
-            <h5 class="card-title">Libro 2</h5>
-            <p class="card-text">Descripción del libro 2.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Última actualización hace 3 minutos</small>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card card-custom h-100">
-          <img src="./images/51K95AV4x2L._SX195_.jpg" class="card-img-top" alt="Libro 4" style="height: 25rem;">
-          <div class="card-body">
-            <h5 class="card-title">Libro 4</h5>
-            <p class="card-text">Descripción del libro 4.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Última actualización hace 3 minutos</small>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card card-custom h-100">
-          <img src="./images/6e771219a8f91566a1c9a200bc8c3103.jpg" class="card-img-top" alt="Libro 5" style="height: 25rem;">
-          <div class="card-body">
-            <h5 class="card-title">Libro 5</h5>
-            <p class="card-text">Descripción del libro 5.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Última actualización hace 3 minutos</small>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -145,40 +231,24 @@
       <div class="row">
         <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
           <h5 class="text-uppercase text-white">Footer Content</h5>
-          <p class="text-white">Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          <p class="text-white">Aquí puedes usar filas y columnas para organizar el contenido del pie de página. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         </div>
         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase text-white">Links</h5>
+          <h5 class="text-uppercase text-white">Enlaces</h5>
           <ul class="list-unstyled mb-0">
-            <li>
-              <a href="#!" class="text-white">Link 1</a>
-            </li>
-            <li>
-              <a href="#!" class="text-white">Link 2</a>
-            </li>
-            <li>
-              <a href="#!" class="text-white">Link 3</a>
-            </li>
-            <li>
-              <a href="#!" class="text-white">Link 4</a>
-            </li>
+            <li><a href="#!" class="text-white">Enlace 1</a></li>
+            <li><a href="#!" class="text-white">Enlace 2</a></li>
+            <li><a href="#!" class="text-white">Enlace 3</a></li>
+            <li><a href="#!" class="text-white">Enlace 4</a></li>
           </ul>
         </div>
         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase text-white">Links</h5>
+          <h5 class="text-uppercase text-white">Enlaces</h5>
           <ul class="list-unstyled mb-0">
-            <li>
-              <a href="#!" class="text-white">Link 1</a>
-            </li>
-            <li>
-              <a href="#!" class="text-white">Link 2</a>
-            </li>
-            <li>
-              <a href="#!" class="text-white">Link 3</a>
-            </li>
-            <li>
-              <a href="#!" class="text-white">Link 4</a>
-            </li>
+            <li><a href="#!" class="text-white">Enlace 1</a></li>
+            <li><a href="#!" class="text-white">Enlace 2</a></li>
+            <li><a href="#!" class="text-white">Enlace 3</a></li>
+            <li><a href="#!" class="text-white">Enlace 4</a></li>
           </ul>
         </div>
       </div>
