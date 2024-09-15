@@ -1,13 +1,6 @@
 <?php
-// Conectar a la base de datos
-$mysqli = new mysqli('localhost', 'root', '', 'siglo_del_hombre');
+require "conexion.php";
 
-// Verificar la conexión
-if ($mysqli->connect_error) {
-  die('Error en la conexión: ' . $mysqli->connect_error);
-}
-
-// Consulta para obtener los últimos libros con información de autor y categoría
 $sql = "SELECT 
             l.id_libro, 
             l.titulo, 
@@ -24,20 +17,7 @@ $sql = "SELECT
 
 $result = $mysqli->query($sql);
 
-if ($result === false) {
-  die('Error en la consulta: ' . $mysqli->error);
-}
 
-// Obtener los libros en un array
-$libros = [];
-if ($result->num_rows > 0) {
-  while ($fila = $result->fetch_assoc()) {
-    $libros[] = $fila;
-  }
-}
-
-// Cerrar la conexión
-$mysqli->close();
 ?>
 
 <!DOCTYPE html>
@@ -52,67 +32,36 @@ $mysqli->close();
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <style>
-    body {
-      color: #333;
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .navbar {
-      background-color: #00796b;
-      border-bottom: 2px solid #004d40;
-    }
-    .navbar-brand {
-      font-weight: bold;
-    }
-    .navbar-nav .nav-link {
-      font-size: 1.1rem;
-      font-weight: 500;
-    }
-    .carousel-inner img {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .card-custom {
-      border: 2px solid #0288d1; /* Borde de color azul */
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-    .card-custom:hover {
-      transform: scale(1.03);
-      border-color: black; /* Color del borde en hover */
-    }
-    .card-img-top {
-      border-radius: 15px 15px 0 0;
-      height: 20rem; /* Ajusta la altura según sea necesario */
-      object-fit: cover;
-      width: 100%;
-    }
-    .card-body {
-      background-color: white;
-      padding: 1rem;
-    }
-    .card-footer {
-      background-color: #f8f9fa;
-      border-top: 1px solid #e0e0e0;
-    }
-    .container {
-      max-width: 1200px;
-      margin-top: 30px;
-    }
     .novedades {
       color: black; /* Color azul claro */
-      font-size: 1.5rem;
+      font-size: 2.5rem;
       font-weight: bold;
       margin: 20px 0;
     }
-    .btn-custom {
-      background-color: #007bff;
-      color: white;
+    .card-custom {
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      transition: transform 0.2s;
+      cursor: pointer;
+      /* Cursor pointer para indicar que es clickeable */
     }
-    .btn-custom:hover {
-      background-color: #0056b3;
+
+    .card-custom:hover {
+      transform: scale(1.05);
+    }
+
+    .card-img-top {
+      height: 25rem;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-footer {
+      background-color: #f8f9fa;
     }
   </style>
 </head>
@@ -121,7 +70,7 @@ $mysqli->close();
 <header>
   <nav class="navbar navbar-expand-lg navbar-primary bg-info">
     <div class="container-fluid">
-      <a class="navbar-brand px-2 text-white" href="../index.php">Siglo del Hombre</a>
+      <a class="navbar-brand px-2 text-white" href="index.php">Siglo del Hombre</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -183,6 +132,18 @@ $mysqli->close();
       <div class="carousel-item">
         <img class="d-block w-100" src="./images/f0c09a4e-776e-9a8d-3c7f-6659fa0bb5e4_imagen_web.jpg" alt="Second slide" style="max-height: 25rem;">
       </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="./images/9c0c1f52-8572-bca2-9b05-66d5f6d27dab_imagen_web.png" alt="Second slide" style="max-height: 25rem;">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="./images/3561b930-6b9f-4026-0c3f-66d233fb91d9_imagen_web.png" alt="Second slide" style="max-height: 25rem;">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="./images/45229dde-26c1-b3f2-3e93-66d239872f29_imagen_web.jpg" alt="Second slide" style="max-height: 25rem;">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="./images/b6eaf9b0-c9df-6d12-2076-66e30ee89a31_imagen_web.jpg" alt="Second slide" style="max-height: 25rem;">
+      </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -196,28 +157,72 @@ $mysqli->close();
 
   <section>
     <div class="container">
-      <div class="novedades">Novedades</div>
+      <div class="novedades ">Novedades</div>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-        <?php foreach ($libros as $libro): ?>
-          <div class="col">
-            <div class="card card-custom h-100">
-              <img src="<?php echo htmlspecialchars($libro['imagen']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($libro['titulo']); ?>">
-              <div class="card-body">
-                <h5 class="card-title"><?php echo htmlspecialchars($libro['titulo']); ?></h5>
-                <p class="card-text">Autor: <?php echo htmlspecialchars($libro['autor']); ?></p>
-                <p class="card-text">Género: <?php echo htmlspecialchars($libro['genero']); ?></p>
-                <p class="card-text"><?php echo htmlspecialchars($libro['descripcion']); ?></p>
-                <p class="card-text">Precio: $<?php echo htmlspecialchars($libro['precio']); ?></p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">Última actualización hace <?php echo rand(1, 60); ?> minutos</small>
-              </div>
-            </div>
-          </div>
-        <?php endforeach; ?>
+        <?php
+          while ($row = $result->fetch_assoc()) {
+            $imagenRuta = $row['imagen'];
+            $idLibro = htmlspecialchars($row["id_libro"], ENT_QUOTES, 'UTF-8');
+            $titulo = htmlspecialchars($row["titulo"], ENT_QUOTES, 'UTF-8');
+            $descripcion = htmlspecialchars($row["descripcion"], ENT_QUOTES, 'UTF-8');
+            $autor = htmlspecialchars($row["autor"], ENT_QUOTES, 'UTF-8');
+            $genero = htmlspecialchars($row["genero"], ENT_QUOTES, 'UTF-8');
+            $precio = htmlspecialchars($row["precio"], ENT_QUOTES, 'UTF-8');
+
+            echo '<div class="col">';
+            echo '<div class="card card-custom h-100" data-toggle="modal" data-target="#bookModal" data-id="' . $idLibro . '" data-title="' . $titulo . '" data-description="' . $descripcion . '" data-author="' . $autor . '" data-genre="' . $genero . '" data-price="' . $precio . '" data-image="' . $imagenRuta . '">';
+            echo '<img src="' . $imagenRuta . '" class="card-img-top" alt="' . $titulo . '">';
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">' . $titulo . '</h5>';
+            echo '<p class="card-text"><strong>Descripción: </strong>' . $descripcion . '</p>';
+            echo '<p class="card-text"><strong>Autor: </strong>' . $autor . '</p>';
+            echo '<p class="card-text"><strong>Género: </strong>' . $genero . '</p>';
+            echo '<p class="card-text"><strong>Precio: </strong>$' . $precio . '</p>';
+            echo '</div>';
+            echo '<div class="card-footer">';
+            if (isset($_SESSION["id_usuario"])) {
+              echo '<form method="post" action="agregar.carrito.php">';
+              echo '<input type="hidden" name="id_libro" value="' . $idLibro . '">';
+              echo '<button type="submit" class="btn" style="background-color: #17a2b8; color: white;">Agregar al Carrito</button>';
+              echo '</form>';
+            }
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+          
+          } ?>
       </div>
     </div>
   </section>
+
+  <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bookModalLabel">Título del Libro</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img src="" id="modalBookImage" class="img-fluid" alt="Imagen del libro">
+          <p id="modalBookDescription"></p>
+          <p><strong>Autor:</strong> <span id="modalBookAuthor"></span></p>
+          <p><strong>Género:</strong> <span id="modalBookGenre"></span></p>
+          <p><strong>Precio:</strong> $<span id="modalBookPrice"></span></p>
+        </div>
+        <div class="modal-footer">
+          <?php if (isset($_SESSION["id_usuario"])) : ?>
+          <form method="post" action="agregar.carrito.php">
+            <input type="hidden" name="id_libro" id="modalBookId">
+            <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
+          </form>
+          <?php endif ?>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer class="bg-light text-center text-lg-start mt-4">
     <div class="container-fluid p-4 bg-dark" style="background-color: #6c757d;">
@@ -251,6 +256,27 @@ $mysqli->close();
       <a class="text-white" href="#">Siglo del Hombre</a>
     </div>
   </footer>
+  <script>
+    $('#bookModal').on('show.bs.modal', function(event) {
+      var card = $(event.relatedTarget); // Botón que activó el modal
+      var id = card.data('id');
+      var title = card.data('title');
+      var description = card.data('description');
+      var author = card.data('author');
+      var genre = card.data('genre');
+      var price = card.data('price');
+      var image = card.data('image');
+
+      var modal = $(this);
+      modal.find('.modal-title').text(title);
+      modal.find('#modalBookDescription').text(description);
+      modal.find('#modalBookAuthor').text(author);
+      modal.find('#modalBookGenre').text(genre);
+      modal.find('#modalBookPrice').text(price);
+      modal.find('#modalBookImage').attr('src', image);
+      modal.find('#modalBookId').val(id);
+    });
+  </script>
 </body>
 
 </html>
