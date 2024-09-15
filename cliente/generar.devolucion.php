@@ -63,7 +63,7 @@
             <h2>Formulario de Devolucion</h2>
             <?php
 
-            require "conexion.php";
+            require "../conexion.php";
 
             if (isset($_GET['id_pedido'])) {
                 $id_pedido = intval($_GET['id_pedido']);
@@ -132,7 +132,7 @@
                 <!-- Comentado el botón de agregar línea -->
                 <!-- <button type="button" class="btn btn-secondary" id="addLineBtn">Agregar Línea</button> -->
                 <button type="submit" class="btn btn-success">Generar Devolucion</button>
-                <a href="index.php" class="btn btn-secondary">Cancelar</a>
+                <a href="../index.php" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
 

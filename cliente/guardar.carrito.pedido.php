@@ -138,7 +138,7 @@
 
                     }
                     echo "<div class='alert alert-success'>Carrito de compras agregado correctamente.</div>";
-                    echo "<a href='index.php' class='btn btn-primary'>Volver a la pagina principal</a>";
+                    echo "<a href='../index.php' class='btn btn-primary'>Volver a la pagina principal</a>";
                     $mysqli->close();
                     exit;
                 } else {

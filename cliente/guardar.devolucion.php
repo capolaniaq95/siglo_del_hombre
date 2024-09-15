@@ -62,7 +62,7 @@
         <div class="container mt-5">
             <h2>Formulario de Devolucion</h2>
             <?php
-            require 'conexion.php';
+            require '../conexion.php';
 
             $id_pedido = intval($_REQUEST['id_pedido']);
             $orderDate = $_REQUEST['orderDate'];
@@ -114,7 +114,7 @@
                         $result = $mysqli->query($insert_linea_devolucion);
                     }
                     echo "<div class='alert alert-success'>Pedido agregado correctamente.</div>";
-                    echo "<a href='index.php' class='btn btn-primary'>Volver al menu principal</a>";
+                    echo "<a href='../index.php' class='btn btn-primary'>Volver al menu principal</a>";
                     $mysqli->close();
                     exit;
                 } else {

@@ -181,7 +181,7 @@ $result = $mysqli->query($sql);
             echo '</div>';
             echo '<div class="card-footer">';
             if (isset($_SESSION["id_usuario"])) {
-              echo '<form method="post" action="agregar.carrito.php">';
+              echo '<form method="post" action="/cliente/agregar.carrito.php">';
               echo '<input type="hidden" name="id_libro" value="' . $idLibro . '">';
               echo '<button type="submit" class="btn" style="background-color: #17a2b8; color: white;">Agregar al Carrito</button>';
               echo '</form>';
@@ -213,7 +213,7 @@ $result = $mysqli->query($sql);
         </div>
         <div class="modal-footer">
           <?php if (isset($_SESSION["id_usuario"])) : ?>
-          <form method="post" action="agregar.carrito.php">
+          <form method="post" action="/cliente/agregar.carrito.php">
             <input type="hidden" name="id_libro" id="modalBookId">
             <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
           </form>

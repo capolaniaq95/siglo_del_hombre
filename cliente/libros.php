@@ -62,16 +62,16 @@
               <a class="nav-link text-white" href="mis.pedidos.php">Mis Pedidos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="devolucion.php">Mis Devoluciones</a>
+              <a class="nav-link text-white" href="mis.devolucion.php">Mis Devoluciones</a>
             </li>
             <?php
             if ($_SESSION["id_tipo"] == 1): ?>
               <li class="nav-item">
-                <a class="nav-link text-white" href="index.administrador.php">Administrador</a>
+                <a class="nav-link text-white" href="../index.administrador.php">Administrador</a>
               </li>
             <?php endif; ?>
             <li class="nav-item">
-              <a class="nav-link text-white" href="logout.php">Logout</a>
+              <a class="nav-link text-white" href="../logout.php">Logout</a>
             </li>
             <?php if (isset($_SESSION['carrito'])): ?>
               <li class="nav-item">
@@ -82,10 +82,14 @@
             <?php endif; ?>
           <?php else: ?>
             <li class="nav-item">
-              <a class="nav-link text-white" href="login.php">Ingresar</a>
+              <a class="nav-link text-white" href="../login.php">Ingresar</a>
             </li>
           <?php endif; ?>
         </ul>
+        <form class="form-inline my-2 my-lg-0" method="POST" action="libros.php">
+          <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="search">
+          <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
       </div>
     </div>
   </nav>
@@ -363,10 +367,12 @@
           <p><strong>Precio:</strong> $<span id="modalBookPrice"></span></p>
         </div>
         <div class="modal-footer">
+        <?php if (isset($_SESSION["id_usuario"])) : ?>
           <form method="post" action="agregar.carrito.php">
             <input type="hidden" name="id_libro" id="modalBookId">
             <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
           </form>
+        <?php endif ?>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </div>
       </div>

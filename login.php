@@ -79,7 +79,7 @@
 
             <button type="submit" class="btn btn-info btn-block">Iniciar Sesión</button>
             <div class="text-center mt-2">
-                <a href="registro.php" class="text-info">¿No tienes una cuenta? Regístrate</a>
+                <a href="/cliente/registro.php" class="text-info">¿No tienes una cuenta? Regístrate</a>
             </div>
             <div class="text-center mt-3">
                 <a href="logout.php" class="text-info">Logout</a>

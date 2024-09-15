@@ -60,6 +60,10 @@
             </li>
           <?php endif; ?>
         </ul>
+        <form class="form-inline my-2 my-lg-0" method="POST" action="libros.php">
+          <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="search">
+          <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
       </div>
     </div>
   </nav>
@@ -110,7 +114,7 @@
                                         <td>' . htmlspecialchars($row["metodo"]) . '</td>
                                         <td>' . htmlspecialchars($row["total"]) . '</td>
                                         <td>
-                                            <a href="/pedidos/consultar.pedido.cliente.php?id=' . urlencode($row["id_pedido"]) . '" class="btn btn-success btn-sm">Consultar</a>
+                                            <a href="consultar.pedido.cliente.php?id=' . urlencode($row["id_pedido"]) . '" class="btn btn-success btn-sm">Consultar</a>
                                             <a href="generar.devolucion.php?id_pedido=' . urlencode($row["id_pedido"]) . '" class="btn btn-danger btn-sm">Devolución</a>
                                         </td>
                                     </tr>';
