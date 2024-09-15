@@ -42,6 +42,12 @@
 
 					$categoria = $_REQUEST['categoria'];
 
+                    $match_correo = '/\d/';
+                    if (preg_match($match_correo, $categoria)) {
+                        echo "<script> alert('Categoria agregada con caracteres incorrectos, no pueden usarse numeros, ni caracteres especiales.');window.location='agregar.categoria.php' </script>";
+                        exit();
+                    }
+
                     $sql = "INSERT INTO `categoria`(`categoria`) VALUES ('$categoria')";
                     if ($mysqli->query($sql) === TRUE) {
                         echo "<div class='alert alert-success'>Categoria agregado correctamente.</div>";

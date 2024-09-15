@@ -42,6 +42,12 @@
 
 					$nombre = $_REQUEST['nombre'];
 
+                    $match_correo = '/\d/';
+                    if (preg_match($match_correo, $nombre)) {
+                        echo "<script> alert('Nombre agregado con caracteres incorrectos, no pueden usarse numeros, ni caracteres especiales.');window.location='agregar.autor.php' </script>";
+                        exit();
+                    }
+
                     $sql = "INSERT INTO `autor`(`nombre`) VALUES ('$nombre')";
                     if ($mysqli->query($sql) === TRUE) {
                         echo "<div class='alert alert-success'>Autor agregado correctamente.</div>";
