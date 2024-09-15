@@ -78,7 +78,8 @@
                               pedido.fecha,
                               pedido.total,
                               devolucion.motivo,
-                              devolucion.estado
+                              devolucion.estado,
+                              devolucion.referencia
                             FROM
                               devolucion
                             INNER JOIN
@@ -97,6 +98,7 @@
 											<th>total</th>
                                             <th>Motivo devolucion</th>
                                             <th>Estado</th>
+                                            <th>Referencia</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -108,6 +110,7 @@
                                         <td>' . htmlspecialchars($row["total"]) . '</td>
                                         <td>' . htmlspecialchars($row["motivo"]) . '</td>
                                         <td>' . htmlspecialchars($row["estado"]) . '</td>
+                                        <td>' . htmlspecialchars($row["referencia"]) . '</td>
                                         <td>
                                             <a href="consultar.devolucion.php?id_devolucion=' . urlencode($row["id_devolucion"]) . '" class="btn btn-info btn-sm">Consultar</a>
                                             <a href="aceptar.devolucion.php?id_devolucion=' . urlencode($row["id_devolucion"]) . '" class="btn btn-success btn-sm">Aceptar</a>

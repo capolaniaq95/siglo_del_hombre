@@ -78,6 +78,17 @@
                         $fecha = date("Y-m-d H:i:s");
                         $referencia = 'Devolucion' . $id_devolucion;
 
+                        $sql = "SELECT * FROM `movimiento_inventario` WHERE movimiento_inventario.referencia='$referencia'";
+
+                        $result = $mysqli->query($sql);
+
+                        $num = $result->num_rows;
+
+                        if ($num != 0){
+                            echo "<script> alert('Esta devolucion ya tiene un movimiento ralacionado. No puede generar otro');window.location='devolucion.php' </script>";
+                            exit();
+                        }
+
                         $sql = "SELECT lineas_devolucion.cantidad, lineas_devolucion.id_libro 
                                 FROM lineas_devolucion
                                 WHERE lineas_devolucion.id_devolucion=$id_devolucion";

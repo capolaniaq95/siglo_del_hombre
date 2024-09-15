@@ -10,53 +10,62 @@
 
 <body>
     <div class="d-flex flex-column min-vh-100">
-	<header>
-            <nav class="navbar navbar-expand-lg navbar-primary bg-info">
-                <div class="container-fluid">
-                    <a class="navbar-brand px-2 text-white" href="index.php">Siglo del Hombre</a>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="libros.php">Libros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="login.php">Ingresar</a>
-                            </li>
-                            <?php
-                            session_start();
-                            if (isset($_SESSION["id_usuario"])): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="mis.pedidos.php">Mis Pedidos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="devolucion.php">Mis Devoluciones</a>
-                                </li>
-                                <?php if ($_SESSION["id_tipo"] == 1): ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white" href="index.administrador.php">Administrador</a>
-                                    </li>
-                                <?php endif ?>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="logout.php">Logout</a>
-                                </li>
-                                <?php if (isset($_SESSION['carrito'])): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="carrito.php">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </a>
-                                </li>
-                                <?php endif ?>
-                            <?php endif ?>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
+    <header>
+  <nav class="navbar navbar-expand-lg navbar-primary bg-info">
+    <div class="container-fluid">
+      <a class="navbar-brand px-2 text-white" href="../index.php">Siglo del Hombre</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="libros.php">Libros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="autores.php">Autores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="categorias.php">Categorías</a>
+          </li>
+
+          <?php
+          session_start();
+          if (isset($_SESSION["id_usuario"])): ?>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="mis.pedidos.php">Mis Pedidos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="devolucion.php">Mis Devoluciones</a>
+            </li>
+            <?php
+            if ($_SESSION["id_tipo"] == 1): ?>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="index.administrador.php">Administrador</a>
+              </li>
+            <?php endif; ?>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="logout.php">Logout</a>
+            </li>
+            <?php if (isset($_SESSION['carrito'])): ?>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="carrito.php">
+                  <i class="fas fa-shopping-cart"></i>
+                </a>
+              </li>
+            <?php endif; ?>
+          <?php else: ?>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="login.php">Ingresar</a>
+            </li>
+          <?php endif; ?>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
 
         <div class="container mt-4">
             <h2>Carrito agregado</h2>
             <?php
-            require 'conexion.php';
+            require '../conexion.php';
 
             $orderDate = $_REQUEST['orderDate'];
             $customer = intval($_REQUEST['customer']);

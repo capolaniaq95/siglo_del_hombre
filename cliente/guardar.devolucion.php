@@ -74,6 +74,17 @@
 
             $referencia = "Pedido" . $id_pedido;
 
+            $sql = "SELECT * FROM `devolucion` WHERE devolucion.referencia='$referencia'";
+
+            $result = $mysqli->query($sql);
+
+            $num = $result->num_rows;
+
+            if ($num != 0){
+                echo "<script> alert('Esta pedido ya tiene una devolucion ralacionada. No puede generar otro');window.location='mis.pedidos.php' </script>";
+                exit();
+            }
+
             $sql = "INSERT INTO `devolucion`(`id_pedido`, `motivo`, `descripcion`, `fecha`, `estado`, `referencia`)
                     VALUES ($id_pedido,'$motivo','$descripcion','$orderDate', 'Proceso', '$referencia')";
 

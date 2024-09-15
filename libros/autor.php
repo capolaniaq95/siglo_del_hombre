@@ -42,7 +42,7 @@
                     <?php
                     require '../conexion.php';
 
-                    $sql = "SELECT `id_autor`, `nombre` FROM `autor`";
+                    $sql = "SELECT `id_autor`, `nombre`, `imagen` FROM `autor`";
 
                     $result = $mysqli->query($sql);
 
@@ -55,6 +55,7 @@
                                         <tr>
                                           <th scope="col">ID Autor</th>
                                           <th scope="col">Autor</th>
+                                          <th scope="col" class="image-column">Imagen</th>
                                           <th scope="col" style="width: 200px">Acciones</th>
                                         </tr>
                                     </thead>
@@ -64,6 +65,11 @@
                                 echo '<tr>
                                         <td>' . htmlspecialchars($row["id_autor"]) . '</td>
                                         <td>' . htmlspecialchars($row["nombre"]) . '</td>
+                                        <td class="image-column">
+                                            <a href="' . htmlspecialchars($row["imagen"]) . '" target="_blank">
+                                                Ver Imagen
+                                            </a>
+                                        </td>
                                         <td>
                                             <div class="d-flex justify-content-start">
                                                 <a href="editar.autor.php?id=' . urlencode($row["id_autor"]) . '" class="btn btn-success btn-sm mr-2">Editar</a>

@@ -93,8 +93,8 @@
                                 echo "<div class='alert alert-danger'>Error al Aceptar devolucion " . $mysqli->error . "</div>";
                             }
                         } else {
-                            echo "<div class='alert alert-danger'>Devolucion ya completada no la puede modificar " . $mysqli->error . "</div>";
-                            echo "<a href='/devolucion/devolucion.php' class='btn btn-primary'>Atras</a>";
+                            echo "<script> alert('Devolucion ya completada. No la puede modificar');window.location='devolucion.php' </script>";
+                            exit();
                         }
                     }
                     ?>

@@ -101,8 +101,7 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- Comentado el botón de agregar línea -->
-                <!-- <button type="button" class="btn btn-secondary" id="addLineBtn">Agregar Línea</button> -->
+
                 <button type="submit" class="btn btn-success">Generar Devolucion</button>
                 <a href="pedido.php" class="btn btn-secondary">Cancelar</a>
             </form>
