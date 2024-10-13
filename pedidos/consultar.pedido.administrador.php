@@ -32,7 +32,15 @@
         </header>
         <main class="flex-fill">
             <div class="container mt-4">
-                <h2>Consultar pedido</h2>
+            <div class="d-flex align-items-center mb-1">
+                <div class="pr-2">
+                    <h2>Consultar pedido</h2>
+                </div>
+                <div class="ml-auto">
+                    <a href="" class="btn btn-danger">Devolucion</a>
+                    <a href="" class="btn btn-success">Entrada</a>
+                </div>
+            </div>
                 <?php
                 require "../conexion.php";
 

@@ -1,5 +1,44 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+
 require "conexion.php";
+require __DIR__ . '/vendor/autoload.php';
+
+/*
+$mail = new PHPMailer(true);
+
+try {
+    // Configuración del servidor SMTP para Outlook
+    $mail->isSMTP();                                            
+    $mail->Host       = 'smtp.office365.com';  // Servidor SMTP de Outlook (Office 365)
+    $mail->SMTPAuth   = true;                                   
+    $mail->Username   = 'carlos_apolania@soy.sena.edu.co'; // Tu dirección de correo Outlook
+    $mail->Password   = 'cA82882828';  // Tu contraseña de correo Outlook
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         
+    $mail->Port       = 587;  // Puerto SMTP de Outlook
+
+    // Remitente y destinatario
+    $mail->setFrom('carlos_apolania@soy.sena.edu.co', 'Carlos Polania');
+    $mail->addAddress('carlospolaniaq@gmail.com', 'Carlitos');     // Añadir destinatario
+
+    // Contenido del correo
+    $mail->isHTML(true);                                  // Establecer el formato del correo en HTML
+    $mail->Subject = 'Prueba de envío de correo';
+    $mail->Body    = 'Este es un correo de prueba <b>usando PHPMailer</b> con Outlook.';
+    $mail->AltBody = 'Este es el contenido en texto plano para clientes de correo que no soportan HTML';
+
+    // Enviar el correo
+    $mail->send();
+    echo 'El correo ha sido enviado';
+} catch (Exception $e) {
+    echo "Hubo un error al enviar el correo: {$mail->ErrorInfo}";
+}
+
+*/
 
 $sql = "SELECT 
             l.id_libro, 

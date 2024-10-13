@@ -1,0 +1,20 @@
+{
+    "name": "vendor/autoload.php",
+    "require-dev": {
+        "spatie/array-to-xml": "^3.3",
+        "mpdf/mpdf": "^6.1",
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vendor\\AutoloadPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "capolaniaq95",
+            "email": "carlospolaniaq@gmail.com"
+        }
+    ],
+    "require": {}
+}
