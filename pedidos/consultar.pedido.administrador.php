@@ -37,13 +37,41 @@
                     <h2>Consultar pedido</h2>
                 </div>
                 <div class="ml-auto">
-                    <a href="" class="btn btn-danger">Devolucion</a>
-                    <a href="" class="btn btn-success">Entrada</a>
+                    <?php
+                    require "../conexion.php";
+                    if (isset($_GET['id'])){
+
+                        $id_pedido = $_GET['id'];
+
+                        $sql = "SELECT id_devolucion FROM devolucion WHERE id_pedido=$id_pedido";
+
+                        $result = $mysqli->query($sql);
+
+                        $num = $result->num_rows;
+
+                        if ($num == 1){
+                            $id_devolucion = $result->fetch_assoc();
+                            $id_devolucion = $id_devolucion['id_devolucion'];
+                            echo '
+                            <a href="../devolucion/consultar.devolucion.php?id_devolucion=' . urlencode($id_devolucion) . '" class="btn btn-danger">Devolucion</a>';
+                        }
+
+                        $referencia = "Pedido" . $id_pedido;
+                        $sql = "SELECT id_movimiento FROM movimiento_inventario WHERE referencia='$referencia'";
+    
+                        $result = $mysqli->query($sql);
+    
+                        $id_movimiento = $result->fetch_assoc();
+                        
+                        $id_movimiento = $id_movimiento['id_movimiento'];
+    
+                        echo '
+                        <a href="../inventario/consultar.movimiento.php?id_movimiento=' . urlencode($id_movimiento) . '" class="btn btn-success">Entrada</a>';
+                    }
+                    ?>
                 </div>
             </div>
                 <?php
-                require "../conexion.php";
-
                 if (isset($_GET['id'])){
                     $id_pedido = $_GET['id'];
 
