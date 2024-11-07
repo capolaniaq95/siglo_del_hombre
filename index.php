@@ -1,12 +1,12 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
+#use PHPMailer\PHPMailer\PHPMailer;
+#use PHPMailer\PHPMailer\Exception;
+#use PHPMailer\PHPMailer\SMTP;
 
 
 require "conexion.php";
-require __DIR__ . '/vendor/autoload.php';
+#require __DIR__ . '/vendor/autoload.php';
 
 /*
 $mail = new PHPMailer(true);
@@ -52,7 +52,7 @@ $sql = "SELECT
         JOIN autor a ON l.id_autor = a.id_autor
         JOIN categoria c ON l.id_categoria = c.id_categoria
         ORDER BY l.id_libro DESC 
-        LIMIT 4"; // Ajusta el LIMIT según necesites
+        LIMIT 4"; 
 
 $result = $mysqli->query($sql);
 
@@ -297,7 +297,7 @@ $result = $mysqli->query($sql);
   </footer>
   <script>
     $('#bookModal').on('show.bs.modal', function(event) {
-      var card = $(event.relatedTarget); // Botón que activó el modal
+      var card = $(event.relatedTarget); 
       var id = card.data('id');
       var title = card.data('title');
       var description = card.data('description');
