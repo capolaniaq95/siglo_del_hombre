@@ -1,0 +1,103 @@
+-- Sentencias DDL: Creación de tablas
+
+-- Tabla: usuario
+CREATE TABLE usuario (
+    id_usuario INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    correo VARCHAR(255) NOT NULL,
+    direccion VARCHAR(255),
+    password VARCHAR(50),
+    rol INT(11) NOT NULL,
+    id_tipo INT(11) NOT NULL,
+    celular VARCHAR(50) NOT NULL,
+    FOREIGN KEY (id_tipo) REFERENCES tipo_de_usuario(id_tipo)
+);
+
+-- Tabla: libro
+CREATE TABLE libro (
+    id_libro INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    descripcion VARCHAR(255) NOT NULL,
+    editorial VARCHAR(255) NOT NULL,
+    imagen VARCHAR(255) NOT NULL,
+    precio INT(11) NOT NULL,
+    id_categoria INT(11) NOT NULL,
+    id_autor INT(11) NOT NULL,
+    stock INT(11) NOT NULL,
+    estado VARCHAR(50) NOT NULL,
+    FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria),
+    FOREIGN KEY (id_autor) REFERENCES autor(id_autor)
+);
+
+-- Tabla: pedido
+CREATE TABLE pedido (
+    id_pedido INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT(11) NOT NULL,
+    id_metodo_de_pago INT(11) NOT NULL,
+    fecha VARCHAR(50) NOT NULL,
+    total INT(11) NOT NULL,
+    estado ENUM('publicado', 'cancelado') NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_metodo_de_pago) REFERENCES metodo_de_pago(id_metodo_de_pago)
+);
+
+-- Tabla: tipo_de_usuario
+CREATE TABLE tipo_de_usuario (
+    id_tipo INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    tipo VARCHAR(50) NOT NULL
+);
+
+-- Tabla: categoria
+CREATE TABLE categoria (
+    id_categoria INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    categoria VARCHAR(255) NOT NULL,
+    imagen VARCHAR(50) NOT NULL
+);
+
+-- Tabla: autor
+CREATE TABLE autor (
+    id_autor INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    imagen VARCHAR(100) NOT NULL
+);
+
+-- Tabla: metodo_de_pago
+CREATE TABLE metodo_de_pago (
+    id_metodo_de_pago INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    metodo VARCHAR(50) NOT NULL
+);
+
+-- Sentencias DML: Inserción de datos
+
+-- Insertando datos en la tabla tipo_de_usuario
+INSERT INTO tipo_de_usuario (tipo) VALUES ('Administrador'), ('Cliente');
+
+-- Insertando datos en la tabla usuario
+INSERT INTO usuario (nombre, correo, direccion, password, rol, id_tipo, celular)
+VALUES 
+('Juan Pérez', 'juan.perez@example.com', 'Calle 123, Bogotá', 'password123', 1, 1, '3001234567'),
+('María Gómez', 'maria.gomez@example.com', 'Avenida 45, Medellín', 'password456', 2, 2, '3107654321');
+
+-- Insertando datos en la tabla categoria
+INSERT INTO categoria (categoria, imagen)
+VALUES ('Novela', 'novela.jpg'), ('Ciencia Ficción', 'ciencia_ficcion.jpg');
+
+-- Insertando datos en la tabla autor
+INSERT INTO autor (nombre, imagen)
+VALUES ('Gabriel García Márquez', 'marquez.jpg'), ('Antoine de Saint-Exupéry', 'antoine.jpg');
+
+-- Insertando datos en la tabla libro
+INSERT INTO libro (titulo, descripcion, editorial, imagen, precio, id_categoria, id_autor, stock, estado)
+VALUES 
+('Cien Años de Soledad', 'Novela de Gabriel García Márquez', 'Editorial XYZ', 'imagen1.jpg', 45000, 1, 1, 50, 'activo'),
+('El Principito', 'Obra de Antoine de Saint-Exupéry', 'Editorial ABC', 'imagen2.jpg', 30000, 2, 2, 100, 'activo');
+
+-- Insertando datos en la tabla metodo_de_pago
+INSERT INTO metodo_de_pago (metodo)
+VALUES ('Efectivo'), ('Tarjeta de Crédito');
+
+-- Insertando datos en la tabla pedido
+INSERT INTO pedido (id_usuario, id_metodo_de_pago, fecha, total, estado)
+VALUES 
+(1, 1, '2024-11-20', 75000, 'publicado'),
+(2, 2, '2024-11-20', 30000, 'publicado');
