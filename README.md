@@ -1,6 +1,6 @@
 
 
-![Logo](https://i.postimg.cc/RV9qP3yJ/logo.jpg)
+![Logo](https://i.postimg.cc/BvGmnWC3/Logo-siglo-del-hombre.jpg)
 
 # SIGLO DEL HOMBRE
 
@@ -33,3 +33,6 @@ El sistema contemplará dos tipos de usuarios: compradores, quienes requerirán 
 ### JUSTIFICACIÓN
 La implementación de un software se vuelve imperativa para facilitar las ventas online y optimizar la gestión de inventario. Este sistema posibilita un seguimiento preciso del inventario, proporciona insights sobre los ejemplares más vendidos, registra las transacciones de venta y ofrece información detallada sobre los medios de pago utilizados, entre otros aspectos clave.
 Asimismo, la integración de la gestión de ventas online se torna esencial para garantizar la disponibilidad de ejemplares, mejorar la eficacia de las operaciones y ampliar el alcance del negocio. En síntesis, la implementación de esta herramienta encuentra justificación en su capacidad para potenciar la eficiencia operativa, asegurar la disponibilidad de productos y contribuir a una gestión financiera efectiva. Además, permite un flujo de trabajo ágil y productivo, consolidando así su papel fundamental en la transformación y modernización de las operaciones de la librería Siglo del hombre.
+
+
+
