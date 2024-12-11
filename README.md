@@ -12,6 +12,7 @@
 
 ### OBJETIVO GENERAL
 
+
 #### Desarrollar un sistema de información para el manejo de inventario y ventas online de la librería Siglo del hombre.
 
 ### OBJETIVOS ESPECÍFICOS
